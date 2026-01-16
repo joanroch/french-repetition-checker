@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Désambiguïsation - DNF.txt</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .improvement {
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-cgram {
+            background: #667eea;
+            color: white;
+        }
+        .badge-freq {
+            background: #10b981;
+            color: white;
+        }
+        .interpretation {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .context {
+            font-style: italic;
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .word {
+            font-weight: bold;
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Rapport de Désambiguïsation par Fréquence</h1>
+        <p><strong>Fichier analysé:</strong> DNF.txt</p>
+        <p><strong>Mots uniques:</strong> 1265 | <strong>Mots ambigus:</strong> 478</p>
+    </div>
+    
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-number">739</div>
+            <div class="stat-label">Mots classifiés avant</div>
+            <small>(58.4%)</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1217</div>
+            <div class="stat-label">Mots classifiés après</div>
+            <small>(96.2%)</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">478</div>
+            <div class="stat-label">Mots désambiguïsés</div>
+            <small>(+37.8%)</small>
+        </div>
+    </div>
+    
+    <div class="improvement">
+        ✅ Amélioration: 478 mots classifiés grâce à la désambiguïsation par fréquence
+    </div>
+    
+    <h2>Détails de la Désambiguïsation</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rang</th>
+                <th>Mot</th>
+                <th>Fréq. texte</th>
+                <th>Interprétations</th>
+                <th>Choix (par fréquence)</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>1</td>
+                <td><span class="word">de</span>
+                    <div class="context">...complication médicale l'année <strong>[de]</strong> ses 76 ans. Urgence, chirurgi...</div>
+                </td>
+                <td><span class="badge badge-freq">135×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ART:def</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 38928.92)</small></td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td><span class="word">le</span>
+                    <div class="context">...le pensait vieillir en santé, <strong>[le]</strong> voilà en train de sombrer rap...</div>
+                </td>
+                <td><span class="badge badge-freq">67×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ART:def</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>ART:def</strong> <small>(fréq: 18310.95)</small></td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td><span class="word">la</span>
+                    <div class="context">...ie, un pépin médical et c'est <strong>[la]</strong> potentielle débandade : l'élè...</div>
+                </td>
+                <td><span class="badge badge-freq">65×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ART:def</span>, <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ART:def</strong> <small>(fréq: 23633.92)</small></td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td><span class="word">l</span>
+                    <div class="context">...à cette complication médicale <strong>[l]</strong>'année de ses 76 ans. Urgence,...</div>
+                </td>
+                <td><span class="badge badge-freq">59×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ART:def</span>, <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ART:def</strong> <small>(fréq: 3.92)</small></td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td><span class="word">en</span>
+                    <div class="context">...ation, oui, oui), 8 kg perdus <strong>[en]</strong> quelques jours puis longue co...</div>
+                </td>
+                <td><span class="badge badge-freq">53×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 8732.57)</small></td>
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td><span class="word">les</span>
+                    <div class="context">...à la con. Après tout, ce sont <strong>[les]</strong> gestes insignifiants de notre...</div>
+                </td>
+                <td><span class="badge badge-freq">53×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ART:def</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>ART:def</strong> <small>(fréq: 14662.30)</small></td>
+            </tr>
+
+            <tr>
+                <td>7</td>
+                <td><span class="word">pour</span>
+                    <div class="context">...rmé aux exercices nécessaires <strong>[pour]</strong> acquérir, puis maintenir une ...</div>
+                </td>
+                <td><span class="badge badge-freq">45×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 6198.24)</small></td>
+            </tr>
+
+            <tr>
+                <td>8</td>
+                <td><span class="word">d</span>
+                    <div class="context">...f depuis toujours, professeur <strong>[d]</strong>'éducation physique, universit...</div>
+                </td>
+                <td><span class="badge badge-freq">42×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 2.97)</small></td>
+            </tr>
+
+            <tr>
+                <td>9</td>
+                <td><span class="word">est</span>
+                    <div class="context">...aladie, un pépin médical et c'<strong>[est]</strong> la potentielle débandade : l'...</div>
+                </td>
+                <td><span class="badge badge-freq">42×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>10</td>
+                <td><span class="word">une</span>
+                    <div class="context">...pour acquérir, puis maintenir <strong>[une]</strong> forme physique optimale, tout...</div>
+                </td>
+                <td><span class="badge badge-freq">41×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ART:ind</span>, <span class='badge badge-cgram'>PRO:ind</span>, <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ART:ind</strong> <small>(fréq: 9587.97)</small></td>
+            </tr>
+
+            <tr>
+                <td>11</td>
+                <td><span class="word">que</span>
+                    <div class="context">...seulement maintenant faire ce <strong>[que]</strong> tu expliques, mais je fais 50...</div>
+                </td>
+                <td><span class="badge badge-freq">41×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:int</span>, <span class='badge badge-cgram'>PRO:rel</span></td>
+                <td><strong>PRO:int</strong> <small>(fréq: 3315.95)</small></td>
+            </tr>
+
+            <tr>
+                <td>12</td>
+                <td><span class="word">pas</span>
+                    <div class="context">...ne vie athlétique exemplaire. <strong>[Pas]</strong> de bol. Une excellente forme ...</div>
+                </td>
+                <td><span class="badge badge-freq">39×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 8795.14)</small></td>
+            </tr>
+
+            <tr>
+                <td>13</td>
+                <td><span class="word">un</span>
+                    <div class="context">...﻿DNF     Prologue Je connais <strong>[un]</strong> vieil homme qui n'arrivait pl...</div>
+                </td>
+                <td><span class="badge badge-freq">32×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ART:ind</span>, <span class='badge badge-cgram'>PRO:ind</span>, <span class='badge badge-cgram'>ADJ:num</span></td>
+                <td><strong>ART:ind</strong> <small>(fréq: 13550.68)</small></td>
+            </tr>
+
+            <tr>
+                <td>14</td>
+                <td><span class="word">qui</span>
+                    <div class="context">...gue Je connais un vieil homme <strong>[qui]</strong> n'arrivait plus à attacher se...</div>
+                </td>
+                <td><span class="badge badge-freq">30×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:int</span>, <span class='badge badge-cgram'>PRO:rel</span></td>
+                <td><strong>PRO:int</strong> <small>(fréq: 7923.24)</small></td>
+            </tr>
+
+            <tr>
+                <td>15</td>
+                <td><span class="word">je</span>
+                    <div class="context">...﻿DNF     Prologue <strong>[Je]</strong> connais un vieil homme qui n'...</div>
+                </td>
+                <td><span class="badge badge-freq">28×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 10862.77)</small></td>
+            </tr>
+
+            <tr>
+                <td>16</td>
+                <td><span class="word">tout</span>
+                    <div class="context">... une forme physique optimale, <strong>[tout]</strong> allait bien pour mon vieillar...</div>
+                </td>
+                <td><span class="badge badge-freq">26×</span></td>
+                <td class="interpretation">5: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>ADJ:ind</span>, <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>PRO:ind</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 3171.35)</small></td>
+            </tr>
+
+            <tr>
+                <td>17</td>
+                <td><span class="word">plus</span>
+                    <div class="context">...un vieil homme qui n'arrivait <strong>[plus]</strong> à attacher ses lacets : mon p...</div>
+                </td>
+                <td><span class="badge badge-freq">25×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 5014.53)</small></td>
+            </tr>
+
+            <tr>
+                <td>18</td>
+                <td><span class="word">on</span>
+                    <div class="context">...ures chances de se relever si <strong>[on]</strong> trébuche. Déjà, plus on décli...</div>
+                </td>
+                <td><span class="badge badge-freq">24×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 4838.38)</small></td>
+            </tr>
+
+            <tr>
+                <td>19</td>
+                <td><span class="word">a</span>
+                    <div class="context">... on décline de haut, moins on <strong>[a]</strong> de chance de subir les effets...</div>
+                </td>
+                <td><span class="badge badge-freq">23×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>20</td>
+                <td><span class="word">qu</span>
+                    <div class="context">...nc on s'affaiblit et c'est là <strong>[qu]</strong>'on se fait mal ailleurs, vlan...</div>
+                </td>
+                <td><span class="badge badge-freq">22×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>PRO:int</span>, <span class='badge badge-cgram'>PRO:rel</span></td>
+                <td><strong>CON</strong> <small>(fréq: 1.55)</small></td>
+            </tr>
+
+            <tr>
+                <td>21</td>
+                <td><span class="word">j</span>
+                    <div class="context">... Je prépare ma montre… Enfin, <strong>[j]</strong>'essaye car elle est toute neu...</div>
+                </td>
+                <td><span class="badge badge-freq">21×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 2.91)</small></td>
+            </tr>
+
+            <tr>
+                <td>22</td>
+                <td><span class="word">n</span>
+                    <div class="context">...Je connais un vieil homme qui <strong>[n]</strong>'arrivait plus à attacher ses ...</div>
+                </td>
+                <td><span class="badge badge-freq">20×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 13841.89)</small></td>
+            </tr>
+
+            <tr>
+                <td>23</td>
+                <td><span class="word">ce</span>
+                    <div class="context">... lacets à la con. Après tout, <strong>[ce]</strong> sont les gestes insignifiants...</div>
+                </td>
+                <td><span class="badge badge-freq">20×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:dem</span>, <span class='badge badge-cgram'>ADJ:dem</span></td>
+                <td><strong>PRO:dem</strong> <small>(fréq: 2958.58)</small></td>
+            </tr>
+
+            <tr>
+                <td>24</td>
+                <td><span class="word">mon</span>
+                    <div class="context">... plus à attacher ses lacets : <strong>[mon]</strong> père. Sportif depuis toujours...</div>
+                </td>
+                <td><span class="badge badge-freq">15×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 2307.97)</small></td>
+            </tr>
+
+            <tr>
+                <td>25</td>
+                <td><span class="word">mais</span>
+                    <div class="context">...rrêter et éteindre le moteur. <strong>[Mais]</strong> non, ce n'est pas son genre. ...</div>
+                </td>
+                <td><span class="badge badge-freq">15×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>CON</strong> <small>(fréq: 4463.72)</small></td>
+            </tr>
+
+            <tr>
+                <td>26</td>
+                <td><span class="word">notre</span>
+                    <div class="context">...t les gestes insignifiants de <strong>[notre]</strong> quotidien qui déterminent not...</div>
+                </td>
+                <td><span class="badge badge-freq">15×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 680.68)</small></td>
+            </tr>
+
+            <tr>
+                <td>27</td>
+                <td><span class="word">il</span>
+                    <div class="context">...enre. Fruit d'une vie active, <strong>[il]</strong> a de beaux restes, comme l'in...</div>
+                </td>
+                <td><span class="badge badge-freq">13×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 15832.09)</small></td>
+            </tr>
+
+            <tr>
+                <td>28</td>
+                <td><span class="word">même</span>
+                    <div class="context">...nnies pour se retrouver quand <strong>[même]</strong> par terre ? Eh bien, c'est po...</div>
+                </td>
+                <td><span class="badge badge-freq">11×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>PRO:ind</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 1358.65)</small></td>
+            </tr>
+
+            <tr>
+                <td>29</td>
+                <td><span class="word">bien</span>
+                    <div class="context">...hysique optimale, tout allait <strong>[bien]</strong> pour mon vieillard préféré ju...</div>
+                </td>
+                <td><span class="badge badge-freq">11×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 2535.14)</small></td>
+            </tr>
+
+            <tr>
+                <td>30</td>
+                <td><span class="word">c</span>
+                    <div class="context">... maladie, un pépin médical et <strong>[c]</strong>'est la potentielle débandade ...</div>
+                </td>
+                <td><span class="badge badge-freq">11×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>PRO:dem</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ:num</strong> <small>(fréq: 4.73)</small></td>
+            </tr>
+
+            <tr>
+                <td>31</td>
+                <td><span class="word">par</span>
+                    <div class="context">... pour se retrouver quand même <strong>[par]</strong> terre ? Eh bien, c'est pour s...</div>
+                </td>
+                <td><span class="badge badge-freq">10×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 3727.09)</small></td>
+            </tr>
+
+            <tr>
+                <td>32</td>
+                <td><span class="word">s</span>
+                    <div class="context">...oché, on bouge moins, donc on <strong>[s]</strong>'affaiblit et c'est là qu'on s...</div>
+                </td>
+                <td><span class="badge badge-freq">10×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>CON</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>33</td>
+                <td><span class="word">ses</span>
+                    <div class="context">...ui n'arrivait plus à attacher <strong>[ses]</strong> lacets : mon père. Sportif de...</div>
+                </td>
+                <td><span class="badge badge-freq">10×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 3105.41)</small></td>
+            </tr>
+
+            <tr>
+                <td>34</td>
+                <td><span class="word">si</span>
+                    <div class="context">...lleures chances de se relever <strong>[si]</strong> on trébuche. Déjà, plus on dé...</div>
+                </td>
+                <td><span class="badge badge-freq">10×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>CON</strong> <small>(fréq: 933.99)</small></td>
+            </tr>
+
+            <tr>
+                <td>35</td>
+                <td><span class="word">quand</span>
+                    <div class="context">...s décennies pour se retrouver <strong>[quand]</strong> même par terre ? Eh bien, c'e...</div>
+                </td>
+                <td><span class="badge badge-freq">9×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>CON</strong> <small>(fréq: 1480.07)</small></td>
+            </tr>
+
+            <tr>
+                <td>36</td>
+                <td><span class="word">course</span>
+                    <div class="context">...e déplacer seul. La fin de la <strong>[course]</strong> se fera en fauteuil roulant. ...</div>
+                </td>
+                <td><span class="badge badge-freq">9×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 81.22)</small></td>
+            </tr>
+
+            <tr>
+                <td>37</td>
+                <td><span class="word">fait</span>
+                    <div class="context">...ffaiblit et c'est là qu'on se <strong>[fait]</strong> mal ailleurs, vlan !, on se r...</div>
+                </td>
+                <td><span class="badge badge-freq">9×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>VER</strong> <small>(fréq: 5328.99)</small></td>
+            </tr>
+
+            <tr>
+                <td>38</td>
+                <td><span class="word">ma</span>
+                    <div class="context">...u monde, Forillon. Je prépare <strong>[ma]</strong> montre… Enfin, j'essaye car e...</div>
+                </td>
+                <td><span class="badge badge-freq">9×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 1667.16)</small></td>
+            </tr>
+
+            <tr>
+                <td>39</td>
+                <td><span class="word">ai</span>
+                    <div class="context">...re la course à pied. Ce que j'<strong>[ai]</strong> retenu, c'est que la mort ann...</div>
+                </td>
+                <td><span class="badge badge-freq">9×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>40</td>
+                <td><span class="word">voiture</span>
+                    <div class="context">...utonomie. Ouvrir une porte de <strong>[voiture]</strong>, monter un escalier, sortir d...</div>
+                </td>
+                <td><span class="badge badge-freq">8×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 283.11)</small></td>
+            </tr>
+
+            <tr>
+                <td>41</td>
+                <td><span class="word">comme</span>
+                    <div class="context">...active, il a de beaux restes, <strong>[comme]</strong> l'infirmière lui a dit. Et su...</div>
+                </td>
+                <td><span class="badge badge-freq">8×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>CON</strong> <small>(fréq: 3429.32)</small></td>
+            </tr>
+
+            <tr>
+                <td>42</td>
+                <td><span class="word">fin</span>
+                    <div class="context">...pable de se déplacer seul. La <strong>[fin]</strong> de la course se fera en faute...</div>
+                </td>
+                <td><span class="badge badge-freq">8×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 314.53)</small></td>
+            </tr>
+
+            <tr>
+                <td>43</td>
+                <td><span class="word">sont</span>
+                    <div class="context">...cets à la con. Après tout, ce <strong>[sont]</strong> les gestes insignifiants de n...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>44</td>
+                <td><span class="word">son</span>
+                    <div class="context">...monter un escalier, sortir de <strong>[son]</strong> fauteuil, porter ses sacs d'é...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 4696.15)</small></td>
+            </tr>
+
+            <tr>
+                <td>45</td>
+                <td><span class="word">y</span>
+                    <div class="context">...era désormais limité. Mais il <strong>[y]</strong> a des limites à changer les p...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 3086.76)</small></td>
+            </tr>
+
+            <tr>
+                <td>46</td>
+                <td><span class="word">ça</span>
+                    <div class="context">...létères d'une blessure. Et si <strong>[ça]</strong> arrive, les conséquences sero...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:dem</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:dem</strong> <small>(fréq: 2477.64)</small></td>
+            </tr>
+
+            <tr>
+                <td>47</td>
+                <td><span class="word">moi</span>
+                    <div class="context">...e et j'enclenche le chrono. — <strong>[Moi]</strong>, je rentre à pied. Tu viens a...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 1877.57)</small></td>
+            </tr>
+
+            <tr>
+                <td>48</td>
+                <td><span class="word">sur</span>
+                    <div class="context">...se relever sans prendre appui <strong>[sur]</strong> le mobilier urbain. « Je peux...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 5320.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>49</td>
+                <td><span class="word">là</span>
+                    <div class="context">... donc on s'affaiblit et c'est <strong>[là]</strong> qu'on se fait mal ailleurs, v...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>ONO</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 1089.66)</small></td>
+            </tr>
+
+            <tr>
+                <td>50</td>
+                <td><span class="word">était</span>
+                    <div class="context">...bien que mon gros tas de tôle <strong>[était]</strong> en fin de course, mais je ne ...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>51</td>
+                <td><span class="word">tous</span>
+                    <div class="context">...e artificielle, mais ils sont <strong>[tous]</strong> les deux blancs comme neige, ...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>PRO:ind</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 3171.35)</small></td>
+            </tr>
+
+            <tr>
+                <td>52</td>
+                <td><span class="word">ont</span>
+                    <div class="context">... heures et mes drives au golf <strong>[ont]</strong> retrouvé des distances accept...</div>
+                </td>
+                <td><span class="badge badge-freq">7×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>53</td>
+                <td><span class="word">me</span>
+                    <div class="context">...ême relacer mes chaussures et <strong>[me]</strong> relever 30 fois de suite ! » ...</div>
+                </td>
+                <td><span class="badge badge-freq">6×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 4264.32)</small></td>
+            </tr>
+
+            <tr>
+                <td>54</td>
+                <td><span class="word">mal</span>
+                    <div class="context">...lit et c'est là qu'on se fait <strong>[mal]</strong> ailleurs, vlan !, on se retro...</div>
+                </td>
+                <td><span class="badge badge-freq">6×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 349.46)</small></td>
+            </tr>
+
+            <tr>
+                <td>55</td>
+                <td><span class="word">sa</span>
+                    <div class="context">...asser au-dessus : il a adapté <strong>[sa]</strong> routine d'entraînement à sa c...</div>
+                </td>
+                <td><span class="badge badge-freq">6×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 3732.43)</small></td>
+            </tr>
+
+            <tr>
+                <td>56</td>
+                <td><span class="word">tu</span>
+                    <div class="context">...ement maintenant faire ce que <strong>[tu]</strong> expliques, mais je fais 50 ki...</div>
+                </td>
+                <td><span class="badge badge-freq">6×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 2537.03)</small></td>
+            </tr>
+
+            <tr>
+                <td>57</td>
+                <td><span class="word">ou</span>
+                    <div class="context">...rès avoir attaché ses lacets. <strong>[Ou]</strong> comment passer en quelques se...</div>
+                </td>
+                <td><span class="badge badge-freq">6×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>CON</strong> <small>(fréq: 2429.86)</small></td>
+            </tr>
+
+            <tr>
+                <td>58</td>
+                <td><span class="word">mes</span>
+                    <div class="context">...de montagne de deux heures et <strong>[mes]</strong> drives au golf ont retrouvé d...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 1023.11)</small></td>
+            </tr>
+
+            <tr>
+                <td>59</td>
+                <td><span class="word">moins</span>
+                    <div class="context">...éjà, plus on décline de haut, <strong>[moins]</strong> on a de chance de subir les e...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 718.18)</small></td>
+            </tr>
+
+            <tr>
+                <td>60</td>
+                <td><span class="word">bon</span>
+                    <div class="context">...her ses lacets. Alors, à quoi <strong>[bon]</strong> suer pendant des décennies po...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>ONO</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 789.66)</small></td>
+            </tr>
+
+            <tr>
+                <td>61</td>
+                <td><span class="word">pendant</span>
+                    <div class="context">...acets. Alors, à quoi bon suer <strong>[pendant]</strong> des décennies pour se retrouv...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 450.14)</small></td>
+            </tr>
+
+            <tr>
+                <td>62</td>
+                <td><span class="word">va</span>
+                    <div class="context">.... Le ciel est rose, le soleil <strong>[va]</strong> bientôt se lever sur l'Atlant...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 2854.93)</small></td>
+            </tr>
+
+            <tr>
+                <td>63</td>
+                <td><span class="word">leur</span>
+                    <div class="context">...ivent à mieux prendre soin de <strong>[leur]</strong> voiture que de leur corps. Ja...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:per</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>PRO:per</strong> <small>(fréq: 427.50)</small></td>
+            </tr>
+
+            <tr>
+                <td>64</td>
+                <td><span class="word">non</span>
+                    <div class="context">...r et éteindre le moteur. Mais <strong>[non]</strong>, ce n'est pas son genre. Frui...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 1135.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>65</td>
+                <td><span class="word">nouveau</span>
+                    <div class="context">... vite répondu. Et le voici de <strong>[nouveau]</strong> en mesure de se baisser pour ...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 292.43)</small></td>
+            </tr>
+
+            <tr>
+                <td>66</td>
+                <td><span class="word">rien</span>
+                    <div class="context">...te m'a échappé, bien entendu. <strong>[Rien]</strong> de nouveau, les voitures m'em...</div>
+                </td>
+                <td><span class="badge badge-freq">5×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:ind</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRO:ind</strong> <small>(fréq: 1522.91)</small></td>
+            </tr>
+
+            <tr>
+                <td>67</td>
+                <td><span class="word">borne</span>
+                    <div class="context">... cet anachronisme franchi, la <strong>[borne]</strong> multicolore qui marque la fin...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 20.61)</small></td>
+            </tr>
+
+            <tr>
+                <td>68</td>
+                <td><span class="word">sera</span>
+                    <div class="context">...nce et que son rayon d'action <strong>[sera]</strong> désormais limité. Mais il y a...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>69</td>
+                <td><span class="word">départ</span>
+                    <div class="context">...ton :  « Et voilà le point de <strong>[départ]</strong> : Southernmost Point, Contine...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 123.04)</small></td>
+            </tr>
+
+            <tr>
+                <td>70</td>
+                <td><span class="word">tard</span>
+                    <div class="context">...nète, mais j'en parlerai plus <strong>[tard]</strong>). Dans l'immédiat, les trajet...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 344.26)</small></td>
+            </tr>
+
+            <tr>
+                <td>71</td>
+                <td><span class="word">puis</span>
+                    <div class="context">...es nécessaires pour acquérir, <strong>[puis]</strong> maintenir une forme physique ...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>CON</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 2659.80)</small></td>
+            </tr>
+
+            <tr>
+                <td>72</td>
+                <td><span class="word">avant</span>
+                    <div class="context">..., là où le continent s'arrête <strong>[avant]</strong> de plonger dans la mer. Ça ne...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 574.32)</small></td>
+            </tr>
+
+            <tr>
+                <td>73</td>
+                <td><span class="word">m</span>
+                    <div class="context">...ger. La cause ? Mon garagiste <strong>[m]</strong>'a dit que le bloc moteur de m...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ:num</span>, <span class='badge badge-cgram'>PRO:per</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 14.73)</small></td>
+            </tr>
+
+            <tr>
+                <td>74</td>
+                <td><span class="word">point</span>
+                    <div class="context">...eau de béton :  « Et voilà le <strong>[point]</strong> de départ : Southernmost Poin...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 323.58)</small></td>
+            </tr>
+
+            <tr>
+                <td>75</td>
+                <td><span class="word">sous</span>
+                    <div class="context">... que l'aube prenne le relais. <strong>[Sous]</strong> les lampadaires, deux silhoue...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 1032.70)</small></td>
+            </tr>
+
+            <tr>
+                <td>76</td>
+                <td><span class="word">moteur</span>
+                    <div class="context">...ite, s'arrêter et éteindre le <strong>[moteur]</strong>. Mais non, ce n'est pas son g...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 51.08)</small></td>
+            </tr>
+
+            <tr>
+                <td>77</td>
+                <td><span class="word">physique</span>
+                    <div class="context">...jours, professeur d'éducation <strong>[physique]</strong>, universitairement formé aux ...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 33.18)</small></td>
+            </tr>
+
+            <tr>
+                <td>78</td>
+                <td><span class="word">quoi</span>
+                    <div class="context">...attacher ses lacets. Alors, à <strong>[quoi]</strong> bon suer pendant des décennie...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>PRO:int</span>, <span class='badge badge-cgram'>PRO:rel</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>ONO</span></td>
+                <td><strong>PRO:int</strong> <small>(fréq: 380.07)</small></td>
+            </tr>
+
+            <tr>
+                <td>79</td>
+                <td><span class="word">avoir</span>
+                    <div class="context">...s et peine à se relever après <strong>[avoir]</strong> attaché ses lacets. Ou commen...</div>
+                </td>
+                <td><span class="badge badge-freq">4×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>80</td>
+                <td><span class="word">toute</span>
+                    <div class="context">... Enfin, j'essaye car elle est <strong>[toute]</strong> neuve et je ne suis toujours ...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>ADJ:ind</span>, <span class='badge badge-cgram'>PRO:ind</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 3171.35)</small></td>
+            </tr>
+
+            <tr>
+                <td>81</td>
+                <td><span class="word">lancer</span>
+                    <div class="context">...a combinaison nécessaire pour <strong>[lancer]</strong> le GPS. Après une courte hési...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>VER</strong> <small>(fréq: 165.07)</small></td>
+            </tr>
+
+            <tr>
+                <td>82</td>
+                <td><span class="word">après</span>
+                    <div class="context">...rophiés et peine à se relever <strong>[après]</strong> avoir attaché ses lacets. Ou ...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 821.55)</small></td>
+            </tr>
+
+            <tr>
+                <td>83</td>
+                <td><span class="word">gros</span>
+                    <div class="context">...s l'inscription peinte sur ce <strong>[gros]</strong> morceau de béton :  « Et voil...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 353.45)</small></td>
+            </tr>
+
+            <tr>
+                <td>84</td>
+                <td><span class="word">dit</span>
+                    <div class="context">...tes, comme l'infirmière lui a <strong>[dit]</strong>. Et surtout, lui (et ses musc...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>NOM</strong> <small>(fréq: 4832.50)</small></td>
+            </tr>
+
+            <tr>
+                <td>85</td>
+                <td><span class="word">arrivée</span>
+                    <div class="context">...pas sous les Tropiques de mon <strong>[arrivée]</strong> en haut de la falaise en Gasp...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>VER</strong> <small>(fréq: 723.04)</small></td>
+            </tr>
+
+            <tr>
+                <td>86</td>
+                <td><span class="word">où</span>
+                    <div class="context">...mbrer rapidement dans la zone <strong>[où]</strong> la vie devient plus compliqué...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRO:int</span>, <span class='badge badge-cgram'>PRO:rel</span></td>
+                <td><strong>PRO:int</strong> <small>(fréq: 2068.11)</small></td>
+            </tr>
+
+            <tr>
+                <td>87</td>
+                <td><span class="word">étais</span>
+                    <div class="context">...ns et demi avant moi. Quand j'<strong>[étais]</strong> petit et que je voulais deven...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>88</td>
+                <td><span class="word">vers</span>
+                    <div class="context">...cle vicieux qui nous entraîne <strong>[vers]</strong> le fond : étant amoché, on bo...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 956.15)</small></td>
+            </tr>
+
+            <tr>
+                <td>89</td>
+                <td><span class="word">sauf</span>
+                    <div class="context">...ade au pire endroit possible. <strong>[Sauf]</strong> que la voiture, elle nous est...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADJ</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 83.99)</small></td>
+            </tr>
+
+            <tr>
+                <td>90</td>
+                <td><span class="word">été</span>
+                    <div class="context">... l'hiver jusqu'au milieu de l'<strong>[été]</strong>, il va me falloir la remplace...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>91</td>
+                <td><span class="word">suis</span>
+                    <div class="context">...elle est toute neuve et je ne <strong>[suis]</strong> toujours pas certain de la co...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">3: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 15085.47)</small></td>
+            </tr>
+
+            <tr>
+                <td>92</td>
+                <td><span class="word">manque</span>
+                    <div class="context">... absence. Cependant, l'argent <strong>[manque]</strong> un peu et ces machines-là, el...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>VER</strong> <small>(fréq: 197.64)</small></td>
+            </tr>
+
+            <tr>
+                <td>93</td>
+                <td><span class="word">parcours</span>
+                    <div class="context">...ous le nom de fastpacking. Un <strong>[parcours]</strong> de près de 8 000 km traversan...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>VER</strong> <small>(fréq: 61.82)</small></td>
+            </tr>
+
+            <tr>
+                <td>94</td>
+                <td><span class="word">depuis</span>
+                    <div class="context">...es lacets : mon père. Sportif <strong>[depuis]</strong> toujours, professeur d'éducat...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>PRE</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>PRE</strong> <small>(fréq: 542.64)</small></td>
+            </tr>
+
+            <tr>
+                <td>95</td>
+                <td><span class="word">ici</span>
+                    <div class="context">...raite indiquent que les vieux <strong>[ici]</strong> s'amusent bien. Arrivés au ba...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADV</span>, <span class='badge badge-cgram'>ADJ:num</span></td>
+                <td><strong>ADV</strong> <small>(fréq: 483.58)</small></td>
+            </tr>
+
+            <tr>
+                <td>96</td>
+                <td><span class="word">avais</span>
+                    <div class="context">...mon emploi en informatique. J'<strong>[avais]</strong> fait quelques calculs savants...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>AUX</span>, <span class='badge badge-cgram'>AUX</span></td>
+                <td><strong>AUX</strong> <small>(fréq: 12800.81)</small></td>
+            </tr>
+
+            <tr>
+                <td>97</td>
+                <td><span class="word">leurs</span>
+                    <div class="context">...nt des piquets de tente. Dans <strong>[leurs]</strong> bagages, leurs têtes et leurs...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>ADJ:pos</span>, <span class='badge badge-cgram'>PRO:pos</span></td>
+                <td><strong>ADJ:pos</strong> <small>(fréq: 886.55)</small></td>
+            </tr>
+
+            <tr>
+                <td>98</td>
+                <td><span class="word">passer</span>
+                    <div class="context">...ttaché ses lacets. Ou comment <strong>[passer]</strong> en quelques semaines d'autono...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>VER</span></td>
+                <td><strong>VER</strong> <small>(fréq: 1466.42)</small></td>
+            </tr>
+
+            <tr>
+                <td>99</td>
+                <td><span class="word">autre</span>
+                    <div class="context">...nental USA. » Anne pointe une <strong>[autre]</strong> information : 90 Miles to Cub...</div>
+                </td>
+                <td><span class="badge badge-freq">3×</span></td>
+                <td class="interpretation">4: <span class='badge badge-cgram'>ADJ</span>, <span class='badge badge-cgram'>PRO:ind</span>, <span class='badge badge-cgram'>NOM</span>, <span class='badge badge-cgram'>ADV</span></td>
+                <td><strong>ADJ</strong> <small>(fréq: 870.14)</small></td>
+            </tr>
+
+            <tr>
+                <td>100</td>
+                <td><span class="word">tombe</span>
+                    <div class="context">... ceinture tout en creusant la <strong>[tombe]</strong> du climat. Une fois cet anach...</div>
+                </td>
+                <td><span class="badge badge-freq">2×</span></td>
+                <td class="interpretation">2: <span class='badge badge-cgram'>VER</span>, <span class='badge badge-cgram'>NOM</span></td>
+                <td><strong>VER</strong> <small>(fréq: 441.42)</small></td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>

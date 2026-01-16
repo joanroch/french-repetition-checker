@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""
+Démonstration du workflow du lexique personnalisé.
+"""
+
+import sys
+from pathlib import Path
+
+def demo():
+    print("=" * 70)
+    print("DÉMONSTRATION: Lexique Personnalisé pour Analyses de Texte")
+    print("=" * 70)
+    print()
+    
+    print("📝 ÉTAPE 1: Première analyse")
+    print("-" * 70)
+    print("Commande: python3 generate_repetitions_report.py DNF.txt")
+    print()
+    print("Résultats:")
+    print("  ✓ DNF_repetitions_report.html       - Rapport HTML interactif")
+    print("  ✓ DNF_custom_lexicon.tsv            - Lexique personnalisé (425 entrées)")
+    print()
+    print("Le lexique contient:")
+    
+    lexicon_path = Path("DNF_custom_lexicon.tsv")
+    if lexicon_path.exists():
+        with open(lexicon_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            
+        categories = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('\t')
+            if len(parts) >= 2:
+                category = parts[1]
+                categories[category] = categories.get(category, 0) + 1
+        
+        for cat, count in sorted(categories.items()):
+            print(f"    - {cat:15s}: {count:3d} mots")
+    
+    print()
+    print("✏️  ÉTAPE 2: Édition du lexique")
+    print("-" * 70)
+    print("Ouvrez DNF_custom_lexicon.tsv dans votre éditeur préféré:")
+    print()
+    print("  1. Excel/LibreOffice:")
+    print("     - Ouvrir le fichier .tsv")
+    print("     - Sélectionner délimiteur: Tabulation")
+    print("     - Modifier les catégories")
+    print("     - Enregistrer au format TSV")
+    print()
+    print("  2. VS Code (avec extension Rainbow CSV):")
+    print("     - Ouvrir: code DNF_custom_lexicon.tsv")
+    print("     - Éditer directement")
+    print("     - Sauvegarder: Cmd+S / Ctrl+S")
+    print()
+    print("  3. Éditeur de texte:")
+    print("     - nano DNF_custom_lexicon.tsv")
+    print("     - vim DNF_custom_lexicon.tsv")
+    print()
+    print("Exemples de modifications:")
+    print()
+    print("  Avant:")
+    print("  ┌────────────┬────────────┬────────────┬─────────┐")
+    print("  │ mot        │ catégorie  │ lemme      │ notes   │")
+    print("  ├────────────┼────────────┼────────────┼─────────┤")
+    print("  │ running    │ INCONNU    │ running    │         │")
+    print("  │ trail      │ INCONNU    │ trail      │         │")
+    print("  └────────────┴────────────┴────────────┴─────────┘")
+    print()
+    print("  Après:")
+    print("  ┌────────────┬────────────┬────────────┬─────────────────┐")
+    print("  │ mot        │ catégorie  │ lemme      │ notes           │")
+    print("  ├────────────┼────────────┼────────────┼─────────────────┤")
+    print("  │ running    │ ETRANGER   │ running    │ anglais         │")
+    print("  │ trail      │ ETRANGER   │ trail      │ anglais         │")
+    print("  └────────────┴────────────┴────────────┴─────────────────┘")
+    print()
+    print("🔄 ÉTAPE 3: Régénération du rapport")
+    print("-" * 70)
+    print("Commande: python3 generate_repetitions_report.py DNF.txt")
+    print()
+    print("Le système:")
+    print("  1. Détecte DNF_custom_lexicon.tsv")
+    print("  2. Charge vos modifications")
+    print("  3. Applique votre classification")
+    print("  4. Génère le rapport mis à jour")
+    print()
+    print("Résultat:")
+    print("  ✓ Nouvelle section 'Mots étrangers' dans le rapport HTML")
+    print("  ✓ Classification personnalisée appliquée")
+    print("  ✓ Statistiques mises à jour")
+    print()
+    print("=" * 70)
+    print("📚 CATÉGORIES SUPPORTÉES")
+    print("=" * 70)
+    print()
+    print("  NOM_PROPRE  - Noms propres (personnes, lieux, marques)")
+    print("              Exemples: Joan, Montréal, St-Laurent, Adidas")
+    print()
+    print("  ACRONYME    - Acronymes et sigles")
+    print("              Exemples: DNF, GRA1, COVID, USA, ADN")
+    print()
+    print("  ETRANGER    - Mots étrangers")
+    print("              Exemples: hello, running, trail, pace")
+    print()
+    print("  INCONNU     - Mots non identifiés (néologismes, erreurs)")
+    print("              Exemples: bigorexie, anxiogène")
+    print()
+    print("=" * 70)
+    print("💡 CONSEILS")
+    print("=" * 70)
+    print()
+    print("  • Utilisez le champ 'notes' pour documenter vos choix")
+    print("  • Regroupez les variantes avec le même 'lemme'")
+    print("  • Versionnez le fichier .tsv avec Git")
+    print("  • Partagez le lexique avec votre équipe")
+    print("  • Sauvegardez vos modifications avant régénération")
+    print()
+    print("=" * 70)
+    print("📖 Documentation complète: LEXIQUE_PERSONNALISE.md")
+    print("=" * 70)
+    print()
+
+if __name__ == '__main__':
+    demo()
