@@ -8,6 +8,7 @@ from word_extractor import extract_words, extract_words_simple
 from lexicon_loader import Lexicon
 from word_classifier import WordClassifier, WordClassification
 import csv
+import unicodedata
 
 
 def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
@@ -17,12 +18,15 @@ def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
     Args:
         positions: Liste de tuples (word, start, end)
         max_distance: Distance maximale entre deux occurrences pour être dans le même cluster
-        min_occurrences: Nombre minimum d'occurrences dans un cluster
+        min_occurrences: Nombre minimum d'occurrences dans un cluster (toujours >= 2 pour former un vrai groupe)
         
     Returns:
         Liste de clusters, chaque cluster est une liste de positions
     """
-    if len(positions) < min_occurrences:
+    # Un groupe de répétitions doit TOUJOURS avoir au moins 2 occurrences
+    min_cluster_size = max(2, min_occurrences)
+    
+    if len(positions) < min_cluster_size:
         return []
     
     # Trier par position
@@ -39,13 +43,13 @@ def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
             # Même cluster
             current_cluster.append(sorted_positions[i])
         else:
-            # Nouveau cluster
-            if len(current_cluster) >= min_occurrences:
+            # Nouveau cluster - ne garder que si au moins 2 occurrences
+            if len(current_cluster) >= min_cluster_size:
                 clusters.append(current_cluster)
             current_cluster = [sorted_positions[i]]
     
-    # Ajouter le dernier cluster
-    if len(current_cluster) >= min_occurrences:
+    # Ajouter le dernier cluster - ne garder que si au moins 2 occurrences
+    if len(current_cluster) >= min_cluster_size:
         clusters.append(current_cluster)
     
     return clusters
@@ -130,14 +134,26 @@ def export_custom_lexicon(unknown_data, filepath: str):
     """
     Exporte les mots inconnus, noms propres et acronymes vers un fichier TSV éditable.
     IMPORTANT: Préserve les entrées existantes et n'ajoute que les nouvelles.
+    Les entrées sont triées par ortho (sans distinction de casse ni diacritiques).
     
     Args:
         unknown_data: dict {key: {'lemma': str, 'category': str, 'forms': list, 'count': int}}
         filepath: Chemin vers le fichier TSV de sortie
     """
+    
+    def normalize_for_sort(text: str) -> str:
+        """
+        Normalise un texte pour le tri en retirant les diacritiques et en convertissant en minuscules.
+        """
+        # Décomposer les caractères accentués
+        nfd = unicodedata.normalize('NFD', text)
+        # Retirer les marques diacritiques
+        without_accents = ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+        # Convertir en minuscules
+        return without_accents.lower()
+    
     # Charger les entrées existantes si le fichier existe
     existing_entries = {}
-    existing_order = []
     
     if Path(filepath).exists():
         try:
@@ -154,7 +170,6 @@ def export_custom_lexicon(unknown_data, filepath: str):
                             'freq': float(row.get('freq', '0.0')),
                             'is_lem': int(row.get('is_lem', '1'))
                         }
-                        existing_order.append(ortho.lower())
         except Exception as e:
             print(f"Avertissement: impossible de lire le lexique existant: {e}")
     
@@ -182,11 +197,9 @@ def export_custom_lexicon(unknown_data, filepath: str):
                 'is_lem': is_lem
             })
     
-    # Trier les nouvelles entrées par cgram puis ortho
-    new_entries.sort(key=lambda x: (x['cgram'], x['ortho'].lower()))
-    
-    # Combiner: entrées existantes (dans l'ordre original) + nouvelles entrées
-    all_entries = [existing_entries[key] for key in existing_order] + new_entries
+    # Combiner toutes les entrées et trier par ortho (normalisé)
+    all_entries = list(existing_entries.values()) + new_entries
+    all_entries.sort(key=lambda x: normalize_for_sort(x['ortho']))
     
     # Écrire le fichier TSV
     try:
@@ -548,46 +561,69 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             'is_unknown': True  # Mot vraiment inconnu (pas dans le lexique)
         })
     
-    # Ajouter les mots du lexique personnalisé avec catégories spéciales (TOUS, même avec une seule occurrence)
-    added_custom_words = set()  # Pour éviter les doublons
+    # Agréger les mots du lexique personnalisé avec catégories spéciales par lemme
+    # (plusieurs word_lower peuvent avoir le même lemme, ex: RARAMURI, Rarámuri, Rarámuris -> Rarámuri)
+    aggregated_custom_words = {}
     for word_lower, data in custom_special_words.items():
+        cgram = data['cgram']
+        lemma = data['lemma']
+        unique_key = f"{cgram}:{lemma}"
+        
+        if unique_key not in aggregated_custom_words:
+            aggregated_custom_words[unique_key] = {
+                'cgram': cgram,
+                'lemma': lemma,
+                'words': [],
+                'positions': []
+            }
+        
+        # Agréger les mots et positions de toutes les variantes
+        aggregated_custom_words[unique_key]['words'].extend(data['words'])
+        aggregated_custom_words[unique_key]['positions'].extend(data['positions'])
+    
+    # Ajouter les mots du lexique personnalisé agrégés dans cgram_data
+    for unique_key, data in aggregated_custom_words.items():
         cgram = data['cgram']
         lemma = data['lemma']
         count = len(data['words'])
         forms_set = set(data['words'])
         forms = sorted(forms_set)
         
-        # Créer une clé unique pour détecter les doublons
-        unique_key = f"{cgram}:{lemma}"
-        if unique_key in added_custom_words:
-            print(f"ATTENTION: Doublon détecté pour {unique_key} (word_lower={word_lower})")
-            continue
-        added_custom_words.add(unique_key)
-        
         if cgram not in cgram_data:
             cgram_data[cgram] = []
         
         # Pour NOM_PROPRE et ACRONYME, utiliser la forme avec casse appropriée
-        display_lemma = lemma if lemma in forms_set else forms[0]  # Par défaut
+        # Priorité au lemme du lexique personnalisé s'il existe dans les formes
+        display_lemma = lemma if lemma in forms_set else forms[0]
         if cgram in ['NOM_PROPRE', 'ACRONYME'] and forms:
-            # Priorité: forme avec majuscule appropriée
-            ideal_form = None
-            for form in forms:
-                if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
-                    ideal_form = form
-                    break
-                elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
-                    ideal_form = form
+            # Chercher d'abord le lemme exact dans le lexique (avec bonne casse)
+            lemma_in_lexicon = None
+            for word_lower_key, entry in custom_lexicon.items():
+                if entry['cgram'] == cgram and entry['lemme'].lower() == lemma and entry.get('is_lem') == 1:
+                    lemma_in_lexicon = entry['lemme']
                     break
             
-            if not ideal_form:
+            if lemma_in_lexicon and lemma_in_lexicon in forms_set:
+                display_lemma = lemma_in_lexicon
+            else:
+                # Chercher la forme idéale parmi les variantes
+                ideal_form = None
                 for form in forms:
-                    if form[0].isupper():
+                    if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
                         ideal_form = form
                         break
-            
-            if ideal_form:
-                display_lemma = ideal_form
+                    elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
+                        ideal_form = form
+                        break
+                
+                if not ideal_form:
+                    for form in forms:
+                        if form[0].isupper():
+                            ideal_form = form
+                            break
+                
+                if ideal_form:
+                    display_lemma = ideal_form
         
         cgram_data[cgram].append({
             'lemma': lemma,
@@ -603,8 +639,8 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     # Pour les clusters: garder les mots répétés normaux (min_occurrences) + TOUS les mots inconnus
     all_repetitions_for_clusters = {**repetitions, **unknown_freq}
     
-    # Ajouter les positions des mots spéciaux du custom_lexicon
-    for word_lower, data in custom_special_words.items():
+    # Ajouter les positions des mots spéciaux du custom_lexicon (agrégés)
+    for unique_key, data in aggregated_custom_words.items():
         lemma = data['lemma']
         all_lemma_positions[lemma] = data['positions']
         all_repetitions_for_clusters[lemma] = len(data['positions'])
@@ -1174,7 +1210,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                                 </div>
 """
                     
-                    # Afficher les premières occurrences (max 5 par défaut, cachées initialement)
+                    # Afficher les premières occurrences (max 5 visibles par défaut)
                     max_display_single = 5
                     for i, (word, start, end) in enumerate(non_clustered_positions):
                         # Extraire le contexte autour du mot
@@ -1186,8 +1222,8 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                         word_text = text[start:end]
                         after_text = text[end:context_end]
                         
-                        # Toutes les occurrences hors groupes sont cachées au départ
-                        hidden_class = " hidden"
+                        # Les premières occurrences sont visibles, les suivantes cachées
+                        hidden_class = " hidden" if i >= max_display_single else ""
                         
                         html += f"""
                                 <div class="cluster-item single-occurrence{hidden_class}" data-lemma="{lemma}-single">
@@ -1200,10 +1236,11 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                                 </div>
 """
                     
-                    # Bouton pour afficher les occurrences hors groupes
-                    html += f"""
+                    # Bouton pour afficher toutes les occurrences hors groupes si nécessaire
+                    if len(non_clustered_positions) > max_display_single:
+                        html += f"""
                                 <button class="show-more-btn" onclick="showMoreClusters('{lemma}-single')">
-                                    Afficher les occurrences hors groupes ({len(non_clustered_positions)})
+                                    Afficher toutes les occurrences hors groupes ({len(non_clustered_positions) - max_display_single} de plus)
                                 </button>
 """
                     
