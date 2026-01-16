@@ -527,11 +527,19 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             forms_set.add(form)
         forms = sorted(forms_set)
         
-        # Pour NOM_PROPRE et ACRONYME, utiliser la forme avec casse appropriée
-        display_lemma = lemma if lemma in forms_set else forms[0]  # Par défaut
-        if category in ['NOM_PROPRE', 'ACRONYME'] and forms:
-            # Priorité: forme avec majuscule appropriée
-            # Chercher d'abord la forme idéale, sinon prendre la première avec bonne casse
+        # Chercher le lemme dans le lexique personnalisé (is_lem=1)
+        lemma_in_lexicon = None
+        for word_lower_key, entry in custom_lexicon.items():
+            if entry['cgram'] == category and entry['lemme'].lower() == lemma.lower() and entry.get('is_lem') == 1:
+                lemma_in_lexicon = entry['lemme']
+                break
+        
+        # Déterminer le display_lemma selon la catégorie
+        if lemma_in_lexicon:
+            # Utiliser le lemme du lexique personnalisé
+            display_lemma = lemma_in_lexicon
+        elif category in ['NOM_PROPRE', 'ACRONYME'] and forms:
+            # Pour NOM_PROPRE et ACRONYME sans lemme dans lexique: forme avec casse appropriée
             ideal_form = None
             for form in forms:
                 if category == 'ACRONYME' and form.isupper() and len(form) > 1:
@@ -549,8 +557,10 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                         ideal_form = form
                         break
             
-            if ideal_form:
-                display_lemma = ideal_form
+            display_lemma = ideal_form if ideal_form else (lemma if lemma in forms_set else forms[0])
+        else:
+            # Pour les autres catégories (ETRANGER, INCONNU): utiliser le lemme normalisé (minuscules)
+            display_lemma = lemma
         
         cgram_data[category].append({
             'lemma': lemma,
@@ -592,38 +602,38 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
         if cgram not in cgram_data:
             cgram_data[cgram] = []
         
-        # Pour NOM_PROPRE et ACRONYME, utiliser la forme avec casse appropriée
-        # Priorité au lemme du lexique personnalisé s'il existe dans les formes
-        display_lemma = lemma if lemma in forms_set else forms[0]
-        if cgram in ['NOM_PROPRE', 'ACRONYME'] and forms:
-            # Chercher d'abord le lemme exact dans le lexique (avec bonne casse)
-            lemma_in_lexicon = None
-            for word_lower_key, entry in custom_lexicon.items():
-                if entry['cgram'] == cgram and entry['lemme'].lower() == lemma and entry.get('is_lem') == 1:
-                    lemma_in_lexicon = entry['lemme']
+        # Chercher le lemme dans le lexique personnalisé (is_lem=1)
+        lemma_in_lexicon = None
+        for word_lower_key, entry in custom_lexicon.items():
+            if entry['cgram'] == cgram and entry['lemme'].lower() == lemma.lower() and entry.get('is_lem') == 1:
+                lemma_in_lexicon = entry['lemme']
+                break
+        
+        # Déterminer le display_lemma selon la catégorie
+        if lemma_in_lexicon:
+            # Utiliser le lemme du lexique personnalisé
+            display_lemma = lemma_in_lexicon
+        elif cgram in ['NOM_PROPRE', 'ACRONYME'] and forms:
+            # Pour NOM_PROPRE et ACRONYME sans lemme dans lexique: forme avec casse appropriée
+            ideal_form = None
+            for form in forms:
+                if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
+                    ideal_form = form
+                    break
+                elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
+                    ideal_form = form
                     break
             
-            if lemma_in_lexicon and lemma_in_lexicon in forms_set:
-                display_lemma = lemma_in_lexicon
-            else:
-                # Chercher la forme idéale parmi les variantes
-                ideal_form = None
+            if not ideal_form:
                 for form in forms:
-                    if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
+                    if form[0].isupper():
                         ideal_form = form
                         break
-                    elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
-                        ideal_form = form
-                        break
-                
-                if not ideal_form:
-                    for form in forms:
-                        if form[0].isupper():
-                            ideal_form = form
-                            break
-                
-                if ideal_form:
-                    display_lemma = ideal_form
+            
+            display_lemma = ideal_form if ideal_form else (lemma if lemma in forms_set else forms[0])
+        else:
+            # Pour les autres catégories (ETRANGER, INCONNU): utiliser le lemme normalisé (minuscules)
+            display_lemma = lemma
         
         cgram_data[cgram].append({
             'lemma': lemma,
