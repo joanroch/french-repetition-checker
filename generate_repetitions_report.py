@@ -265,6 +265,10 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             # Ajouter au set des mots connus
             lexicon_words.add(ortho.lower())
             
+            # Si le mot contient un espace, l'ajouter aux mots composés
+            if ' ' in ortho:
+                compounds_with_spaces.add(ortho.lower())
+            
             # Créer une fausse entrée de lexique pour ce mot
             # Cela permettra au classifier de le reconnaître
             if not hasattr(lexicon, '_custom_entries'):
