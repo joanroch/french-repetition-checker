@@ -10,13 +10,12 @@ from typing import List, Dict, Optional
 class LexiconEntry:
     """Représente une entrée du lexique."""
     
-    def __init__(self, ortho: str, lemme: str, cgram: str, freq: float, is_lem: bool, cgram_ortho: str):
+    def __init__(self, ortho: str, lemme: str, cgram: str, freq: float, is_lem: bool):
         self.ortho = ortho
         self.lemme = lemme
         self.cgram = cgram
         self.freq = freq
         self.is_lem = is_lem
-        self.cgram_ortho = cgram_ortho
     
     def __repr__(self):
         return f"LexiconEntry(ortho={self.ortho}, lemme={self.lemme}, cgram={self.cgram}, is_lem={self.is_lem})"
@@ -58,9 +57,7 @@ class Lexicon:
                 except (ValueError, KeyError):
                     is_lem = False
                 
-                cgram_ortho = row.get('Lexique3__cgramortho', '')
-                
-                entry = LexiconEntry(ortho, lemme, cgram, freq, is_lem, cgram_ortho)
+                entry = LexiconEntry(ortho, lemme, cgram, freq, is_lem)
                 
                 # Indexer par ortho (forme orthographique)
                 if ortho not in self.entries:

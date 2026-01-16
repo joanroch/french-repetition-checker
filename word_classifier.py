@@ -242,8 +242,7 @@ class WordClassifier:
                 lemme=custom_entry['lemme'],
                 cgram=custom_entry['cgram'],
                 freq=100.0,  # Haute fréquence pour prioriser
-                is_lem=True,
-                cgram_ortho=custom_entry['cgram']
+                is_lem=True
             )
             return WordClassification(word, WordClassification.CLASSIFIED, 
                                     cgram=custom_entry['cgram'], 
