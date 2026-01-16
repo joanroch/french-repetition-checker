@@ -1,0 +1,13 @@
+ortho	lemme	cgram	freq	is_lem	cgramortho	categorie	notes
+Joan	Joan	NOM_PROPRE	13.0	1	NOM_PROPRE	NOM_PROPRE	prénom
+JOAN	Joan	NOM_PROPRE	13.0	0	NOM_PROPRE	NOM_PROPRE	variante majuscules
+trailer	trailer	NOM	5.0	1	NOM	ETRANGER	anglais - coureur de trail (masculin singulier)
+trailers	trailer	NOM	5.0	0	NOM	ETRANGER	anglais - coureurs de trail (masculin pluriel)
+traileuse	trailer	NOM	5.0	0	NOM	ETRANGER	anglais - coureuse de trail (féminin singulier)
+traileuses	trailer	NOM	5.0	0	NOM	ETRANGER	anglais - coureuses de trail (féminin pluriel)
+bigorexique	bigorexique	ADJ	2.0	1	ADJ	INCONNU	néologisme (masculin/féminin singulier)
+bigorexiques	bigorexique	ADJ	2.0	0	ADJ	INCONNU	néologisme (pluriel)
+ultramarathonien	ultramarathonien	NOM	8.0	1	NOM	ETRANGER	anglicisme (masculin singulier)
+ultramarathoniens	ultramarathonien	NOM	8.0	0	NOM	ETRANGER	anglicisme (masculin pluriel)
+ultramarathonienne	ultramarathonien	NOM	8.0	0	NOM	ETRANGER	anglicisme (féminin singulier)
+ultramarathoniennes	ultramarathonien	NOM	8.0	0	NOM	ETRANGER	anglicisme (féminin pluriel)

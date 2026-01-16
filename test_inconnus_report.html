@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Répétitions - test_inconnus.txt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0;
+            background: white;
+            border-bottom: 3px solid #f0f0f0;
+        }
+        
+        .stat-box {
+            padding: 30px;
+            text-align: center;
+            border-right: 1px solid #f0f0f0;
+        }
+        
+        .stat-box:last-child {
+            border-right: none;
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .category-section {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .category-header:hover {
+            background: linear-gradient(to right, #e9ecef, #f8f9fa);
+        }
+        
+        .category-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .category-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .category-content {
+            display: none;
+            padding: 20px;
+            background: #fafafa;
+        }
+        
+        .category-section.expanded .category-content {
+            display: block;
+        }
+        
+        .category-section.expanded .arrow {
+            transform: rotate(90deg);
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        
+        .lemma-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .lemma-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .lemma-header:hover {
+            background: #f8f9fa;
+        }
+        
+        .lemma-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .lemma-count {
+            background: #10b981;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .cluster-badge {
+            background: #d63031;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .no-cluster-badge {
+            background: #95a5a6;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+        
+        .forms-content {
+            display: none;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .lemma-item.expanded .forms-content {
+            display: block;
+        }
+        
+        .lemma-item.expanded .lemma-arrow {
+            transform: rotate(90deg);
+        }
+        
+        .lemma-arrow {
+            transition: transform 0.3s;
+            color: #999;
+            font-size: 0.9em;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        
+        .forms-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .form-tag {
+            background: white;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            border: 1px solid #667eea;
+        }
+        
+        .info-text {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        /* Styles pour les groupes de répétitions intégrés */
+        .clusters-in-lemma {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 8px;
+            border: 2px solid #fdcb6e;
+        }
+        
+        .clusters-in-lemma-title {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .cluster-count-badge {
+            background: #d63031;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .cluster-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #fdcb6e;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cluster-header {
+            font-size: 0.9em;
+            color: #636e72;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .cluster-text {
+            line-height: 1.8;
+            color: #2d3436;
+            font-family: Georgia, serif;
+        }
+        
+        .cluster-context {
+            color: #636e72;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            color: #856404;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .show-more-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        .show-more-btn:hover {
+            background: #764ba2;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Rapport de Répétitions</h1>
+            <p>test_inconnus.txt</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">28</div>
+                <div class="stat-label">Mots Totaux</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">22</div>
+                <div class="stat-label">Mots Uniques</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">16</div>
+                <div class="stat-label">Lemmes Uniques</div>
+            </div>
+        </div>
+        
+        <div class="content">
+
+
+            <div class="category-section">
+                <div class="category-header">
+                    <div>
+                        <span class="category-title">Auxiliaires</span>
+                        <span class="info-text"> · 1 lemme(s) · 3 occurrences</span>
+                    </div>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="category-content">
+
+                    <div class="lemma-item">
+                        <div class="lemma-header">
+                            <div>
+                                <span class="lemma-name">être</span>
+                                <span class="info-text"> · 1 forme(s)</span>
+                            </div>
+                            <div>
+                                <span class="lemma-count">3×</span>
+                                <span class="cluster-badge">🔍 1 groupe(s)</span>
+                                <span class="lemma-arrow">▶</span>
+                            </div>
+                        </div>
+                        <div class="forms-content">
+                            <div class="forms-list">
+                                <span class="form-tag">est</span>
+
+                            </div>
+
+                            <div class="clusters-in-lemma">
+                                <div class="clusters-in-lemma-title">
+                                    🔍 Groupes de répétitions
+                                    <span class="cluster-count-badge">1</span>
+                                </div>
+
+                                <div class="cluster-item" data-lemma="être">
+                                    <div class="cluster-header">
+                                        Groupe 1 • 3 occurrence(s) • Position 49-143
+                                    </div>
+                                    <div class="cluster-text">
+                                        <span class="cluster-context">...Je connais Zéphyrine depuis longtemps. Zéphyrine </span><span class="highlight">est</span> très gentille.
+L'entreprise ACME <span class="highlight">est</span> connue. ACME fabrique des gadgets.
+Le mot zorglub <span class="highlight">est</span><span class="cluster-context"> inventé. Je n'aime pas zorglub.
+...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <div>
+                        <span class="category-title">Verbes</span>
+                        <span class="info-text"> · 1 lemme(s) · 2 occurrences</span>
+                    </div>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="category-content">
+
+                    <div class="lemma-item">
+                        <div class="lemma-header">
+                            <div>
+                                <span class="lemma-name">connaître</span>
+                                <span class="info-text"> · 2 forme(s)</span>
+                            </div>
+                            <div>
+                                <span class="lemma-count">2×</span>
+                                <span class="cluster-badge">🔍 1 groupe(s)</span>
+                                <span class="lemma-arrow">▶</span>
+                            </div>
+                        </div>
+                        <div class="forms-content">
+                            <div class="forms-list">
+                                <span class="form-tag">connais</span>
+                                <span class="form-tag">connue</span>
+
+                            </div>
+
+                            <div class="clusters-in-lemma">
+                                <div class="clusters-in-lemma-title">
+                                    🔍 Groupes de répétitions
+                                    <span class="cluster-count-badge">1</span>
+                                </div>
+
+                                <div class="cluster-item" data-lemma="connaître">
+                                    <div class="cluster-header">
+                                        Groupe 1 • 2 occurrence(s) • Position 3-96
+                                    </div>
+                                    <div class="cluster-text">
+                                        <span class="cluster-context">...Je </span><span class="highlight">connais</span> Zéphyrine depuis longtemps. Zéphyrine est très gentille.
+L'entreprise ACME est <span class="highlight">connue</span><span class="cluster-context">. ACME fabrique des gadgets.
+Le mot zorglub est inventé. Je n'aime pas zorglub.
+...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <div>
+                        <span class="category-title">Noms propres</span>
+                        <span class="info-text"> · 1 lemme(s) · 2 occurrences</span>
+                    </div>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="category-content">
+
+                    <div class="lemma-item">
+                        <div class="lemma-header">
+                            <div>
+                                <span class="lemma-name">Zéphyrine</span>
+                                <span class="info-text"> · 1 forme(s)</span>
+                            </div>
+                            <div>
+                                <span class="lemma-count">2×</span>
+                                <span class="cluster-badge">🔍 1 groupe(s)</span>
+                                <span class="lemma-arrow">▶</span>
+                            </div>
+                        </div>
+                        <div class="forms-content">
+                            <div class="forms-list">
+                                <span class="form-tag">zéphyrine</span>
+
+                            </div>
+
+                            <div class="clusters-in-lemma">
+                                <div class="clusters-in-lemma-title">
+                                    🔍 Groupes de répétitions
+                                    <span class="cluster-count-badge">1</span>
+                                </div>
+
+                                <div class="cluster-item" data-lemma="Zéphyrine">
+                                    <div class="cluster-header">
+                                        Groupe 1 • 2 occurrence(s) • Position 11-48
+                                    </div>
+                                    <div class="cluster-text">
+                                        <span class="cluster-context">...Je connais </span><span class="highlight">Zéphyrine</span> depuis longtemps. <span class="highlight">Zéphyrine</span><span class="cluster-context"> est très gentille.
+L'entreprise ACME est connue. ACME fabrique des gadgets.
+Le ...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <div>
+                        <span class="category-title">Acronymes</span>
+                        <span class="info-text"> · 1 lemme(s) · 2 occurrences</span>
+                    </div>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="category-content">
+
+                    <div class="lemma-item">
+                        <div class="lemma-header">
+                            <div>
+                                <span class="lemma-name">ACME</span>
+                                <span class="info-text"> · 1 forme(s)</span>
+                            </div>
+                            <div>
+                                <span class="lemma-count">2×</span>
+                                <span class="cluster-badge">🔍 1 groupe(s)</span>
+                                <span class="lemma-arrow">▶</span>
+                            </div>
+                        </div>
+                        <div class="forms-content">
+                            <div class="forms-list">
+                                <span class="form-tag">acme</span>
+
+                            </div>
+
+                            <div class="clusters-in-lemma">
+                                <div class="clusters-in-lemma-title">
+                                    🔍 Groupes de répétitions
+                                    <span class="cluster-count-badge">1</span>
+                                </div>
+
+                                <div class="cluster-item" data-lemma="ACME">
+                                    <div class="cluster-header">
+                                        Groupe 1 • 2 occurrence(s) • Position 81-102
+                                    </div>
+                                    <div class="cluster-text">
+                                        <span class="cluster-context">...e connais Zéphyrine depuis longtemps. Zéphyrine est très gentille.
+L'entreprise </span><span class="highlight">ACME</span> est connue. <span class="highlight">ACME</span><span class="cluster-context"> fabrique des gadgets.
+Le mot zorglub est inventé. Je n'aime pas zorglub.
+...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <div>
+                        <span class="category-title">Inconnus</span>
+                        <span class="info-text"> · 1 lemme(s) · 2 occurrences</span>
+                    </div>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="category-content">
+
+                    <div class="lemma-item">
+                        <div class="lemma-header">
+                            <div>
+                                <span class="lemma-name">zorglub</span>
+                                <span class="info-text"> · 1 forme(s)</span>
+                            </div>
+                            <div>
+                                <span class="lemma-count">2×</span>
+                                <span class="cluster-badge">🔍 1 groupe(s)</span>
+                                <span class="lemma-arrow">▶</span>
+                            </div>
+                        </div>
+                        <div class="forms-content">
+                            <div class="forms-list">
+                                <span class="form-tag">zorglub</span>
+
+                            </div>
+
+                            <div class="clusters-in-lemma">
+                                <div class="clusters-in-lemma-title">
+                                    🔍 Groupes de répétitions
+                                    <span class="cluster-count-badge">1</span>
+                                </div>
+
+                                <div class="cluster-item" data-lemma="zorglub">
+                                    <div class="cluster-header">
+                                        Groupe 1 • 2 occurrence(s) • Position 132-174
+                                    </div>
+                                    <div class="cluster-text">
+                                        <span class="cluster-context">... très gentille.
+L'entreprise ACME est connue. ACME fabrique des gadgets.
+Le mot </span><span class="highlight">zorglub</span> est inventé. Je n'aime pas <span class="highlight">zorglub</span><span class="cluster-context">.
+...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+        // Fonction pour afficher tous les clusters d'un lemme
+        function showMoreClusters(lemma) {
+            const hiddenClusters = document.querySelectorAll(`.cluster-item.hidden[data-lemma="${lemma}"]`);
+            hiddenClusters.forEach(cluster => cluster.classList.remove('hidden'));
+            
+            // Masquer le bouton
+            event.target.style.display = 'none';
+        }
+        
+        // Initialisation après chargement du DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ajouter les écouteurs pour les en-têtes de catégories
+            document.querySelectorAll('.category-header').forEach(function(header) {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.category-section');
+                    section.classList.toggle('expanded');
+                });
+            });
+            
+            // Ajouter les écouteurs pour les en-têtes de lemmes
+            document.querySelectorAll('.lemma-header').forEach(function(header) {
+                header.addEventListener('click', function() {
+                    const item = this.closest('.lemma-item');
+                    item.classList.toggle('expanded');
+                });
+            });
+            
+            // Raccourcis clavier
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'o' && e.ctrlKey) {
+                    e.preventDefault();
+                    document.querySelectorAll('.category-section').forEach(s => s.classList.add('expanded'));
+                }
+                if (e.key === 'c' && e.ctrlKey) {
+                    e.preventDefault();
+                    document.querySelectorAll('.category-section').forEach(s => s.classList.remove('expanded'));
+                    document.querySelectorAll('.lemma-item').forEach(s => s.classList.remove('expanded'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
