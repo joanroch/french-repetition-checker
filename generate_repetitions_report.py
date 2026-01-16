@@ -291,6 +291,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     lemma_to_words = {}
     lemma_positions = {}  # Nouveau: positions de chaque lemme
     unknown_words_data = []  # Données des mots inconnus avec positions
+    custom_special_words = {}  # Mots du lexique personnalisé avec catégories spéciales
     
     for word, start, end in words_with_positions:
         word_lower = word.lower()
@@ -312,6 +313,20 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                     
                 lemma_to_words[lemma].append(word)  # Conserver le mot original avec ligatures
                 lemma_positions[lemma].append((word, start, end))  # Utiliser le mot original
+                
+                # Vérifier si c'est un mot du lexique personnalisé avec catégorie spéciale
+                if word_lower in custom_lexicon:
+                    cgram = custom_lexicon[word_lower]['cgram']
+                    if cgram in ['NOM_PROPRE', 'ACRONYME', 'ETRANGER', 'INCONNU']:
+                        if word_lower not in custom_special_words:
+                            custom_special_words[word_lower] = {
+                                'cgram': cgram,
+                                'lemma': lemma,
+                                'words': [],
+                                'positions': []
+                            }
+                        custom_special_words[word_lower]['words'].append(word)
+                        custom_special_words[word_lower]['positions'].append((word, start, end))
         elif classif and classif.status == WordClassification.UNKNOWN:
             # Stocker les mots inconnus avec leur position pour analyse ultérieure
             unknown_words_data.append((word, word_lower, start, end))
@@ -398,6 +413,15 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     # Organiser par catégorie grammaticale
     cgram_data = {}
     for lemma, count in repetitions.items():
+        # Ignorer les lemmes qui sont dans custom_special_words (ils seront ajoutés plus tard)
+        is_in_custom_special = False
+        for word_lower, data in custom_special_words.items():
+            if data['lemma'] == lemma:
+                is_in_custom_special = True
+                break
+        if is_in_custom_special:
+            continue
+        
         classif = classifications.get(lemma)
         
         # Si le lemme n'est pas dans classifications, prendre la première forme
@@ -454,9 +478,32 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 'is_unknown': False  # Mot du lexique (peut être du lexique personnalisé)
             })
     
-    # Ajouter les mots inconnus dans cgram_data (même s'ils ne sont pas répétés)
+    # Créer un set des lemmes déjà traités par custom_special_words pour éviter les doublons
+    custom_special_lemmas = set()
+    for word_lower, data in custom_special_words.items():
+        # Ajouter la clé avec préfixe pour comparaison avec unknown_freq
+        # Normaliser le lemme en minuscules pour la comparaison
+        cgram = data['cgram']
+        lemma_normalized = data['lemma'].lower() if isinstance(data['lemma'], str) else data['lemma']
+        custom_special_lemmas.add(f"{cgram}:{lemma_normalized}")
+        # DEBUG: aussi ajouter le word_lower original comme clé alternative
+        custom_special_lemmas.add(f"{cgram}:{word_lower}")
+    
+    # Ajouter les mots inconnus dans cgram_data (TOUS, même avec une seule occurrence)
+    # SAUF ceux déjà traités par custom_special_words OU ceux qui sont dans custom_lexicon
     for key, count in unknown_freq.items():
         category, lemma = key.split(':', 1)
+        
+        # Normaliser la clé pour comparaison (lemme en minuscules)
+        normalized_key = f"{category}:{lemma.lower()}"
+        
+        # Ignorer si déjà traité par custom_special_words
+        if normalized_key in custom_special_lemmas:
+            continue
+        
+        # Ignorer si le mot est dans custom_lexicon (car il sera traité par custom_special_words)
+        if lemma.lower() in custom_lexicon:
+            continue
         
         if category not in cgram_data:
             cgram_data[category] = []
@@ -501,10 +548,66 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             'is_unknown': True  # Mot vraiment inconnu (pas dans le lexique)
         })
     
+    # Ajouter les mots du lexique personnalisé avec catégories spéciales (TOUS, même avec une seule occurrence)
+    added_custom_words = set()  # Pour éviter les doublons
+    for word_lower, data in custom_special_words.items():
+        cgram = data['cgram']
+        lemma = data['lemma']
+        count = len(data['words'])
+        forms_set = set(data['words'])
+        forms = sorted(forms_set)
+        
+        # Créer une clé unique pour détecter les doublons
+        unique_key = f"{cgram}:{lemma}"
+        if unique_key in added_custom_words:
+            print(f"ATTENTION: Doublon détecté pour {unique_key} (word_lower={word_lower})")
+            continue
+        added_custom_words.add(unique_key)
+        
+        if cgram not in cgram_data:
+            cgram_data[cgram] = []
+        
+        # Pour NOM_PROPRE et ACRONYME, utiliser la forme avec casse appropriée
+        display_lemma = lemma if lemma in forms_set else forms[0]  # Par défaut
+        if cgram in ['NOM_PROPRE', 'ACRONYME'] and forms:
+            # Priorité: forme avec majuscule appropriée
+            ideal_form = None
+            for form in forms:
+                if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
+                    ideal_form = form
+                    break
+                elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
+                    ideal_form = form
+                    break
+            
+            if not ideal_form:
+                for form in forms:
+                    if form[0].isupper():
+                        ideal_form = form
+                        break
+            
+            if ideal_form:
+                display_lemma = ideal_form
+        
+        cgram_data[cgram].append({
+            'lemma': lemma,
+            'display_lemma': display_lemma,
+            'count': count,
+            'forms': sorted(forms),
+            'cluster_count': 0,
+            'is_unknown': False  # Du lexique personnalisé, mais catégorie spéciale
+        })
+    
     # Fusionner les positions pour le calcul des clusters
     all_lemma_positions = {**lemma_positions, **unknown_lemma_positions}
-    # Pour les clusters, on ne garde que les mots qui sont répétés (min_occurrences)
-    all_repetitions_for_clusters = {**repetitions, **{key: count for key, count in unknown_freq.items() if count >= min_occurrences}}
+    # Pour les clusters: garder les mots répétés normaux (min_occurrences) + TOUS les mots inconnus
+    all_repetitions_for_clusters = {**repetitions, **unknown_freq}
+    
+    # Ajouter les positions des mots spéciaux du custom_lexicon
+    for word_lower, data in custom_special_words.items():
+        lemma = data['lemma']
+        all_lemma_positions[lemma] = data['positions']
+        all_repetitions_for_clusters[lemma] = len(data['positions'])
     
     # Trouver les groupes de répétitions (clusters)
     print("Recherche des groupes de répétitions...")
@@ -512,7 +615,12 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     for lemma, positions in all_lemma_positions.items():
         # Pour les mots inconnus, le lemma dans all_lemma_positions a le format "CATEGORY:word"
         if lemma in all_repetitions_for_clusters and lemma not in excluded_lemmas_for_clusters:
-            clusters = find_repetition_clusters(positions, max_distance=200, min_occurrences=2)
+            # Pour les mots inconnus (avec préfixe) ou du custom_lexicon spécial, accepter même une seule occurrence
+            is_unknown_word = ':' in lemma and lemma.split(':', 1)[0] in ['ACRONYME', 'NOM_PROPRE', 'INCONNU', 'ETRANGER']
+            is_custom_special = any(data['lemma'] == lemma for data in custom_special_words.values())
+            min_occ = 1 if (is_unknown_word or is_custom_special) else 2
+            
+            clusters = find_repetition_clusters(positions, max_distance=200, min_occurrences=min_occ)
             if clusters:
                 lemma_clusters[lemma] = clusters
     
