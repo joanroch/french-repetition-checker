@@ -93,6 +93,7 @@ def load_custom_lexicon(filepath: str):
         
     Returns:
         dict: {mot: {'categorie': str, 'lemme': str, 'cgram': str, 'freq': float, 'is_lem': int}}
+        Retourne None en cas d'erreur de parsing
     """
     custom_lexicon = {}
     
@@ -102,30 +103,65 @@ def load_custom_lexicon(filepath: str):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f, delimiter='\t')
+            line_num = 1  # Ligne 1 = header
             for row in reader:
+                line_num += 1
+                
                 ortho = row.get('ortho', '').strip()
                 if not ortho:
                     continue
                 
-                cgram = row.get('cgram', '').strip()
+                # Vérifier que toutes les colonnes requises sont présentes et valides
+                lemme = row.get('lemme')
+                cgram = row.get('cgram')
+                freq = row.get('freq')
+                is_lem = row.get('is_lem')
+                
+                if lemme is None or cgram is None or freq is None or is_lem is None:
+                    print(f"\n❌ ERREUR DE PARSING DU LEXIQUE PERSONNALISÉ")
+                    print(f"   Fichier: {filepath}")
+                    print(f"   Ligne {line_num}: Colonnes manquantes ou mal formatées")
+                    print(f"   Contenu: ortho='{ortho}', lemme='{lemme}', cgram='{cgram}', freq='{freq}', is_lem='{is_lem}'")
+                    print(f"\n   Le fichier TSV doit avoir 5 colonnes séparées par des TABULATIONS:")
+                    print(f"   ortho<TAB>lemme<TAB>cgram<TAB>freq<TAB>is_lem")
+                    print(f"\n   ⚠️  L'analyse est ANNULÉE pour éviter de corrompre le lexique.")
+                    return None
+                
+                cgram = cgram.strip()
                 # Déterminer la catégorie depuis cgram
                 if cgram in ['NOM_PROPRE', 'ACRONYME', 'ETRANGER', 'INCONNU']:
                     categorie = cgram
                 else:
                     categorie = 'INCONNU'
+                
+                try:
+                    freq_value = float(freq)
+                    is_lem_value = int(is_lem)
+                except (ValueError, TypeError) as e:
+                    print(f"\n❌ ERREUR DE PARSING DU LEXIQUE PERSONNALISÉ")
+                    print(f"   Fichier: {filepath}")
+                    print(f"   Ligne {line_num}: Valeur numérique invalide")
+                    print(f"   freq='{freq}' (doit être un nombre)")
+                    print(f"   is_lem='{is_lem}' (doit être 0 ou 1)")
+                    print(f"\n   ⚠️  L'analyse est ANNULÉE pour éviter de corrompre le lexique.")
+                    return None
                     
                 custom_lexicon[ortho.lower()] = {
                     'categorie': categorie,
-                    'lemme': row.get('lemme', ortho).strip(),
+                    'lemme': lemme.strip(),
                     'cgram': cgram,
-                    'freq': float(row.get('freq', '0.0')),
-                    'is_lem': int(row.get('is_lem', '1')),
+                    'freq': freq_value,
+                    'is_lem': is_lem_value,
                     'ortho_original': ortho  # Préserver la casse originale
                 }
         
         print(f"Lexique personnalisé chargé: {len(custom_lexicon)} entrées")
     except Exception as e:
-        print(f"Erreur lors du chargement du lexique personnalisé: {e}")
+        print(f"\n❌ ERREUR lors du chargement du lexique personnalisé")
+        print(f"   Fichier: {filepath}")
+        print(f"   Erreur: {e}")
+        print(f"\n   ⚠️  L'analyse est ANNULÉE pour éviter de corrompre le lexique.")
+        return None
     
     return custom_lexicon
 
@@ -246,6 +282,12 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     # Charger le lexique personnalisé si disponible
     custom_lexicon_path = filepath.replace('.txt', '_custom_lexicon.tsv')
     custom_lexicon = load_custom_lexicon(custom_lexicon_path)
+    
+    # Si le chargement du lexique a échoué (retourne None), arrêter l'analyse
+    if custom_lexicon is None:
+        print("\n⛔ L'analyse est interrompue. Veuillez corriger le fichier lexique et réessayer.")
+        return
+    
     if custom_lexicon:
         print(f"Utilisation du lexique personnalisé: {custom_lexicon_path}")
     
