@@ -121,21 +121,39 @@ class Lexicon:
         """
         return len(self.lookup(word))
     
-    def find_lemma_entry(self, lemma: str) -> Optional[LexiconEntry]:
+    def find_lemma_entry(self, lemma: str, preferred_cgram: Optional[str] = None) -> Optional[LexiconEntry]:
         """
         Trouve l'entrée où ortho = lemma et is_lem = True.
         
+        Si plusieurs entrées lemmes existent (homonymes), préfère:
+        1. L'entrée avec le même cgram que preferred_cgram
+        2. L'entrée avec la fréquence la plus élevée
+        
         Args:
             lemma: Le lemme à rechercher
+            preferred_cgram: Catégorie grammaticale préférée (pour désambiguïser)
             
         Returns:
             L'entrée correspondante si trouvée, None sinon
         """
         entries = self.lookup(lemma)
-        for entry in entries:
-            if entry.is_lem:
-                return entry
-        return None
+        lemma_entries = [e for e in entries if e.is_lem]
+        
+        if not lemma_entries:
+            return None
+        
+        # Si une seule entrée, la retourner
+        if len(lemma_entries) == 1:
+            return lemma_entries[0]
+        
+        # Si plusieurs entrées et qu'on a une préférence de cgram, la chercher
+        if preferred_cgram:
+            for entry in lemma_entries:
+                if entry.cgram == preferred_cgram:
+                    return entry
+        
+        # Sinon, retourner l'entrée avec la fréquence la plus élevée
+        return max(lemma_entries, key=lambda e: e.freq if e.freq is not None else 0.0)
     
     def get_all_words_set(self) -> set:
         """

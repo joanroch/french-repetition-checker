@@ -311,7 +311,8 @@ class WordClassifier:
         
         # Si is_lem = False, chercher le lemme
         lemma = entry.lemme
-        lemma_entry = self.lexicon.find_lemma_entry(lemma)
+        # Passer le cgram de l'entrée actuelle pour désambiguïser les homonymes
+        lemma_entry = self.lexicon.find_lemma_entry(lemma, preferred_cgram=entry.cgram)
         
         if lemma_entry is None:
             # Le lemme n'a pas été trouvé ou n'a pas d'entrée avec is_lem=True

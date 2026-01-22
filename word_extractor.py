@@ -16,6 +16,32 @@ import unicodedata
 from typing import List, Tuple, Optional, Set
 
 
+def normalize_apostrophes(text: str) -> str:
+    """
+    Normalise les différents types d'apostrophes en apostrophe droite standard.
+    
+    Convertit:
+    - U+2019 (') RIGHT SINGLE QUOTATION MARK (apostrophe typographique)
+    - U+2018 (') LEFT SINGLE QUOTATION MARK
+    - Autres variantes d'apostrophes
+    
+    En:
+    - U+0027 (') APOSTROPHE (apostrophe droite standard)
+    
+    Args:
+        text: Texte à normaliser
+        
+    Returns:
+        Texte avec apostrophes normalisées
+    """
+    # Remplacer toutes les variantes d'apostrophes par l'apostrophe droite standard
+    text = text.replace('\u2019', "'")  # RIGHT SINGLE QUOTATION MARK
+    text = text.replace('\u2018', "'")  # LEFT SINGLE QUOTATION MARK
+    text = text.replace('\u02BC', "'")  # MODIFIER LETTER APOSTROPHE
+    text = text.replace('\u02BB', "'")  # MODIFIER LETTER TURNED COMMA
+    return text
+
+
 def is_latin_letter(char: str) -> bool:
     """
     Vérifie si un caractère est une lettre latine (utilisée en français).
@@ -77,8 +103,10 @@ def extract_potential_compound(text: str, start_pos: int) -> Tuple[str, int]:
     """
     i = start_pos
     
-    # Collecter lettres, traits d'union et apostrophes
-    while i < len(text) and (is_latin_letter(text[i]) or text[i] in "-'"):
+    # Collecter lettres, traits d'union et apostrophes (incluant apostrophe typographique)
+    # U+0027 = apostrophe droite '
+    # U+2019 = apostrophe typographique '
+    while i < len(text) and (is_latin_letter(text[i]) or text[i] in "-''\u2019"):
         i += 1
     
     return text[start_pos:i], i
@@ -87,6 +115,7 @@ def extract_potential_compound(text: str, start_pos: int) -> Tuple[str, int]:
 def check_compound_in_lexicon(compound: str, lexicon_words: Optional[Set[str]]) -> bool:
     """
     Vérifie si un mot composé existe dans le lexique.
+    Normalise les apostrophes avant la recherche.
     
     Args:
         compound: Le mot composé à vérifier
@@ -98,7 +127,9 @@ def check_compound_in_lexicon(compound: str, lexicon_words: Optional[Set[str]]) 
     if lexicon_words is None:
         return False
     
-    return compound.lower() in lexicon_words
+    # Normaliser les apostrophes avant de chercher dans le lexique
+    normalized = normalize_apostrophes(compound)
+    return normalized.lower() in lexicon_words
 
 
 def split_compound_word(compound: str, start_pos: int) -> List[Tuple[str, int, int]]:
@@ -201,7 +232,9 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                     # Vérifier si cette séquence forme un mot composé connu
                     if len(temp_words) == n_words:
                         potential_compound = ' '.join(temp_words)
-                        if potential_compound.lower() in compounds_with_spaces:
+                        # Normaliser les apostrophes avant de chercher
+                        normalized_compound = normalize_apostrophes(potential_compound)
+                        if normalized_compound.lower() in compounds_with_spaces:
                             best_match = potential_compound
                             best_match_end = temp_pos
                             compound_found = True
@@ -219,8 +252,9 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
             
             # Vérifier si le mot composé existe dans le lexique
             if lexicon_words and check_compound_in_lexicon(potential_compound, lexicon_words):
-                # Le mot composé existe, le garder tel quel
-                words.append((potential_compound, start, end))
+                # Le mot composé existe, le garder tel quel (avec apostrophes normalisées)
+                normalized_word = normalize_apostrophes(potential_compound)
+                words.append((normalized_word, start, end))
                 i = end
             else:
                 # Le mot composé n'existe pas, extraire seulement les lettres

@@ -829,6 +829,49 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             letter-spacing: 1px;
         }}
         
+        .search-container {{
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }}
+        
+        .search-box {{
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }}
+        
+        .search-input {{
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            font-size: 1.1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            outline: none;
+            transition: all 0.3s;
+        }}
+        
+        .search-input:focus {{
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }}
+        
+        .search-icon {{
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1.2em;
+        }}
+        
+        .search-results {{
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.95em;
+        }}
+        
         .content {{
             padding: 40px;
         }}
@@ -1094,6 +1137,14 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 <div class="stat-number">{unique_lemmas:,}</div>
                 <div class="stat-label">Lemmes Uniques</div>
             </div>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Rechercher un lemme ou une forme..." autocomplete="off">
+                <span class="search-icon">⌨️</span>
+            </div>
+            <div id="searchResults" class="search-results"></div>
         </div>
         
         <div class="content">
@@ -1375,8 +1426,92 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             event.target.style.display = 'none';
         }
         
+        // Fonction de recherche en temps réel
+        function performSearch(searchTerm) {
+            const term = searchTerm.toLowerCase().trim();
+            const categories = document.querySelectorAll('.category-section');
+            const searchResults = document.getElementById('searchResults');
+            
+            let totalMatches = 0;
+            let matchedLemmas = 0;
+            
+            if (term === '') {
+                // Réinitialiser l'affichage
+                categories.forEach(cat => {
+                    cat.style.display = 'block';
+                    const lemmas = cat.querySelectorAll('.lemma-item');
+                    lemmas.forEach(lemma => {
+                        lemma.style.display = 'block';
+                    });
+                });
+                searchResults.textContent = '';
+                return;
+            }
+            
+            // Parcourir chaque catégorie
+            categories.forEach(cat => {
+                const lemmas = cat.querySelectorAll('.lemma-item');
+                let categoryHasMatch = false;
+                
+                lemmas.forEach(lemma => {
+                    const lemmaName = lemma.querySelector('.lemma-name').textContent.toLowerCase();
+                    const forms = Array.from(lemma.querySelectorAll('.form-tag'))
+                        .map(tag => tag.textContent.toLowerCase());
+                    
+                    // Vérifier si le terme de recherche correspond au lemme ou à une forme
+                    const lemmaMatches = lemmaName.includes(term);
+                    const formMatches = forms.some(form => form.includes(term));
+                    
+                    if (lemmaMatches || formMatches) {
+                        lemma.style.display = 'block';
+                        categoryHasMatch = true;
+                        matchedLemmas++;
+                        
+                        // Compter le nombre d'occurrences
+                        const countBadge = lemma.querySelector('.lemma-count');
+                        if (countBadge) {
+                            const count = parseInt(countBadge.textContent.replace('×', ''));
+                            totalMatches += count;
+                        }
+                    } else {
+                        lemma.style.display = 'none';
+                    }
+                });
+                
+                // Afficher/masquer la catégorie selon les résultats
+                if (categoryHasMatch) {
+                    cat.style.display = 'block';
+                    cat.classList.add('expanded'); // Ouvrir automatiquement la catégorie
+                } else {
+                    cat.style.display = 'none';
+                }
+            });
+            
+            // Afficher le résultat de la recherche
+            if (matchedLemmas === 0) {
+                searchResults.innerHTML = '❌ Aucun résultat trouvé';
+            } else {
+                searchResults.innerHTML = `✅ <strong>${matchedLemmas}</strong> lemme(s) trouvé(s) · <strong>${totalMatches}</strong> occurrence(s) totale(s)`;
+            }
+        }
+        
         // Initialisation après chargement du DOM
         document.addEventListener('DOMContentLoaded', function() {
+            // Ajouter l'écouteur pour la recherche
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                performSearch(e.target.value);
+            });
+            
+            // Focus sur la recherche avec Ctrl+F ou Cmd+F
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    searchInput.focus();
+                    searchInput.select();
+                }
+            });
+            
             // Ajouter les écouteurs pour les en-têtes de catégories
             document.querySelectorAll('.category-header').forEach(function(header) {
                 header.addEventListener('click', function() {
