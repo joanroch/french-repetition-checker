@@ -1,0 +1,115 @@
+ortho	lemme	cgram	freq	is_lem
+Abraham	Abraham	NOM_PROPRE	1.0	1
+alimentions	alimenter	VER	1.0	0
+Amériques	Amériques	NOM_PROPRE	1.0	1
+Anne	Anne Genest	NOM_PROPRE	18.0	0
+Anne Genest	Anne Genest	NOM_PROPRE	18.0	1
+Annie	Annie	NOM_PROPRE	2.0	1
+Antonin Artaud	Antonin Artaud	NOM_PROPRE	1.0	1
+Aomamé	Aomamé	NOM_PROPRE	2.0	1
+babe	babe	ETRANGER	1.0	1
+babes	babe	ETRANGER	1.0	0
+babillards	babillard	NOM	1.0	0
+babillars	babillard	NOM	1.0	1
+bifurquaient	bifurquer	VER	1.0	0
+blog	blog	NOM	1.0	1
+bouquinerie	bouquinerie	NOM	2.0	1
+canopée	canopée	NOM	1.0	1
+Champlain	Champlain	NOM_PROPRE	1.0	1
+clopinais	clopiner	VER	1.0	0
+cumulais	cumuler	VER	1.0	0
+déneigerais	dénigrer	VER	1.0	0
+descenderais	descendre	VER	1.0	0
+électroménager	électroménager	NOM	1.0	1
+électroménagers	électroménager	NOM	1.0	0
+électros	électroménager	NOM	2.0	0
+Élise Turcotte	Élise Turcotte	NOM_PROPRE	1.0	1
+Elvis	Elvis	NOM_PROPRE	1.0	1
+Emmaüs	Emmaüs	NOM_PROPRE	1.0	1
+énergisait	énergiser	VER	1.0	0
+engouffrais	engouffrer	VER	1.0	0
+enjolivées	enjoliver	VER	1.0	0
+espresso	espresso	NOM	1.0	1
+estropiées	estropier	VER	1.0	0
+Étienne	Étienne	NOM_PROPRE	1.0	1
+euphorisantes	euphorisantes	ADJ	1.0	1
+France	France	NOM_PROPRE	2.0	1
+fredenions	fredenions	INCONNU	1.0	1
+galeristes	galeristes	NOM	1.0	1
+gaudasses	gaudasses	INCONNU	1.0	1
+Genest	Genest	NOM_PROPRE	1.0	1
+George-Étienne-Cartier	George-Étienne-Cartier	NOM_PROPRE	1.0	1
+googlé	googler	VER	1.0	0
+googler	googler	VER	1.0	1
+gossant	gosser	VER	1.0	0
+gosser	gosser	VER	1.0	1
+GPS	GPS	ACRONYME	1.0	1
+Haruki Murakami	Haruki Murakami	NOM_PROPRE	8.0	1
+Hochelaga	Hochelaga	NOM_PROPRE	1.0	1
+huaraches	huaraches	ETRANGER	1.0	1
+hystérographie	hystérographie	NOM	1.0	1
+IRM	IRM	ACRONYME	1.0	1
+Jacques-Cartier	Jacques-Cartier	NOM_PROPRE	2.0	1
+Joan	Joan Roch	NOM_PROPRE	42.0	0
+Joan Roch	Joan Roch	NOM_PROPRE	5.0	1
+Jonquière	Jonquière	NOM_PROPRE	1.0	1
+Kijiji	Kijiji	NOM_PROPRE	1.0	1
+km	kilomètre	NOM	2.0	0
+Laure	Laure	NOM_PROPRE	3.0	1
+Madonna	Madonna	NOM_PROPRE	2.0	1
+map	map	ETRANGER	1.0	1
+Marketplace	Marketplace	NOM_PROPRE	1.0	1
+meubler	meubler	VER	1.0	1
+meublerait	meubler	VER	1.0	0
+Mexique	Mexique	NOM_PROPRE	1.0	1
+Montréal	Montréal	NOM_PROPRE	6.0	1
+Mouawad	Mouawad	NOM_PROPRE	1.0	1
+Murakami	Haruki Murakami	NOM_PROPRE	3.0	0
+ninjas	ninjas	NOM	1.0	1
+Olmstead	Olmstead	NOM_PROPRE	1.0	1
+Paul Auster	Paul Auster	NOM_PROPRE	1.0	1
+Paula Radcliffe	Paula Radcliffe	NOM_PROPRE	1.0	1
+Paule	Paule	NOM_PROPRE	6.0	1
+pesto	pesto	ETRANGER	1.0	1
+poètesse	poète	NOM	1.0	0
+poudrerie	poudrerie	NOM	1.0	1
+Québec	Québec	NOM_PROPRE	7.0	1
+Queen	Queen	NOM_PROPRE	2.0	1
+Raramuri	Raramuri	NOM_PROPRE	1.0	1
+répondue	répondre	VER	1.0	0
+ressourçantes	ressourcer	VER	1.0	0
+restreignais	restreindre	VER	1.0	0
+rétractaient	rétracter	VER	1.0	0
+SAint-Bruno	Saint-Bruno	NOM_PROPRE	1.0	1
+Saint-Lambert	Saint-Lambert	NOM_PROPRE	1.0	1
+Salaberry	Salaberry	NOM_PROPRE	1.0	1
+St-Lambert	Saint-Lambert	NOM_PROPRE	1.0	0
+Ste-Angèle	Ste-Angèle	NOM_PROPRE	1.0	1
+Stéphanie	Stéphanie	NOM_PROPRE	3.0	1
+Strava	Strava	NOM_PROPRE	3.0	1
+surplombais	surplomber	VER	1.0	0
+Sylvia Plath	Sylvia Plath	NOM_PROPRE	1.0	1
+taillages	taillages	INCONNU	1.0	1
+Tarahumara	Tarahumara	NOM_PROPRE	1.0	1
+Taschereau	Taschereau	NOM_PROPRE	1.0	1
+texté	texter	VER	1.0	0
+texter	texter	VER	1.0	1
+texto	texto	NOM	1.0	1
+textos	texto	NOM	1.0	0
+tortillières	tortillières	INCONNU	1.0	1
+trail	trail	NOM	1.0	1
+trails	trail	NOM	1.0	0
+transperçantes	transperçantes	INCONNU	1.0	1
+trisuit	trisuit	ETRANGER	1.0	1
+ultradistance	ultradistance	NOM	1.0	1
+ultramarathon	ultramarathon	NOM	1.0	1
+ultramarathons	ultramarathon	NOM	1.0	0
+ultratrail	ultratrail	NOM	3.0	1
+ultratrails	ultratrail	NOM	3.0	0
+unifamiliale	unifamiliale	ADJ	1.0	1
+Victor Hugo	Victor Hugo	NOM_PROPRE	1.0	1
+Virginia Woolf	Virginia Woolf	NOM_PROPRE	1.0	1
+Wajdi	Wajdi Mouawad	NOM_PROPRE	4.0	0
+Wajdi Mouawad	Wajdi Mouawad	NOM_PROPRE	4.0	1
+Westmount	Westmount	NOM_PROPRE	2.0	1
+Zatopek	Zatopek	NOM_PROPRE	1.0	1
