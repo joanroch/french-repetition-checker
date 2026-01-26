@@ -46,6 +46,7 @@ Asia	Asia	NOM_PROPRE	1.0	1
 at	at	ETRANGER	3.0	1
 Aurélie	Aurélie	NOM_PROPRE	1.0	1
 Australie	Australie	NOM_PROPRE	1.0	1
+bad	bad	ETRANGER	1.0	1
 bankable	bankable	ETRANGER	1.0	1
 Barefoot Ted	Ted McDonald	NOM_PROPRE	2.0	0
 Barrancas	Barrancas del Cobre	NOM_PROPRE	3.0	0
@@ -105,6 +106,8 @@ Conecuh	Conecuh	NOM_PROPRE	1.0	1
 Cormac McCarthy	Cormac McCarthy	NOM_PROPRE	1.0	1
 COVID	COVID-19	ACRONYME	1.0	0
 COVID-19	COVID-19	ACRONYME	1.0	1
+CP2	CP2	ACRONYME	2.0	1
+CP3	CP3	ACRONYME	2.0	1
 CR12	CR12	ACRONYME	2.0	1
 Crestview	Crestview	NOM_PROPRE	2.0	1
 Crinqués	Crinqués	NOM_PROPRE	1.0	1
@@ -157,6 +160,7 @@ Erol Flynn	Erol Flynn	NOM_PROPRE	1.0	1
 Everglades	Everglades	NOM_PROPRE	8.0	1
 évitements	évitement	NOM	1.0	0
 faith	faith	ETRANGER	1.0	1
+family	family	ETRANGER	1.0	1
 fast	fast	ETRANGER	1.0	1
 fastpacker	fastpacker	ETRANGER	1.0	1
 fastpackers	fastpacker	ETRANGER	1.0	0
@@ -164,6 +168,7 @@ fastpacking	fastpacking	ETRANGER	5.0	1
 Fat Belly's	Fat Belly's	NOM_PROPRE	4.0	1
 Fernando	Fernando	NOM_PROPRE	1.0	1
 festifs	festif	ADJ	1.0	1
+firearms	firearms	ETRANGER	1.0	1
 First	First	NOM_PROPRE	1.0	1
 FiveFingers	FiveFingers	NOM_PROPRE	1.0	1
 Florida Trail	Florida Trail	NOM_PROPRE	11.0	1
@@ -207,10 +212,12 @@ Harley	Harley	NOM_PROPRE	1.0	1
 Harricana	Harricana	NOM_PROPRE	1.0	1
 Haruki	Haruki	NOM_PROPRE	1.0	1
 Harvard	Harvard	NOM_PROPRE	1.0	1
+Hawk	Hawk	NOM_PROPRE	1.0	1
 heads	heads	ETRANGER	1.0	1
 héhé	héhé	ONO	1.0	1
 hélicoïdales	hélicoïdale	ADJ	1.0	0
 Hemingway	Hemingway	NOM_PROPRE	1.0	1
+hétérodoxe	hétérodoxe	NOM	1.0	1
 Hike	Hike	NOM_PROPRE	1.0	1
 hiker	hiker	ETRANGER	2.0	1
 hikers	hiker	ETRANGER	2.0	0
@@ -276,6 +283,7 @@ ll	will	ETRANGER	1.0	0
 Longueuil	Longueuil	NOM_PROPRE	4.0	1
 luchador	luchador	ETRANGER	1.0	1
 Luna	Luna	NOM_PROPRE	6.0	1
+Luverne	Luverne	NOM_PROPRE	1.0	1
 Lyme	Lyme	NOM_PROPRE	1.0	1
 MacKaye	Benton MacKaye	NOM_PROPRE	1.0	0
 macrophotographique	macrophotographique	ADJ	1.0	1
@@ -317,10 +325,11 @@ NGCC Mamilossa	NGCC Mamilossa	NOM_PROPRE	1.0	1
 Nike	Nike	NOM_PROPRE	2.0	1
 Nimblewill	Nimblewill Nomad	NOM_PROPRE	4.0	0
 Nimblewill Nomad	Nimblewill Nomad	NOM_PROPRE	4.0	1
-No	No	NOM_PROPRE	1.0	1
+no	no	ETRANGER	1.0	1
 Nomad	Nimblewill Nomad	NOM_PROPRE	2.0	0
 Nouveau-Brunswick	Nouveau-Brunswick	NOM_PROPRE	1.0	1
 obtempérons	obtempérer	VER	1.0	0
+occultées	occulter	VER	1.01	0
 of	of	ETRANGER	3.0	1
 Okeechobee	Okeechobee	NOM_PROPRE	4.0	1
 OMS	OMS	ACRONYME	1.0	1
@@ -349,6 +358,7 @@ pours	pour	NOM	1.0	0
 primales	primal	ADJ	1.0	0
 programmant	programmer	VER	1.0	0
 pronounce	pronounce	ETRANGER	1.0	1
+protect	protect	ETRANGER	2.0	1
 protègera	protéger	VER	1.0	0
 Québec	Québec	NOM_PROPRE	24.0	1
 Quimare	Quimare	NOM_PROPRE	1.0	1
@@ -366,8 +376,10 @@ real	real	ETRANGER	1.0	1
 reconverties	reconvertir	VER	1.0	0
 refondé	refonder	VER	1.0	0
 règlera	régler	VER	1.0	0
+remballée	remballer	VER	1.0	0
 réutilisable	réutilisable	ADJ	1.0	1
 révèlera	révéler	VER	1.0	0
+río	río	ETRANGER	1.0	1
 Roch	Joan Roch	NOM_PROPRE	12.0	0
 rodent	roder	VER	1.0	0
 Rose Hill	Rose Hill	NOM_PROPRE	1.0	1
@@ -386,11 +398,13 @@ should	should	ETRANGER	1.0	1
 Shrimp Basket	Shrimp Basket	NOM_PROPRE	1.0	1
 sí	sí	ETRANGER	1.0	1
 SIA	SIA	ACRONYME	1.0	1
+Sicario	Sicario	NOM_PROPRE	1.0	1
 sillonnerai	silloner	VER	1.0	0
 Simon	Simon	NOM_PROPRE	3.0	1
 Sméagol	Sméagol	NOM_PROPRE	2.0	1
 Snowbirds	Snowbirds	NOM_PROPRE	1.0	1
 so	so	ETRANGER	1.0	1
+Soldado	soldado	ETRANGER	1.0	1
 southernmost	southernmost	ETRANGER	1.0	1
 Special	Special	NOM_PROPRE	1.0	1
 Springfever	Springfever	NOM_PROPRE	1.0	1
@@ -422,6 +436,7 @@ Thanks	thanks	ETRANGER	1.0	0
 that	that	ETRANGER	1.0	1
 the	the	ETRANGER	3.0	1
 there	there	ETRANGER	2.0	0
+Thierry	Thierry	NOM_PROPRE	2.0	1
 thru-hike	thru-hike	ETRANGER	4.0	1
 thru-hiker	thru-hiker	ETRANGER	4.0	1
 thru-hikers	thru-hiker	ETRANGER	4.0	0
@@ -439,10 +454,14 @@ traileuses	traileur	NOM	2.0	0
 trails	trail	NOM	12.0	0
 trainers	trainers	ETRANGER	1.0	1
 Transcanadien	Transcanadien	NOM_PROPRE	1.0	1
+triathlètes	triathlète	NOM	0.0	0
 Uber	Uber	NOM_PROPRE	1.0	1
+Uh	Uh	ONO	1.0	1
 Ui	Ui	NOM_PROPRE	1.0	1
 Ultimate XC	Ultimate XC	NOM_PROPRE	2.0	1
 Ultra Trail du mont Blanc	Ultra Trail du mont Blanc	NOM_PROPRE	4.0	1
+Ultra-Trail Harricana	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	0
+Ultra-Trail Harricana du Canada	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	1
 ultramarathon	ultramarathon	NOM	2.0	1
 ultramarathonien	ultramarathonien	NOM	3.0	1
 ultramarathonienne	ultramarathonien	NOM	1.0	0
@@ -454,6 +473,7 @@ ultratrails	ultratrail	NOM	1.0	0
 universitairement	universitairement	ADV	1.0	1
 USB	USB	ACRONYME	1.0	1
 usual	usual	ETRANGER	1.0	0
+UTHC	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	0
 UTMB	Ultra Trail du mont Blanc	NOM_PROPRE	4.0	0
 uto	uto	ADJ	1.0	1
 UV	UV	ACRONYME	1.0	1
@@ -485,4 +505,5 @@ yes	yes	ETRANGER	1.0	1
 Yo	Yo	NOM_PROPRE	1.0	1
 you	you	ETRANGER	8.0	1
 your	your	ETRANGER	2.0	1
+yourself	yourself	ETRANGER	1.0	1
 Yukon	Yukon	NOM_PROPRE	2.0	1
