@@ -1243,6 +1243,9 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             
             # Afficher les groupes de répétitions s'il y en a
             if has_clusters and len(clusters) > 0:
+                # Trier les clusters : d'abord par nombre décroissant d'occurrences, puis par position croissante
+                sorted_clusters = sorted(clusters, key=lambda c: (-len(c), c[0][1]))
+                
                 html += f"""
                             <div class="clusters-in-lemma">
                                 <div class="clusters-in-lemma-title">
@@ -1253,7 +1256,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 
                 # Afficher les premiers clusters (max 3 par défaut)
                 max_display_clusters = 3
-                for i, cluster in enumerate(clusters):
+                for i, cluster in enumerate(sorted_clusters):
                     # Extraire le texte du cluster
                     before, cluster_text, after, start, end = extract_cluster_text(text, cluster, context_chars=80)
                     
@@ -1307,6 +1310,9 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 non_clustered_positions = [(word, start, end) for word, start, end in all_positions 
                                           if (start, end) not in clustered_positions]
                 
+                # Trier les occurrences hors groupes par position croissante
+                non_clustered_positions.sort(key=lambda x: x[1])
+                
                 # Afficher les occurrences hors groupes s'il y en a
                 if len(non_clustered_positions) > 0:
                     html += f"""
@@ -1357,6 +1363,9 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             
             # Si pas de groupes mais des répétitions, afficher les occurrences individuelles
             elif len(all_positions) > 0:
+                # Trier les occurrences par position croissante
+                sorted_positions = sorted(all_positions, key=lambda x: x[1])
+                
                 html += f"""
                             <div class="clusters-in-lemma">
                                 <div class="clusters-in-lemma-title">
@@ -1367,7 +1376,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 
                 # Afficher les premières occurrences (max 10 par défaut)
                 max_display = 10
-                for i, (word, start, end) in enumerate(all_positions):
+                for i, (word, start, end) in enumerate(sorted_positions):
                     # Extraire le contexte autour du mot
                     context_chars = 80
                     context_start = max(0, start - context_chars)
