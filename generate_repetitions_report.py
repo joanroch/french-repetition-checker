@@ -55,9 +55,123 @@ def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
     return clusters
 
 
+def char_position_to_word_position(text, char_pos):
+    """
+    Convertit une position en caractères en position en nombre de mots.
+    
+    Args:
+        text: Le texte complet
+        char_pos: La position en caractères
+        
+    Returns:
+        Le numéro du mot (1-based) à cette position
+    """
+    # Compter les mots jusqu'à cette position
+    text_until_pos = text[:char_pos]
+    # Découper en mots (tout ce qui est séparé par des espaces/ponctuation)
+    words = text_until_pos.split()
+    return len(words) + 1  # +1 car on veut le mot actuel, pas avant
+
+
+def build_char_to_word_map(text):
+    """
+    Construit une table de correspondance efficace entre positions de caractères et positions de mots.
+    
+    Args:
+        text: Le texte complet
+        
+    Returns:
+        Liste où char_to_word[i] = numéro du mot à la position i
+    """
+    char_to_word = [0] * len(text)
+    word_count = 0
+    in_word = False
+    
+    for i, char in enumerate(text):
+        if char.isspace():
+            in_word = False
+        else:
+            if not in_word:
+                word_count += 1
+                in_word = True
+        char_to_word[i] = word_count
+    
+    return char_to_word
+
+
+def fast_char_to_word_position(char_to_word_map, char_pos):
+    """
+    Convertit rapidement une position en caractères en position en nombre de mots.
+    
+    Args:
+        char_to_word_map: Table pré-calculée par build_char_to_word_map()
+        char_pos: La position en caractères
+        
+    Returns:
+        Le numéro du mot (1-based) à cette position
+    """
+    if char_pos >= len(char_to_word_map):
+        return char_to_word_map[-1]
+    return char_to_word_map[char_pos]
+
+
+def generate_distribution_visualization(all_positions, clusters, text_length, lemma_key):
+    """
+    Génère le HTML pour la visualisation de la distribution des occurrences.
+    
+    Args:
+        all_positions: Liste de tuples (word, start, end) pour toutes les occurrences
+        clusters: Liste des clusters de répétitions
+        text_length: Longueur totale du texte en caractères
+        lemma_key: Clé unique du lemme pour générer les IDs
+        
+    Returns:
+        HTML string de la visualisation
+    """
+    if not all_positions:
+        return ""
+    
+    # Utiliser une liste pour la concaténation efficace
+    parts = ['                        <div class="distribution-viz">\n                            <div class="distribution-bar">']
+    
+    # Créer un ensemble des positions qui sont dans des clusters
+    clustered_positions = set()
+    for cluster in clusters:
+        for _, start, end in cluster:
+            clustered_positions.add((start, end))
+    
+    # Ajouter les marqueurs pour les clusters (en premier pour qu'ils soient en arrière-plan)
+    for i, cluster in enumerate(clusters):
+        # Position du début et fin du cluster en pourcentage
+        cluster_start = cluster[0][1]
+        cluster_end = cluster[-1][2]
+        left_pct = (cluster_start / text_length) * 100
+        width_pct = ((cluster_end - cluster_start) / text_length) * 100
+        
+        # Intensité basée sur le nombre d'occurrences dans le cluster
+        intensity = min(len(cluster) / 10, 1.0)  # Max à 10 occurrences pour saturation
+        
+        # Créer un ID unique pour ce cluster
+        cluster_id = f"cluster-{lemma_key}-{i}"
+        
+        parts.append(f'<div class="distribution-marker cluster" style="left: {left_pct:.2f}%; width: {max(width_pct, 0.5):.2f}%; opacity: {0.5 + intensity * 0.5}" title="Groupe de {len(cluster)} occurrences - Cliquer pour voir" onclick="scrollToCluster(\'{cluster_id}\')"></div>')
+    
+    # Ajouter les marqueurs pour les occurrences individuelles (non-clustered)
+    occurrence_index = 0
+    for word, start, end in all_positions:
+        if (start, end) not in clustered_positions:
+            left_pct = (start / text_length) * 100
+            occurrence_id = f"occurrence-{lemma_key}-{occurrence_index}"
+            parts.append(f'<div class="distribution-marker single" style="left: {left_pct:.2f}%" title="Occurrence unique - Cliquer pour voir" onclick="scrollToCluster(\'{occurrence_id}\')"></div>')
+            occurrence_index += 1
+    
+    parts.append('</div>\n                        </div>\n')
+    return ''.join(parts)
+
+
 def extract_cluster_text(text, cluster, context_chars=100):
     """
-    Extrait le texte d'un cluster avec contexte.
+    Extrait le texte d'un cluster avec contexte, en s'assurant de ne pas couper les mots.
     
     Args:
         text: Texte complet
@@ -70,15 +184,43 @@ def extract_cluster_text(text, cluster, context_chars=100):
     first_start = cluster[0][1]
     last_end = cluster[-1][2]
     
-    # Contexte
+    # Contexte initial
     context_start = max(0, first_start - context_chars)
     context_end = min(len(text), last_end + context_chars)
+    
+    # Ajuster pour ne pas couper les mots
+    context_start, context_end = adjust_context_boundaries(text, context_start, context_end)
     
     before_text = text[context_start:first_start]
     cluster_text = text[first_start:last_end]
     after_text = text[last_end:context_end]
     
     return before_text, cluster_text, after_text, first_start, last_end
+
+
+def adjust_context_boundaries(text, start, end):
+    """
+    Ajuste les limites de contexte pour ne pas couper les mots.
+    
+    Args:
+        text: Texte complet
+        start: Position de début initiale
+        end: Position de fin initiale
+        
+    Returns:
+        Tuple (adjusted_start, adjusted_end)
+    """
+    # Ajuster start pour ne pas couper un mot au début
+    # Reculer jusqu'au début du mot ou un espace
+    while start > 0 and not text[start - 1].isspace():
+        start -= 1
+    
+    # Ajuster end pour ne pas couper un mot à la fin
+    # Avancer jusqu'à la fin du mot ou un espace
+    while end < len(text) and not text[end].isspace():
+        end += 1
+    
+    return start, end
 
 
 def load_custom_lexicon(filepath: str):
@@ -748,6 +890,9 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     
     print(f"Génération du HTML...")
     
+    # Construire la table de correspondance char->word une seule fois (optimisation)
+    char_to_word_map = build_char_to_word_map(text)
+    
     # Générer le HTML
     html = f"""<!DOCTYPE html>
 <html lang="fr">
@@ -990,6 +1135,64 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             margin-left: 5px;
         }}
         
+        /* Visualisation de distribution */
+        .distribution-viz {{
+            margin: 10px 0px;
+            padding: 8px 20px;
+            background: transparent;
+        }}
+        
+        .distribution-bar {{
+            position: relative;
+            height: 20px;
+            background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            overflow: visible;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            max-width: 100%;
+        }}
+        
+        .distribution-marker {{
+            position: absolute;
+            top: 0;
+            height: 100%;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }}
+        
+        .distribution-marker.single {{
+            width: 2px;
+            background: #3498db;
+            opacity: 0.6;
+        }}
+        
+        .distribution-marker.cluster {{
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            opacity: 0.85;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+        }}
+        
+        .distribution-marker:hover {{
+            opacity: 1;
+            transform: scaleY(1.5);
+            z-index: 10;
+        }}
+        
+        .cluster-item.highlight {{
+            animation: highlightPulse 1.5s ease-in-out;
+        }}
+        
+        @keyframes highlightPulse {{
+            0%, 100% {{ background: #f8f9fa; }}
+            50% {{ background: #fff3cd; box-shadow: 0 0 20px rgba(255, 193, 7, 0.5); }}
+        }}
+        
+        .lemma-item {{
+            max-width: 100%;
+            overflow: hidden;
+        }}
+        
         .forms-content {{
             display: none;
             padding: 15px 20px;
@@ -1205,6 +1408,21 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             else:
                 cluster_badge = '<span class="no-cluster-badge">0 groupe</span>'
             
+            # Pour les vrais mots inconnus, chercher avec le préfixe
+            is_unknown = item.get('is_unknown', False)
+            if is_unknown and cgram in ['ACRONYME', 'NOM_PROPRE', 'INCONNU', 'ETRANGER']:
+                lookup_key = f"{cgram}:{lemma}"
+            else:
+                lookup_key = lemma
+            
+            # Récupérer les positions de toutes les occurrences
+            all_positions = all_lemma_positions.get(lookup_key, [])
+            has_clusters = lookup_key in lemma_clusters
+            clusters = lemma_clusters.get(lookup_key, [])
+            
+            # Générer la visualisation de distribution
+            distribution_html = generate_distribution_visualization(all_positions, clusters, len(text), lookup_key)
+            
             html += f"""
                     <div class="lemma-item">
                         <div class="lemma-header">
@@ -1218,6 +1436,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                                 <span class="lemma-arrow">▶</span>
                             </div>
                         </div>
+{distribution_html}
                         <div class="forms-content">
                             <div class="forms-list">
 """
@@ -1228,18 +1447,6 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             html += """
                             </div>
 """
-            
-            # Pour les vrais mots inconnus, chercher avec le préfixe
-            is_unknown = item.get('is_unknown', False)
-            if is_unknown and cgram in ['ACRONYME', 'NOM_PROPRE', 'INCONNU', 'ETRANGER']:
-                lookup_key = f"{cgram}:{lemma}"
-            else:
-                lookup_key = lemma
-            
-            # Récupérer les positions de toutes les occurrences
-            all_positions = all_lemma_positions.get(lookup_key, [])
-            has_clusters = lookup_key in lemma_clusters
-            clusters = lemma_clusters.get(lookup_key, [])
             
             # Afficher les groupes de répétitions s'il y en a
             if has_clusters and len(clusters) > 0:
@@ -1260,14 +1467,18 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                     # Extraire le texte du cluster
                     before, cluster_text, after, start, end = extract_cluster_text(text, cluster, context_chars=80)
                     
+                    # Convertir les positions en nombre de mots
+                    word_start = fast_char_to_word_position(char_to_word_map, start)
+                    word_end = fast_char_to_word_position(char_to_word_map, end)
+                    
                     # Highlighter les occurrences dans le cluster_text
                     highlighted_cluster = cluster_text
                     # Trier par position décroissante pour éviter les décalages d'index
                     sorted_cluster = sorted(cluster, key=lambda x: x[1], reverse=True)
-                    for word, word_start, word_end in sorted_cluster:
+                    for word, word_start_char, word_end_char in sorted_cluster:
                         # Positions relatives au début du cluster
-                        rel_start = word_start - start
-                        rel_end = word_end - start
+                        rel_start = word_start_char - start
+                        rel_end = word_end_char - start
                         highlighted_cluster = (
                             highlighted_cluster[:rel_start] +
                             f'<span class="highlight">{highlighted_cluster[rel_start:rel_end]}</span>' +
@@ -1275,11 +1486,12 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                         )
                     
                     hidden_class = " hidden" if i >= max_display_clusters else ""
+                    cluster_id = f"cluster-{lookup_key}-{i}"
                     
                     html += f"""
-                                <div class="cluster-item{hidden_class}" data-lemma="{lemma}">
+                                <div class="cluster-item{hidden_class}" id="{cluster_id}" data-lemma="{lemma}">
                                     <div class="cluster-header">
-                                        Groupe {i+1} • {len(cluster)} occurrence(s) • Position {start}-{end}
+                                        Groupe {i+1} • {len(cluster)} occurrence(s) • Mots {word_start}-{word_end}
                                     </div>
                                     <div class="cluster-text">
                                         <span class="cluster-context">...{before}</span>{highlighted_cluster}<span class="cluster-context">{after}...</span>
@@ -1326,10 +1538,17 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                     # Afficher les premières occurrences (max 5 visibles par défaut)
                     max_display_single = 5
                     for i, (word, start, end) in enumerate(non_clustered_positions):
+                        # Convertir les positions en nombre de mots
+                        word_pos_start = fast_char_to_word_position(char_to_word_map, start)
+                        word_pos_end = fast_char_to_word_position(char_to_word_map, end)
+                        
                         # Extraire le contexte autour du mot
                         context_chars = 80
                         context_start = max(0, start - context_chars)
                         context_end = min(len(text), end + context_chars)
+                        
+                        # Ajuster pour ne pas couper les mots
+                        context_start, context_end = adjust_context_boundaries(text, context_start, context_end)
                         
                         before_text = text[context_start:start]
                         word_text = text[start:end]
@@ -1337,11 +1556,12 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                         
                         # Les premières occurrences sont visibles, les suivantes cachées
                         hidden_class = " hidden" if i >= max_display_single else ""
+                        occurrence_id = f"occurrence-{lookup_key}-{i}"
                         
                         html += f"""
-                                <div class="cluster-item single-occurrence{hidden_class}" data-lemma="{lemma}-single">
+                                <div class="cluster-item single-occurrence{hidden_class}" id="{occurrence_id}" data-lemma="{lemma}-single">
                                     <div class="cluster-header">
-                                        Occurrence {i+1} • Position {start}-{end}
+                                        Occurrence {i+1} • Mot {word_pos_start}
                                     </div>
                                     <div class="cluster-text">
                                         <span class="cluster-context">...{before_text}</span><span class="highlight">{word_text}</span><span class="cluster-context">{after_text}...</span>
@@ -1377,21 +1597,29 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 # Afficher les premières occurrences (max 10 par défaut)
                 max_display = 10
                 for i, (word, start, end) in enumerate(sorted_positions):
+                    # Convertir les positions en nombre de mots
+                    word_pos_start = fast_char_to_word_position(char_to_word_map, start)
+                    word_pos_end = fast_char_to_word_position(char_to_word_map, end)
+                    
                     # Extraire le contexte autour du mot
                     context_chars = 80
                     context_start = max(0, start - context_chars)
                     context_end = min(len(text), end + context_chars)
+                    
+                    # Ajuster pour ne pas couper les mots
+                    context_start, context_end = adjust_context_boundaries(text, context_start, context_end)
                     
                     before_text = text[context_start:start]
                     word_text = text[start:end]
                     after_text = text[end:context_end]
                     
                     hidden_class = " hidden" if i >= max_display else ""
+                    occurrence_id = f"occurrence-{lookup_key}-{i}"
                     
                     html += f"""
-                                <div class="cluster-item{hidden_class}" data-lemma="{lemma}">
+                                <div class="cluster-item{hidden_class}" id="{occurrence_id}" data-lemma="{lemma}">
                                     <div class="cluster-header">
-                                        Occurrence {i+1} • Position {start}-{end}
+                                        Occurrence {i+1} • Mot {word_pos_start}
                                     </div>
                                     <div class="cluster-text">
                                         <span class="cluster-context">...{before_text}</span><span class="highlight">{word_text}</span><span class="cluster-context">{after_text}...</span>
@@ -1426,6 +1654,52 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     </div>
     
     <script>
+        // Fonction pour scroller vers un cluster ou une occurrence
+        function scrollToCluster(clusterId) {
+            const element = document.getElementById(clusterId);
+            if (!element) return;
+            
+            // Si l'élément est caché, afficher tous les éléments cachés de même type
+            if (element.classList.contains('hidden')) {
+                const dataLemma = element.getAttribute('data-lemma');
+                const hiddenSiblings = document.querySelectorAll(`.cluster-item.hidden[data-lemma="${dataLemma}"]`);
+                hiddenSiblings.forEach(sibling => sibling.classList.remove('hidden'));
+                
+                // Masquer le bouton "Afficher plus" correspondant
+                const clustersContainer = element.closest('.clusters-in-lemma');
+                if (clustersContainer) {
+                    const showMoreBtn = clustersContainer.querySelector('.show-more-btn');
+                    if (showMoreBtn) {
+                        showMoreBtn.style.display = 'none';
+                    }
+                }
+            }
+            
+            // Déployer le lemma-item parent s'il est réduit
+            const lemmaItem = element.closest('.lemma-item');
+            if (lemmaItem && !lemmaItem.classList.contains('expanded')) {
+                lemmaItem.classList.add('expanded');
+            }
+            
+            // Déployer la catégorie parente si elle est réduite
+            const categorySection = element.closest('.category-section');
+            if (categorySection && !categorySection.classList.contains('expanded')) {
+                categorySection.classList.add('expanded');
+            }
+            
+            // Attendre que les animations se terminent
+            setTimeout(() => {
+                // Scroller vers l'élément
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Ajouter un effet de surbrillance temporaire
+                element.classList.add('highlight');
+                setTimeout(() => {
+                    element.classList.remove('highlight');
+                }, 1500);
+            }, 300);
+        }
+        
         // Fonction pour afficher tous les clusters d'un lemme
         function showMoreClusters(lemma) {
             const hiddenClusters = document.querySelectorAll(`.cluster-item.hidden[data-lemma="${lemma}"]`);

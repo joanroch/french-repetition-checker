@@ -118000,9 +118000,8 @@ sanctions	sanction	NOM	4.86	0
 sanctuaire	sanctuaire	NOM	6.42	1
 sanctuaires	sanctuaire	NOM	6.42	0
 sanctus	sanctus	NOM	0.68	1
-sandale	sandal	NOM	8.51	0
-sandales	sandal	NOM	8.51	0
-sandales	sandale	NOM	0.2	0
+sandale	sandale	NOM	8.51	1
+sandales	sandale	NOM	8.51	0
 sandalettes	sandalette	NOM	0.61	0
 sandalier	sandalier	NOM	0.07	1
 sanderling	sanderling	NOM	0.0	1
@@ -128807,12 +128806,12 @@ tiquaient	tiquer	VER	2.91	0
 tiquais	tiquer	VER	2.91	0
 tiquait	tiquer	VER	2.91	0
 tiquant	tiquer	VER	2.91	0
-tique	tique	NOM	0.81	1
+tique	tique	NOM	9.81	1
 tique	tiquer	VER	2.91	0
 tiquent	tiquer	VER	2.91	0
 tiquer	tiquer	VER	2.91	1
 tiquerais	tiquer	VER	2.91	0
-tiques	tique	NOM	0.81	0
+tiques	tique	NOM	9.81	0
 tiqueté	tiqueté	ADJ	0.07	1
 tiqué	tiquer	VER	2.91	0
 tir	tir	NOM	18.85	1

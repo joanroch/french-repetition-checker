@@ -116,8 +116,8 @@ crocodiliens	crocodiliens	ADJ	1.0	1
 Cuba	Cuba	NOM_PROPRE	1.0	1
 cubicule	cubicule	NOM	1.0	1
 cumulent	cumuler	VER	1.0	0
-Daniel	Daniel E. LiebermanLieberman	NOM_PROPRE	1.0	0
-Daniel E. Lieberman	Daniel E. LiebermanLieberman	NOM_PROPRE	1.0	1
+Daniel	Daniel E. Lieberman	NOM_PROPRE	1.0	0
+Daniel E. Lieberman	Daniel E. Lieberman	NOM_PROPRE	1.0	1
 Day	Day	NOM_PROPRE	1.0	1
 de Kat	Joan de Kat	NOM_PROPRE	2.0	0
 débusquées	disqualifier	VER	1.0	0
@@ -207,7 +207,7 @@ grevant	grever	VER	1.0	0
 grilled	grilled	ETRANGER	1.0	1
 Guardia	Guardia	NOM_PROPRE	2.0	1
 h	heure	NOM	1.0	0
-haaaa	haaaa	ONO	1.0	1
+haaaa	ha	ONO	1.0	0
 Harley	Harley	NOM_PROPRE	1.0	1
 Harricana	Harricana	NOM_PROPRE	1.0	1
 Haruki	Haruki	NOM_PROPRE	1.0	1
@@ -242,6 +242,7 @@ Jean-François	Jean-François Tantin	NOM_PROPRE	13.0	0
 Jean-François Tantin	Jean-François Tantin	NOM_PROPRE	13.0	1
 Jean-Philippe	Jean-Philippe Lefief	NOM_PROPRE	3.0	0
 Jean-Philippe Lefief	Jean-Philippe Lefief	NOM_PROPRE	3.0	1
+jefe	jefe	ETRANGER	1.0	1
 Jenn Shelton	Jenn Shelton	NOM_PROPRE	1.0	1
 Jérôme	Jérôme	NOM_PROPRE	3.0	1
 Joan	Joan Roch	NOM_PROPRE	13.0	0
@@ -259,9 +260,11 @@ Julien Chorier	Julien Chorier	NOM_PROPRE	1.0	1
 Jupiter	Jupiter	NOM_PROPRE	5.0	1
 Jurek	Scott Jurek	NOM_PROPRE	4.0	0
 Katahdin	Katahdin	NOM_PROPRE	2.0	1
+Kenyans	Kenyans	NOM_PROPRE	1.0	1
 Kevin Spacey	Kevin Spacey	NOM_PROPRE	1.0	1
-key	key	ETRANGER	14.0	1
-keys	key	ETRANGER	14.0	0
+Key Largo	Key Largo	NOM_PROPRE	14.0	1
+Key West	Key West	NOM_PROPRE	14.0	1
+Keys	Keys	NOM_PROPRE	5.0	1
 Keyser	Keyser Söze	NOM_PROPRE	1.0	0
 Keyser Söze	Keyser Söze	NOM_PROPRE	1.0	1
 kg	kilogramme	NOM	1.0	0
@@ -441,6 +444,7 @@ thru-hike	thru-hike	ETRANGER	4.0	1
 thru-hiker	thru-hiker	ETRANGER	4.0	1
 thru-hikers	thru-hiker	ETRANGER	4.0	0
 thru-hikes	thru-hike	ETRANGER	4.0	0
+TOC	TOC	ACRONYME	2.0	1
 Tolkien	Tolkien	NOM_PROPRE	1.0	1
 Tom Hanks	Tom Hanks	NOM_PROPRE	1.0	1
 tractées	tracter	VER	1.0	0
@@ -490,7 +494,6 @@ Walking	Walking	NOM_PROPRE	1.0	1
 Warner Bros	Warner Bros	NOM_PROPRE	1.0	1
 Webwalker	Webwalker	NOM_PROPRE	2.0	1
 weird	weird	ETRANGER	2.0	1
-west	west	ETRANGER	12.0	0
 what	What	ETRANGER	2.0	1
 White Springs	White Springs	NOM_PROPRE	3.0	1
 wifi	wifi	NOM	1.0	1
