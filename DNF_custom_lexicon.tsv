@@ -1,4 +1,5 @@
 ortho	lemme	cgram	freq	is_lem
+acétazolamide	acétazolamide	NOM	1.0	1
 Achille	Achille	NOM_PROPRE	1.0	1
 Adidas	Adidas	NOM_PROPRE	1.0	1
 ADN	ADN	ACRONYME	1.0	1
@@ -22,6 +23,7 @@ Amicalola	Amicalola	NOM_PROPRE	1.0	1
 amortissante	amortir	VER	4.93	0
 amortissantes	amortir	VER	4.93	0
 amortissants	amortir	VER	4.93	0
+and	and	ETRANGER	1.0	1
 Andalusia	Andalusia	NOM_PROPRE	2.0	1
 Andréanne	Andréanne	NOM_PROPRE	1.0	1
 angel	angel	ETRANGER	2.0	1
@@ -203,6 +205,7 @@ GR	GR	ACRONYME	1.0	1
 GRA1	GRA1	ACRONYME	2.0	1
 graduels	graduel	ADJ	1.0	0
 grapiller	grapiller	VER	1.0	1
+greatest	greatest	ETRANGER	1.0	1
 grevant	grever	VER	1.0	0
 grilled	grilled	ETRANGER	1.0	1
 Guardia	Guardia	NOM_PROPRE	2.0	1
@@ -212,12 +215,14 @@ Harley	Harley	NOM_PROPRE	1.0	1
 Harricana	Harricana	NOM_PROPRE	1.0	1
 Haruki	Haruki	NOM_PROPRE	1.0	1
 Harvard	Harvard	NOM_PROPRE	1.0	1
+has	has	ETRANGER	1.0	1
 Hawk	Hawk	NOM_PROPRE	1.0	1
 heads	heads	ETRANGER	1.0	1
 héhé	héhé	ONO	1.0	1
 hélicoïdales	hélicoïdale	ADJ	1.0	0
 Hemingway	Hemingway	NOM_PROPRE	1.0	1
 hétérodoxe	hétérodoxe	NOM	1.0	1
+hidden	hidden	ETRANGER	1.0	1
 Hike	Hike	NOM_PROPRE	1.0	1
 hiker	hiker	ETRANGER	2.0	1
 hikers	hiker	ETRANGER	2.0	0
@@ -314,6 +319,7 @@ millilitres	millilitre	NOM	1.0	0
 minimalistes	minimaliste	NOM	5.0	0
 minivan	minivan	NOM	3.0	1
 Monadnock	Monadnock	NOM_PROPRE	1.0	1
+Montaigne	Montaigne	NOM_PROPRE	1.0	1
 Montgomery	Montgomery	NOM_PROPRE	1.0	1
 Montréal	Montréal	NOM_PROPRE	20.0	1
 Mountain	Mountain	NOM_PROPRE	1.0	1
@@ -324,6 +330,7 @@ narcos	narcotrafiquant	NOM	1.0	0
 narcotrafiquant	narcotrafiquant	NOM	1.0	1
 Némésis	némésis	NOM	1.0	1
 Nessmuk	Nessmuk	NOM_PROPRE	1.0	1
+never	never	ETRANGER	1.0	1
 NGCC Mamilossa	NGCC Mamilossa	NOM_PROPRE	1.0	1
 Nike	Nike	NOM_PROPRE	2.0	1
 Nimblewill	Nimblewill Nomad	NOM_PROPRE	4.0	0
@@ -379,6 +386,7 @@ real	real	ETRANGER	1.0	1
 reconverties	reconvertir	VER	1.0	0
 refondé	refonder	VER	1.0	0
 règlera	régler	VER	1.0	0
+réhydratés	réhydrater	VER	0.07	0
 remballée	remballer	VER	1.0	0
 réutilisable	réutilisable	ADJ	1.0	1
 révèlera	révéler	VER	1.0	0
@@ -396,6 +404,7 @@ salvatrices	salvateur	ADJ	1.0	0
 Scott	Scott Jurek	NOM_PROPRE	5.0	0
 Scott Jurek	Scott Jurek	NOM_PROPRE	4.0	1
 Sears	George W. Sears	NOM_PROPRE	1.0	0
+seen	seen	ETRANGER	1.0	1
 Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	0
 should	should	ETRANGER	1.0	1
 Shrimp Basket	Shrimp Basket	NOM_PROPRE	1.0	1
@@ -421,6 +430,7 @@ step	step	ETRANGER	1.0	1
 steps	step	ETRANGER	1.0	0
 Subway	Subway	NOM_PROPRE	1.0	1
 Sunoco	Sunoco	NOM_PROPRE	1.0	1
+superathletes	superathletes	ETRANGER	1.0	1
 Supercuts	Supercuts	NOM_PROPRE	1.0	1
 surdimensionnées	surdimensionné	ADJ	2.0	0
 sussurant	sussurer	VER	1.0	0
@@ -459,10 +469,12 @@ trails	trail	NOM	12.0	0
 trainers	trainers	ETRANGER	1.0	1
 Transcanadien	Transcanadien	NOM_PROPRE	1.0	1
 triathlètes	triathlète	NOM	0.0	0
+tribe	tribe	ETRANGER	1.0	1
 Uber	Uber	NOM_PROPRE	1.0	1
 Uh	Uh	ONO	1.0	1
 Ui	Ui	NOM_PROPRE	1.0	1
 Ultimate XC	Ultimate XC	NOM_PROPRE	2.0	1
+Ultra Run Rarámuri	Ultra Run Rarámuri	NOM_PROPRE	4.0	1
 Ultra Trail du mont Blanc	Ultra Trail du mont Blanc	NOM_PROPRE	4.0	1
 Ultra-Trail Harricana	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	0
 Ultra-Trail Harricana du Canada	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	1
@@ -503,6 +515,8 @@ With	with	ETRANGER	1.0	0
 world	world	ETRANGER	1.0	0
 wouhou	wouhou	ONO	1.0	1
 XIXe	XIXe	NOM_PROPRE	1.0	1
+XVe	XVe	NOM_PROPRE	1.0	1
+XVIe	XVIe	NOM_PROPRE	1.0	1
 XXL	XXL	ACRONYME	1.0	1
 yes	yes	ETRANGER	1.0	1
 Yo	Yo	NOM_PROPRE	1.0	1

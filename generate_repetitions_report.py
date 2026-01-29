@@ -11,14 +11,18 @@ import csv
 import unicodedata
 
 
-def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
+def find_repetition_clusters(positions, max_distance=200, min_occurrences=2, text_length=None):
     """
     Trouve les groupes de répétitions (clusters) pour un lemme.
+    La distance maximale est adaptée en fonction de la fréquence du mot :
+    - Mots rares : distance plus grande (groupes plus permissifs)
+    - Mots fréquents : distance plus courte (groupes plus stricts)
     
     Args:
         positions: Liste de tuples (word, start, end)
-        max_distance: Distance maximale entre deux occurrences pour être dans le même cluster
+        max_distance: Distance de base maximale entre deux occurrences
         min_occurrences: Nombre minimum d'occurrences dans un cluster (toujours >= 2 pour former un vrai groupe)
+        text_length: Longueur totale du texte (pour calculer la densité)
         
     Returns:
         Liste de clusters, chaque cluster est une liste de positions
@@ -28,6 +32,27 @@ def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
     
     if len(positions) < min_cluster_size:
         return []
+    
+    # Calculer la distance adaptative
+    # Formule : distance = base_distance * (reference_frequency / actual_frequency)^0.7
+    # Plus le mot est fréquent, plus la distance est réduite
+    # Plus le mot est rare, plus la distance est augmentée
+    
+    total_occurrences = len(positions)
+    
+    # Fréquence de référence : un mot avec 23 occurrences aura la distance de base (1100)
+    # Formule linéaire inversement proportionnelle
+    # Pour 23 occ -> facteur = 1.0 (distance = 1100)
+    # Pour 10 occ -> facteur = 2.3 (distance = 2530)
+    # Pour 50 occ -> facteur = 0.46 (distance = 506)
+    # Pour 100 occ -> facteur = 0.23 (distance = 253)
+    # Pour 5 occ -> facteur = 4.6 (distance = 5060)
+    adjustment_factor = 23 / total_occurrences
+    
+    # Limiter le facteur entre 0.2 et 5.0 pour éviter les extrêmes
+    adjustment_factor = max(0.2, min(5.0, adjustment_factor))
+    
+    adaptive_max_distance = int(max_distance * 5.5 * adjustment_factor)  # base augmentée à 1100
     
     # Trier par position
     sorted_positions = sorted(positions, key=lambda x: x[1])
@@ -39,7 +64,7 @@ def find_repetition_clusters(positions, max_distance=200, min_occurrences=2):
         prev_pos = sorted_positions[i-1][2]  # Fin de l'occurrence précédente
         curr_pos = sorted_positions[i][1]    # Début de l'occurrence actuelle
         
-        if curr_pos - prev_pos <= max_distance:
+        if curr_pos - prev_pos <= adaptive_max_distance:
             # Même cluster
             current_cluster.append(sorted_positions[i])
         else:
@@ -404,6 +429,20 @@ def export_custom_lexicon(unknown_data, filepath: str):
             print(f"  Ajoutez des variantes (masc/fém, sing/plur) avec le même lemme")
     except Exception as e:
         print(f"Erreur lors de l'export du lexique personnalisé: {e}")
+
+
+def format_number_french(number):
+    """
+    Formate un nombre selon la typographie française (espace fine insécable pour les milliers).
+    
+    Args:
+        number: Le nombre à formater
+        
+    Returns:
+        String du nombre formaté
+    """
+    # Utiliser l'espace fine insécable (U+202F) comme séparateur de milliers
+    return f"{number:,}".replace(',', '\u202F')
 
 
 def generate_html_report(filepath: str, output_file: str = None, min_occurrences: int = 2):
@@ -854,7 +893,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             is_custom_special = any(data['lemma'] == lemma for data in custom_special_words.values())
             min_occ = 1 if (is_unknown_word or is_custom_special) else 2
             
-            clusters = find_repetition_clusters(positions, max_distance=200, min_occurrences=min_occ)
+            clusters = find_repetition_clusters(positions, max_distance=200, min_occurrences=min_occ, text_length=len(text))
             if clusters:
                 lemma_clusters[lemma] = clusters
     
@@ -1329,15 +1368,15 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
         
         <div class="stats-grid">
             <div class="stat-box">
-                <div class="stat-number">{total_words:,}</div>
+                <div class="stat-number">{format_number_french(total_words)}</div>
                 <div class="stat-label">Mots Totaux</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">{unique_words_count:,}</div>
+                <div class="stat-number">{format_number_french(unique_words_count)}</div>
                 <div class="stat-label">Mots Uniques</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">{unique_lemmas:,}</div>
+                <div class="stat-number">{format_number_french(unique_lemmas)}</div>
                 <div class="stat-label">Lemmes Uniques</div>
             </div>
         </div>
