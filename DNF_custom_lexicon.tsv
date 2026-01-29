@@ -95,7 +95,7 @@ carénée	caréner	VER	1.0	0
 Carlos	Carlos	NOM_PROPRE	2.0	1
 Cédric	Cédric	NOM_PROPRE	1.0	1
 Celestino	Celestino	NOM_PROPRE	9.0	1
-ch	ch	INCONNU	1.0	1
+ch	c	PRO:dem	4.59	0
 Chamonix	Chamonix	NOM_PROPRE	1.0	1
 Charlevoix	Charlevoix	NOM_PROPRE	1.0	1
 cheese	cheese	ETRANGER	1.0	1
@@ -347,7 +347,7 @@ Ontario	Ontario	NOM_PROPRE	2.0	1
 Orlando	Orlando	NOM_PROPRE	2.0	1
 other	other	ETRANGER	1.0	1
 Ottawa	Ottawa	NOM_PROPRE	1.0	1
-oua	oua	INCONNU	1.0	1
+oua	moi	PRO:per	1877.57	0
 paléoanthropologue	paléoanthropologue	NOM	1.0	1
 papemobile	papemobile	NOM	1.0	1
 parasitique	parasitique	ADJ	1.0	1
@@ -400,6 +400,9 @@ runner	runner	ETRANGER	1.0	1
 safe	safe	ETRANGER	1.0	1
 Sahara	Sahara	NOM_PROPRE	1.0	1
 Saïgon	Saïgon	NOM_PROPRE	1.0	1
+Saint-Denis	Saint-Denis	NOM_PROPRE	8.0	1
+Saint-Donat	Saint-Donat	NOM_PROPRE	1.0	1
+Saint-Laurent	Saint-Laurent	NOM_PROPRE	6.0	1
 salvatrices	salvateur	ADJ	1.0	0
 Scott	Scott Jurek	NOM_PROPRE	5.0	0
 Scott Jurek	Scott Jurek	NOM_PROPRE	4.0	1
@@ -421,10 +424,6 @@ southernmost	southernmost	ETRANGER	1.0	1
 Special	Special	NOM_PROPRE	1.0	1
 Springfever	Springfever	NOM_PROPRE	1.0	1
 Sssííí	Sí	ETRANGER	4.0	0
-St-Bruno	St-Bruno	NOM_PROPRE	6.0	1
-St-Denis	St-Denis	NOM_PROPRE	8.0	1
-St-Donat	St-Donat	NOM_PROPRE	1.0	1
-St-Laurent	St-Laurent	NOM_PROPRE	6.0	1
 start	start	ETRANGER	1.0	1
 step	step	ETRANGER	1.0	1
 steps	step	ETRANGER	1.0	0
@@ -472,7 +471,7 @@ triathlètes	triathlète	NOM	0.0	0
 tribe	tribe	ETRANGER	1.0	1
 Uber	Uber	NOM_PROPRE	1.0	1
 Uh	Uh	ONO	1.0	1
-Ui	Ui	NOM_PROPRE	1.0	1
+ui	oui	ADV	637.57	0
 Ultimate XC	Ultimate XC	NOM_PROPRE	2.0	1
 Ultra Run Rarámuri	Ultra Run Rarámuri	NOM_PROPRE	4.0	1
 Ultra Trail du mont Blanc	Ultra Trail du mont Blanc	NOM_PROPRE	4.0	1
