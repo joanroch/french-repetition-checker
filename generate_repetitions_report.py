@@ -445,6 +445,217 @@ def format_number_french(number):
     return f"{number:,}".replace(',', '\u202F')
 
 
+def contextual_disambiguation(words_with_positions, classifications, classifier):
+    """
+    Améliore la classification des mots en fonction du contexte.
+    Se concentre sur la désambiguïsation NOM/VER occurrence par occurrence.
+    
+    Args:
+        words_with_positions: Liste de tuples (word, start, end)
+        classifications: Dict des classifications initiales (par mot)
+        classifier: Instance de WordClassifier
+        
+    Returns:
+        Dict indexé par position (index dans words_with_positions) contenant 
+        les classifications contextuelles pour les mots reclassifiés
+    """
+    from word_classifier import WordClassification
+    
+    # Articles (définis, indéfinis, possessifs, démonstratifs)
+    articles = {
+        'le', 'la', 'les', 'l', "l'",  # 'l' pour les cas où l'apostrophe est séparée
+        'un', 'une', 'des',
+        'du', 'de la', 'de l\'', 'des',
+        'mon', 'ma', 'mes',
+        'ton', 'ta', 'tes',
+        'son', 'sa', 'ses',
+        'notre', 'nos',
+        'votre', 'vos',
+        'leur', 'leurs',
+        'ce', 'cet', 'cette', 'ces',
+        'au', 'aux'  # contractions de à + le/les
+    }
+    
+    # Mots ambigus qui peuvent être articles OU pronoms objets
+    # selon le contexte (présence d'un pronom sujet avant)
+    ambiguous_article_or_pronoun = {
+        'le', 'la', 'les', 'l', "l'",
+        'leur', 'leurs'
+    }
+    
+    # Pronoms objets (compléments d'objet direct ou indirect)
+    object_pronouns = {
+        'me', 'm', "m'",
+        'te', 't', "t'",
+        'se', 's', "s'",
+        'le', 'la', 'les', 'l', "l'",
+        'lui', 'leur',
+        'nous', 'vous',
+        'en', 'y'
+    }
+    
+    # Pronoms sujets (indiquent clairement un verbe)
+    subject_pronouns = {
+        'je', 'j', "j'", 'tu', 'il', 'elle', 'on',
+        'nous', 'vous', 'ils', 'elles',
+        'qui', 'que', 'qu', "qu'"  # 'j' et 'qu' pour les cas où l'apostrophe est séparée
+    }
+    
+    # Prépositions qui peuvent introduire un nom
+    prepositions = {'de', 'd', 'd\'', 'à', 'en', 'pour', 'sans', 'avec', 'par', 'dans', 'sur', 'sous'}  # 'd' pour les cas où l'apostrophe est séparée
+    
+    # Adjectifs/adverbes/numéraux qui peuvent précéder un nom
+    modifiers = {
+        # Adjectifs courants
+        'bonne', 'bon', 'mauvaise', 'mauvais', 'grande', 'grand', 'petite', 'petit',
+        'belle', 'beau', 'longue', 'long', 'courte', 'court', 'rapide', 'lente', 'lent',
+        'nouvelle', 'nouveau', 'vieille', 'vieux', 'jeune', 'première', 'premier',
+        'dernière', 'dernier', 'prochaine', 'prochain', 'autre', 'même',
+        # Adverbes
+        'bien', 'mal', 'très', 'trop', 'plus', 'moins', 'assez', 'peu',
+        # Numéraux ordinaux
+        'deuxième', 'troisième', 'quatrième', 'cinquième',
+        'second', 'seconde'
+    }
+    
+    # Dict des classifications contextuelles (indexé par position)
+    contextual_overrides = {}
+    
+    # Parcourir tous les mots avec leur contexte
+    for i, (word, start, end) in enumerate(words_with_positions):
+        word_lower = word.lower()
+        classif = classifications.get(word_lower)
+        
+        if not classif or classif.status != WordClassification.CLASSIFIED:
+            continue
+            
+        # Ne traiter que les mots classés comme VER
+        if classif.cgram != 'VER':
+            continue
+        
+        # Vérifier si le mot existe aussi comme NOM dans le lexique
+        all_entries = classifier.lexicon.lookup_case_insensitive(word_lower)
+        has_nom = any(entry.cgram == 'NOM' for entry in all_entries)
+        
+        if not has_nom:
+            continue
+        
+        # Analyser le contexte pour décider si CETTE OCCURRENCE est un NOM
+        should_be_nom = False
+        
+        # Collecter les mots précédents (en ignorant la ponctuation)
+        # Limiter la recherche si on rencontre un NOM qui bloquerait un groupe nominal
+        prev_words = []
+        prev_cgrams = []  # Garder trace des catégories grammaticales
+        j = i - 1
+        stop_at_nom = False  # Flag pour limiter la collecte après un NOM
+        
+        while j >= 0 and len(prev_words) < 3:
+            prev_word = words_with_positions[j][0].lower()
+            
+            # Traiter tous les mots (y compris ceux avec espaces comme "florida trail")
+            # sauf la pure ponctuation
+            if prev_word and not prev_word.strip() == '':
+                # Vérifier la catégorie grammaticale de ce mot
+                prev_classif = classifications.get(prev_word)
+                
+                if prev_classif and prev_classif.status == WordClassification.CLASSIFIED:
+                    prev_cgram = prev_classif.cgram
+                    
+                    # Si c'est un nom et qu'on en a déjà collecté un après une préposition,
+                    # arrêter (ex: "le NOM de NOM VER" - on ne veut pas aller au-delà du deuxième NOM)
+                    if prev_cgram in ['NOM', 'NOM_PROPRE', 'ACRONYME', 'ETRANGER']:
+                        if stop_at_nom:
+                            # On a déjà un NOM après une préposition, arrêter
+                            break
+                        # Premier NOM rencontré, le marquer mais continuer pour voir s'il y a une préposition avant
+                        stop_at_nom = True
+                    
+                    prev_cgrams.append(prev_cgram)
+                else:
+                    prev_cgrams.append(None)
+                
+                prev_words.append(prev_word)
+            j -= 1
+        
+        if len(prev_words) == 0:
+            continue
+        
+        prev_1 = prev_words[0]
+        
+        # Règle 0: Pronom sujet avant → garder VER (ne pas reclassifier)
+        if prev_1 in subject_pronouns:
+            continue
+        
+        # Règle 1: Article directement avant → NOM
+        # MAIS vérifier si c'est vraiment un article ou un pronom objet
+        if prev_1 in articles:
+            # Si c'est un mot ambigu (peut être article ou pronom objet)
+            if prev_1 in ambiguous_article_or_pronoun:
+                # Vérifier s'il y a un pronom sujet IMMÉDIATEMENT avant
+                # (éventuellement séparé par des pronoms réfléchis comme 'se' ou 'ne')
+                # Ex: "je le tente" → pronom objet
+                # Ex: "je glisse la tente" → article (pas immédiatement adjacent)
+                is_object_pronoun = False
+                if len(prev_words) > 1:
+                    prev_2 = prev_words[1]
+                    # Cas 1: pronom sujet directement avant (ex: "je le tente")
+                    if prev_2 in subject_pronouns:
+                        is_object_pronoun = True
+                    # Cas 2: pronom réfléchi entre les deux (ex: "on se le tente")
+                    elif prev_2 in {'se', 's', 's\'', 'ne', 'n', 'n\''} and len(prev_words) > 2:
+                        prev_3 = prev_words[2]
+                        if prev_3 in subject_pronouns:
+                            is_object_pronoun = True
+                
+                # Si c'est un pronom objet, ne pas reclassifier en NOM
+                if is_object_pronoun:
+                    continue
+            
+            # C'est un vrai article → NOM
+            should_be_nom = True
+        
+        # Règle 2: Préposition avant → vérifier le contexte
+        elif prev_1 in prepositions:
+            if len(prev_words) > 1:
+                prev_2 = prev_words[1]
+                # Si article avant la préposition → NOM (ex: "la de marche")
+                if prev_2 in articles:
+                    should_be_nom = True
+                # Si NOM avant la préposition → NOM (ex: "formulaires de demande")
+                # Car c'est un complément du nom, pas un verbe à l'infinitif
+                elif len(prev_cgrams) > 1 and prev_cgrams[1] in ['NOM', 'NOM_PROPRE', 'ACRONYME']:
+                    should_be_nom = True
+        
+        # Règle 3: Modificateur (ADJ/ADV/numéral) avant → chercher l'article
+        elif prev_1 in modifiers:
+            if len(prev_words) > 1:
+                prev_2 = prev_words[1]
+                if prev_2 in articles:
+                    should_be_nom = True
+                # Si préposition, chercher encore plus loin
+                elif prev_2 in prepositions and len(prev_words) > 2:
+                    prev_3 = prev_words[2]
+                    if prev_3 in articles:
+                        should_be_nom = True
+        
+        # Si cette occurrence doit être reclassifiée en NOM
+        if should_be_nom:
+            # Trouver l'entrée NOM dans le lexique
+            nom_entry = next((e for e in all_entries if e.cgram == 'NOM'), None)
+            if nom_entry:
+                # Créer une classification pour cette occurrence spécifique
+                new_classif = WordClassification(
+                    word=word_lower,
+                    status=WordClassification.CLASSIFIED,
+                    entry=nom_entry,
+                    cgram='NOM'
+                )
+                contextual_overrides[i] = new_classif
+    
+    return contextual_overrides
+
+
 def generate_html_report(filepath: str, output_file: str = None, min_occurrences: int = 2):
     """
     Génère un rapport HTML des répétitions par catégorie grammaticale.
@@ -518,10 +729,59 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             word, case_sensitive=False, disambiguate_by_frequency=True
         )
     
+    # Créer un dictionnaire pour mapper les mots vers leurs lemmes personnalisés
+    custom_lemmas = {}
+    
+    # Normaliser les ordinaux abrégés (1er → premier, 4ème → quatrième, etc.)
+    from ordinal_normalizer import normalize_ordinal
+    import re
+    ordinal_pattern = re.compile(r'^\d+(er|ère|e|ème)$', re.IGNORECASE)
+    
+    for word in unique_words:
+        if ordinal_pattern.match(word):
+            # C'est un ordinal abrégé
+            normalized = normalize_ordinal(word)
+            if normalized != word:
+                # La normalisation a réussi, ajouter au dictionnaire des lemmes personnalisés
+                custom_lemmas[word] = normalized.lower()
+                
+                # Classifier comme ADJ:num (adjectif numéral)
+                from word_classifier import WordClassification
+                classifications[word] = WordClassification(
+                    word=word,
+                    status=WordClassification.CLASSIFIED,
+                    entry=None,
+                    cgram='ADJ:num'
+                )
+    
+    # Ajouter les classifications du lexique personnalisé
+    if custom_lexicon:
+        for word_lower, entry in custom_lexicon.items():
+            cgram = entry['cgram']
+            lemme = entry['lemme']
+            
+            # Stocker le lemme pour utilisation ultérieure
+            custom_lemmas[word_lower] = lemme.lower()
+            
+            # Créer une classification pour les mots du lexique personnalisé
+            from word_classifier import WordClassification
+            classifications[word_lower] = WordClassification(
+                word=word_lower,
+                status=WordClassification.CLASSIFIED,
+                entry=None,  # Pas d'entrée réelle du lexique
+                cgram=cgram
+            )
+    
+    # Appliquer la désambiguïsation contextuelle pour améliorer NOM/VER
+    print("Désambiguïsation contextuelle...")
+    contextual_overrides = contextual_disambiguation(words_with_positions, classifications, classifier)
+    
     # Catégories à exclure
+    # Note: ADJ:num (adjectifs numéraux ordinaux) n'est PAS exclu car on veut voir
+    # les répétitions d'ordinaux (premier, deuxième, 1er, 2e, etc.)
     excluded_categories = {'ART:def', 'ART:ind', 'PRO:per', 'PRO:int', 'PRO:rel', 
                           'PRO:dem', 'PRO:ind', 'PRO:pos', 'CON', 'PRE',
-                          'ADJ:pos', 'ADJ:dem', 'ADJ:num'}
+                          'ADJ:pos', 'ADJ:dem'}
     
     # Lemmes spécifiques à exclure des groupes de répétitions
     excluded_lemmas_for_clusters = {'ne', 'pas'}
@@ -533,15 +793,26 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     unknown_words_data = []  # Données des mots inconnus avec positions
     custom_special_words = {}  # Mots du lexique personnalisé avec catégories spéciales
     
-    for word, start, end in words_with_positions:
+    for i, (word, start, end) in enumerate(words_with_positions):
         word_lower = word.lower()
-        classif = classifications.get(word_lower)
+        
+        # Vérifier si cette occurrence a une classification contextuelle
+        if i in contextual_overrides:
+            classif = contextual_overrides[i]
+        else:
+            classif = classifications.get(word_lower)
         
         if classif and classif.status == WordClassification.CLASSIFIED:
             if classif.cgram not in excluded_categories:
                 lemma = None
-                if classif.entry and classif.entry.lemme:
+                
+                # D'abord, vérifier si c'est un mot du lexique personnalisé
+                if word_lower in custom_lemmas:
+                    lemma = custom_lemmas[word_lower]
+                # Sinon, essayer de récupérer le lemme depuis l'entrée du lexique
+                elif classif.entry and classif.entry.lemme:
                     lemma = classif.entry.lemme.lower()
+                # Sinon, utiliser le mot lui-même
                 else:
                     lemma = word_lower
                 
@@ -573,6 +844,38 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     
     # Calculer les fréquences par lemme
     lemma_freq = Counter(words_to_analyze)
+    
+    # Créer une structure pour compter les catégories grammaticales par lemme
+    # (en tenant compte des reclassifications contextuelles)
+    lemma_cgram_count = {}  # {lemma: {cgram: count}}
+    
+    for i, (word, start, end) in enumerate(words_with_positions):
+        word_lower = word.lower()
+        
+        # Vérifier si cette occurrence a une classification contextuelle
+        if i in contextual_overrides:
+            classif = contextual_overrides[i]
+        else:
+            classif = classifications.get(word_lower)
+        
+        if classif and classif.status == WordClassification.CLASSIFIED:
+            if classif.cgram not in excluded_categories:
+                lemma = None
+                if classif.entry and classif.entry.lemme:
+                    lemma = classif.entry.lemme.lower()
+                else:
+                    lemma = word_lower
+                
+                cgram = classif.cgram
+                
+                # Exception : forcer être et avoir dans AUX
+                if lemma in ['être', 'avoir']:
+                    cgram = 'AUX'
+                
+                if lemma not in lemma_cgram_count:
+                    lemma_cgram_count[lemma] = Counter()
+                
+                lemma_cgram_count[lemma][cgram] += 1
     
     # Traiter les mots inconnus et les catégoriser
     unknown_lemma_to_words = {}
@@ -662,17 +965,29 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
         if is_in_custom_special:
             continue
         
-        classif = classifications.get(lemma)
+        # Déterminer la catégorie grammaticale en tenant compte des reclassifications contextuelles
+        cgram = None
         
-        # Si le lemme n'est pas dans classifications, prendre la première forme
-        if not classif or not classif.cgram:
-            forms = lemma_to_words.get(lemma, [lemma])
-            if forms:
-                classif = classifications.get(forms[0])
+        if lemma in lemma_cgram_count:
+            # Prendre la catégorie la plus fréquente pour ce lemme
+            cgram_counts = lemma_cgram_count[lemma]
+            if cgram_counts:
+                cgram = cgram_counts.most_common(1)[0][0]
         
-        if classif and classif.cgram:
-            cgram = classif.cgram
+        # Fallback: si pas trouvé dans lemma_cgram_count, utiliser l'ancienne méthode
+        if not cgram:
+            classif = classifications.get(lemma)
             
+            # Si le lemme n'est pas dans classifications, prendre la première forme
+            if not classif or not classif.cgram:
+                forms = lemma_to_words.get(lemma, [lemma])
+                if forms:
+                    classif = classifications.get(forms[0])
+            
+            if classif and classif.cgram:
+                cgram = classif.cgram
+        
+        if cgram:
             # Exception : forcer être et avoir dans AUX
             if lemma in ['être', 'avoir']:
                 cgram = 'AUX'

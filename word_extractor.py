@@ -284,27 +284,53 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                     word = text[start:i]
                     words.append((word, start, i))
         
-        # Cas 2: Commence par un chiffre - peut être un nombre avec séparateurs
+        # Cas 2: Commence par un chiffre - peut être un nombre avec séparateurs ou un ordinal abrégé
         elif text[i].isdigit():
-            # Collecter tous les chiffres, espaces et virgules connectés
+            # D'abord, vérifier si c'est un ordinal abrégé (1er, 2e, 3ème, etc.)
             temp_end = i
-            while temp_end < len(text) and (text[temp_end].isdigit() or 
-                                           text[temp_end] in ' ,'):
+            while temp_end < len(text) and text[temp_end].isdigit():
                 temp_end += 1
             
-            # Vérifier si c'est un nombre valide avec séparateurs
-            potential_number = text[start:temp_end]
+            # Vérifier s'il y a un suffixe ordinal après les chiffres
+            ordinal_suffix = None
+            if temp_end < len(text):
+                # Suffixes ordinaux possibles: er, ère, e, ème
+                remaining = text[temp_end:].lower()
+                if remaining.startswith('er') or remaining.startswith('ère'):
+                    ordinal_suffix = 'er' if remaining.startswith('er') and not remaining.startswith('ère') else 'ère'
+                elif remaining.startswith('ème'):
+                    ordinal_suffix = 'ème'
+                elif remaining.startswith('e') and (temp_end + 1 >= len(text) or not is_latin_letter(text[temp_end + 1])):
+                    # "e" seulement si ce n'est pas suivi d'une autre lettre
+                    ordinal_suffix = 'e'
             
-            if is_number_with_separators(potential_number):
-                # C'est un nombre valide, on le prend en entier
-                words.append((potential_number.strip(), start, temp_end))
-                i = temp_end
+            if ordinal_suffix:
+                # C'est un ordinal abrégé, prendre le nombre + le suffixe
+                ordinal_end = temp_end + len(ordinal_suffix)
+                word = text[start:ordinal_end]
+                words.append((word, start, ordinal_end))
+                i = ordinal_end
             else:
-                # Pas un nombre valide, on prend juste les chiffres jusqu'au prochain séparateur
-                while i < len(text) and text[i].isdigit():
-                    i += 1
-                word = text[start:i]
-                words.append((word, start, i))
+                # Pas un ordinal, traiter comme un nombre normal
+                # Collecter tous les chiffres, espaces et virgules connectés
+                temp_end = i
+                while temp_end < len(text) and (text[temp_end].isdigit() or 
+                                               text[temp_end] in ' ,'):
+                    temp_end += 1
+                
+                # Vérifier si c'est un nombre valide avec séparateurs
+                potential_number = text[start:temp_end]
+                
+                if is_number_with_separators(potential_number):
+                    # C'est un nombre valide, on le prend en entier
+                    words.append((potential_number.strip(), start, temp_end))
+                    i = temp_end
+                else:
+                    # Pas un nombre valide, on prend juste les chiffres jusqu'au prochain séparateur
+                    while i < len(text) and text[i].isdigit():
+                        i += 1
+                    word = text[start:i]
+                    words.append((word, start, i))
     
     return words
 
