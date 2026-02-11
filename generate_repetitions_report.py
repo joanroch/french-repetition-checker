@@ -431,6 +431,81 @@ def export_custom_lexicon(unknown_data, filepath: str):
         print(f"Erreur lors de l'export du lexique personnalisé: {e}")
 
 
+def update_custom_lexicon_frequencies(custom_lexicon_path: str, words_with_positions, custom_lexicon):
+    """
+    Met à jour les fréquences dans le lexique personnalisé en fonction des occurrences réelles trouvées.
+    
+    Args:
+        custom_lexicon_path: Chemin vers le fichier TSV du lexique personnalisé
+        words_with_positions: Liste de tuples (word, start, end) extraits du texte
+        custom_lexicon: Dictionnaire du lexique personnalisé chargé
+    """
+    if not Path(custom_lexicon_path).exists():
+        return
+    
+    # Compter les occurrences de chaque entrée du lexique personnalisé
+    occurrence_counts = {}
+    for word, start, end in words_with_positions:
+        word_lower = word.lower()
+        if word_lower in custom_lexicon:
+            if word_lower not in occurrence_counts:
+                occurrence_counts[word_lower] = 0
+            occurrence_counts[word_lower] += 1
+    
+    if not occurrence_counts:
+        # Aucune occurrence trouvée, pas besoin de mettre à jour
+        return
+    
+    # Charger les entrées existantes
+    existing_entries = {}
+    try:
+        with open(custom_lexicon_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f, delimiter='\t')
+            for row in reader:
+                ortho = row.get('ortho', '').strip()
+                if ortho:
+                    existing_entries[ortho.lower()] = {
+                        'ortho': ortho,
+                        'lemme': row.get('lemme', ortho).strip(),
+                        'cgram': row.get('cgram', '').strip(),
+                        'freq': float(row.get('freq', '0.0')),
+                        'is_lem': int(row.get('is_lem', '1'))
+                    }
+    except Exception as e:
+        print(f"Avertissement: impossible de lire le lexique personnalisé pour mise à jour: {e}")
+        return
+    
+    # Mettre à jour les fréquences avec les occurrences trouvées
+    updated_count = 0
+    for word_lower, count in occurrence_counts.items():
+        if word_lower in existing_entries:
+            old_freq = existing_entries[word_lower]['freq']
+            existing_entries[word_lower]['freq'] = float(count)
+            if old_freq != count:
+                updated_count += 1
+    
+    # Réécrire le fichier avec les fréquences mises à jour
+    try:
+        def normalize_for_sort(text: str) -> str:
+            nfd = unicodedata.normalize('NFD', text)
+            without_accents = ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+            return without_accents.lower()
+        
+        all_entries = list(existing_entries.values())
+        all_entries.sort(key=lambda x: normalize_for_sort(x['ortho']))
+        
+        with open(custom_lexicon_path, 'w', encoding='utf-8', newline='') as f:
+            fieldnames = ['ortho', 'lemme', 'cgram', 'freq', 'is_lem']
+            writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+            writer.writeheader()
+            writer.writerows(all_entries)
+        
+        if updated_count > 0:
+            print(f"✓ Fréquences du lexique personnalisé mises à jour: {updated_count} entrée(s)")
+    except Exception as e:
+        print(f"Avertissement: erreur lors de la mise à jour du lexique personnalisé: {e}")
+
+
 def format_number_french(number):
     """
     Formate un nombre selon la typographie française (espace fine insécable pour les milliers).
@@ -516,6 +591,19 @@ def contextual_disambiguation(words_with_positions, classifications, classifier)
         # Numéraux ordinaux
         'deuxième', 'troisième', 'quatrième', 'cinquième',
         'second', 'seconde'
+    }
+    
+    # Numéraux cardinaux (déterminants numéraux)
+    numerals = {
+        'un', 'une', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix',
+        'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'vingt', 'trente',
+        'quarante', 'cinquante', 'soixante', 'cent', 'mille', 'million', 'milliard'
+    }
+    
+    # Déterminants indéfinis
+    indefinite_determiners = {
+        'quelque', 'quelques', 'chaque', 'plusieurs', 'certain', 'certains', 'certaine', 'certaines',
+        'tout', 'tous', 'toute', 'toutes', 'aucun', 'aucune', 'nul', 'nulle'
     }
     
     # Dict des classifications contextuelles (indexé par position)
@@ -617,15 +705,18 @@ def contextual_disambiguation(words_with_positions, classifications, classifier)
         
         # Règle 2: Préposition avant → vérifier le contexte
         elif prev_1 in prepositions:
+            # Si préposition seule (sans article/NOM avant) → NOM (ex: "en partie", "à part")
+            should_be_nom = True
+            # Exception: si pronom sujet avant la préposition, ce pourrait être un verbe infinitif
+            # Ex: "je vais partir" → on ne veut PAS reclassifier "partir"
             if len(prev_words) > 1:
                 prev_2 = prev_words[1]
-                # Si article avant la préposition → NOM (ex: "la de marche")
-                if prev_2 in articles:
-                    should_be_nom = True
-                # Si NOM avant la préposition → NOM (ex: "formulaires de demande")
-                # Car c'est un complément du nom, pas un verbe à l'infinitif
-                elif len(prev_cgrams) > 1 and prev_cgrams[1] in ['NOM', 'NOM_PROPRE', 'ACRONYME']:
-                    should_be_nom = True
+                # Si pronom sujet avant la préposition, vérifier si c'est un verbe de mouvement
+                # Pour simplifier, on accepte la reclassification sauf si le mot avant est un verbe
+                if prev_2 in subject_pronouns and len(prev_cgrams) > 1:
+                    # Vérifier si le mot entre la préposition et le pronom est un verbe (verbe auxiliaire ou de mouvement)
+                    # Pour simplifier, on garde la règle: préposition → NOM dans la plupart des cas
+                    pass
         
         # Règle 3: Modificateur (ADJ/ADV/numéral) avant → chercher l'article
         elif prev_1 in modifiers:
@@ -638,6 +729,14 @@ def contextual_disambiguation(words_with_positions, classifications, classifier)
                     prev_3 = prev_words[2]
                     if prev_3 in articles:
                         should_be_nom = True
+        
+        # Règle 4: Numéral cardinal avant → NOM (ex: "deux parties", "trois parts")
+        elif prev_1 in numerals:
+            should_be_nom = True
+        
+        # Règle 5: Déterminant indéfini avant → NOM (ex: "quelque part", "chaque part")
+        elif prev_1 in indefinite_determiners:
+            should_be_nom = True
         
         # Si cette occurrence doit être reclassifiée en NOM
         if should_be_nom:
@@ -1113,50 +1212,47 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
             'is_unknown': True  # Mot vraiment inconnu (pas dans le lexique)
         })
     
-    # Agréger les mots du lexique personnalisé avec catégories spéciales par lemme
-    # (plusieurs word_lower peuvent avoir le même lemme, ex: RARAMURI, Rarámuri, Rarámuris -> Rarámuri)
+    # Agréger les mots du lexique personnalisé avec catégories spéciales par lemme (clé = lemme seul, minuscule)
     aggregated_custom_words = {}
     for word_lower, data in custom_special_words.items():
         cgram = data['cgram']
         lemma = data['lemma']
-        unique_key = f"{cgram}:{lemma}"
-        
-        if unique_key not in aggregated_custom_words:
-            aggregated_custom_words[unique_key] = {
+        lemma_key = lemma.lower() if isinstance(lemma, str) else lemma
+        if lemma_key not in aggregated_custom_words:
+            aggregated_custom_words[lemma_key] = {
                 'cgram': cgram,
                 'lemma': lemma,
                 'words': [],
                 'positions': []
             }
-        
-        # Agréger les mots et positions de toutes les variantes
-        aggregated_custom_words[unique_key]['words'].extend(data['words'])
-        aggregated_custom_words[unique_key]['positions'].extend(data['positions'])
-    
+        # Si plusieurs cgram pour le même lemme, garder le plus fréquent (ou le premier rencontré)
+        # Ici, on écrase cgram si différent, mais on pourrait raffiner si besoin
+        aggregated_custom_words[lemma_key]['cgram'] = cgram
+        aggregated_custom_words[lemma_key]['words'].extend(data['words'])
+        aggregated_custom_words[lemma_key]['positions'].extend(data['positions'])
+
     # Ajouter les mots du lexique personnalisé agrégés dans cgram_data
-    for unique_key, data in aggregated_custom_words.items():
+    for lemma_key, data in aggregated_custom_words.items():
         cgram = data['cgram']
         lemma = data['lemma']
         count = len(data['words'])
         forms_set = set(data['words'])
         forms = sorted(forms_set)
-        
+
         if cgram not in cgram_data:
             cgram_data[cgram] = []
-        
+
         # Chercher le lemme dans le lexique personnalisé (is_lem=1)
         lemma_in_lexicon = None
         for word_lower_key, entry in custom_lexicon.items():
-            if entry['cgram'] == cgram and entry['lemme'].lower() == lemma.lower() and entry.get('is_lem') == 1:
+            if entry['cgram'] == cgram and entry['lemme'].lower() == lemma_key and entry.get('is_lem') == 1:
                 lemma_in_lexicon = entry['lemme']
                 break
-        
+
         # Déterminer le display_lemma selon la catégorie
         if lemma_in_lexicon:
-            # Utiliser le lemme du lexique personnalisé
             display_lemma = lemma_in_lexicon
         elif cgram in ['NOM_PROPRE', 'ACRONYME'] and forms:
-            # Pour NOM_PROPRE et ACRONYME sans lemme dans lexique: forme avec casse appropriée
             ideal_form = None
             for form in forms:
                 if cgram == 'ACRONYME' and form.isupper() and len(form) > 1:
@@ -1165,18 +1261,15 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
                 elif cgram == 'NOM_PROPRE' and len(form) > 1 and form[0].isupper() and not form.isupper():
                     ideal_form = form
                     break
-            
             if not ideal_form:
                 for form in forms:
                     if form[0].isupper():
                         ideal_form = form
                         break
-            
             display_lemma = ideal_form if ideal_form else (lemma if lemma in forms_set else forms[0])
         else:
-            # Pour les autres catégories (ETRANGER, INCONNU): utiliser le lemme normalisé (minuscules)
             display_lemma = lemma
-        
+
         cgram_data[cgram].append({
             'lemma': lemma,
             'display_lemma': display_lemma,
@@ -1253,7 +1346,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapport de Répétitions - {Path(filepath).name}</title>
+    <title>Rapport de répétitions - {Path(filepath).name}</title>
     <style>
         * {{
             margin: 0;
@@ -1677,7 +1770,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Rapport de Répétitions</h1>
+            <h1>📊 Rapport de répétitions</h1>
             <p>{Path(filepath).name}</p>
         </div>
         
@@ -2211,6 +2304,10 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
         }
     
     export_custom_lexicon(unknown_export_data, custom_lexicon_export_path)
+    
+    # Mettre à jour les fréquences du lexique personnalisé basé sur les occurrences réelles trouvées
+    custom_lexicon_path = filepath.replace('.txt', '_custom_lexicon.tsv')
+    update_custom_lexicon_frequencies(custom_lexicon_path, words_with_positions, custom_lexicon)
 
 
 if __name__ == '__main__':

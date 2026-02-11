@@ -33,10 +33,13 @@ espresso	espresso	NOM	1.0	1
 estropiées	estropier	VER	1.0	0
 Étienne	Étienne	NOM_PROPRE	1.0	1
 euphorisantes	euphorisantes	ADJ	1.0	1
+First	First	ETRANGER	1.0	1
+Forest	Forest	ETRANGER	1.0	1
 France	France	NOM_PROPRE	2.0	1
 fredenions	fredenions	INCONNU	1.0	1
 galeristes	galeristes	NOM	1.0	1
 gaudasses	gaudasses	INCONNU	1.0	1
+générait	générer	VER	1.0	0
 Genest	Genest	NOM_PROPRE	1.0	1
 George-Étienne-Cartier	George-Étienne-Cartier	NOM_PROPRE	1.0	1
 googlé	googler	VER	1.0	0
@@ -44,11 +47,13 @@ googler	googler	VER	1.0	1
 gossant	gosser	VER	1.0	0
 gosser	gosser	VER	1.0	1
 GPS	GPS	ACRONYME	1.0	1
+Haliburton	Haliburton	NOM_PROPRE	1.0	1
 Haruki Murakami	Haruki Murakami	NOM_PROPRE	8.0	1
 Hochelaga	Hochelaga	NOM_PROPRE	1.0	1
 huaraches	huaraches	ETRANGER	1.0	1
 hystérographie	hystérographie	NOM	1.0	1
 IRM	IRM	ACRONYME	1.0	1
+it	it	ETRANGER	1.0	1
 Jacques-Cartier	Jacques-Cartier	NOM_PROPRE	2.0	1
 Joan	Joan Roch	NOM_PROPRE	42.0	0
 Joan Roch	Joan Roch	NOM_PROPRE	5.0	1
@@ -76,6 +81,7 @@ poudrerie	poudrerie	NOM	1.0	1
 Québec	Québec	NOM_PROPRE	7.0	1
 Queen	Queen	NOM_PROPRE	2.0	1
 Raramuri	Raramuri	NOM_PROPRE	1.0	1
+remballée	remballer	VER	1.0	0
 répondue	répondre	VER	1.0	0
 ressourçantes	ressourcer	VER	1.0	0
 restreignais	restreindre	VER	1.0	0
@@ -92,10 +98,12 @@ Sylvia Plath	Sylvia Plath	NOM_PROPRE	1.0	1
 taillages	taillages	INCONNU	1.0	1
 Tarahumara	Tarahumara	NOM_PROPRE	1.0	1
 Taschereau	Taschereau	NOM_PROPRE	1.0	1
+taton	taton	INCONNU	1.0	1
 texté	texter	VER	1.0	0
 texter	texter	VER	1.0	1
 texto	texto	NOM	1.0	1
 textos	texto	NOM	1.0	0
+the	the	ETRANGER	1.0	1
 tortillières	tortillières	INCONNU	1.0	1
 trail	trail	NOM	1.0	1
 trails	trail	NOM	1.0	0
@@ -112,4 +120,5 @@ Virginia Woolf	Virginia Woolf	NOM_PROPRE	1.0	1
 Wajdi	Wajdi Mouawad	NOM_PROPRE	4.0	0
 Wajdi Mouawad	Wajdi Mouawad	NOM_PROPRE	4.0	1
 Westmount	Westmount	NOM_PROPRE	2.0	1
+you	you	ETRANGER	1.0	1
 Zatopek	Zatopek	NOM_PROPRE	1.0	1

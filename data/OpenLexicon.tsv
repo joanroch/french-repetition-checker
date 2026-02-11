@@ -31477,6 +31477,7 @@ cornéenne	cornéen	ADJ	0.0	0
 cornées	corné	ADJ	1.42	0
 cornées	cornée	NOM	1.22	0
 cornélien	cornélien	ADJ	0.54	1
+cornéliens	cornélien	ADJ	0.54	0
 cornélienne	cornélien	ADJ	0.54	0
 cornéliennes	cornélien	ADJ	0.54	0
 cornés	corné	ADJ	1.42	0
@@ -32640,8 +32641,10 @@ covenant	covenant	NOM	0.0	1
 cover-girl	cover-girl	NOM	0.47	1
 cover-girls	cover-girl	NOM	0.47	0
 covoiturage	covoiturage	NOM	0.0	1
-cow-boy	cow-boy	NOM	5.27	1
-cow-boys	cow-boy	NOM	5.27	0
+cowboy	cowboy	NOM	5.27	1
+cowboys	cowboy	NOM	5.27	0
+cow-boy	cowboy	NOM	5.27	0
+cow-boys	cowboy	NOM	5.27	0
 coxalgie	coxalgie	NOM	0.07	1
 coxalgique	coxalgique	ADJ	0.07	1
 coyote	coyote	NOM	0.47	1
@@ -127092,8 +127095,7 @@ tancée	tancer	VER	1.01	0
 tancés	tancer	VER	1.01	0
 tandem	tandem	NOM	2.03	1
 tandems	tandem	NOM	2.03	0
-tandis qu	tandis qu	CON	0.07	1
-tandis que	tandis que	ADV	0.07	1
+tandis qu	tandis que	CON	136.15	0
 tandis que	tandis que	CON	136.15	1
 tandoori	tandoori	NOM	0.0	1
 tangage	tangage	NOM	1.08	1

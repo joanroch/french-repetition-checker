@@ -201,8 +201,9 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
             
             if compounds_with_spaces:
                 # Essayer de trouver le plus long mot composé avec espaces qui commence ici
-                # On teste de 2 à N mots (jusqu'à 5 mots pour des expressions comme "ad majorem dei gloriam")
-                max_words_to_test = 5
+                # On teste de N mots au plus long jusqu'à 2 mots
+                # Compter le nombre maximum de mots possibles dans les composés
+                max_words_to_test = max(10, max(len(c.split()) for c in compounds_with_spaces))
                 best_match = None
                 best_match_end = i
                 
@@ -217,28 +218,33 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                         while temp_pos < len(text) and text[temp_pos].isspace():
                             temp_pos += 1
                         
-                        if temp_pos >= len(text) or not is_latin_letter(text[temp_pos]):
+                        if temp_pos >= len(text):
                             break
                         
-                        # Extraire le mot (lettres, traits d'union, apostrophes)
+                        # Un mot peut commencer par une lettre OU un chiffre
+                        if not (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit()):
+                            break
+                        
+                        # Extraire le mot (lettres, traits d'union, apostrophes, chiffres)
+                        # Inclure l'apostrophe droite ' et l'apostrophe typographique ' (U+2019)
                         word_start = temp_pos
-                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos] in "-'"):
+                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit() or text[temp_pos] in "-''\u2019"):
                             temp_pos += 1
                         
                         word = text[word_start:temp_pos]
                         temp_words.append(word)
                         temp_positions.append((word_start, temp_pos))
                     
-                    # Vérifier si cette séquence forme un mot composé connu
-                    if len(temp_words) == n_words:
-                        potential_compound = ' '.join(temp_words)
-                        # Normaliser les apostrophes avant de chercher
-                        normalized_compound = normalize_apostrophes(potential_compound)
-                        if normalized_compound.lower() in compounds_with_spaces:
-                            best_match = potential_compound
-                            best_match_end = temp_pos
-                            compound_found = True
-                            break
+                        # Vérifier si cette séquence forme un mot composé connu
+                        if len(temp_words) == n_words:
+                            potential_compound = ' '.join(temp_words)
+                            # Normaliser les apostrophes avant de chercher
+                            normalized_compound = normalize_apostrophes(potential_compound)
+                            if normalized_compound.lower() in compounds_with_spaces:
+                                best_match = potential_compound
+                                best_match_end = temp_pos
+                                compound_found = True
+                                break
                 
                 if compound_found and best_match:
                     # On a trouvé un mot composé avec espaces
