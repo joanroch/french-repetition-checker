@@ -1,5 +1,5 @@
 ortho	lemme	cgram	freq	is_lem
-à l'instar	à l'instar	PRE	1.0	1
+à l’instar	à l'instar	PRE	1.0	1
 acétazolamide	acétazolamide	NOM	2.0	1
 Achille	Achille	NOM_PROPRE	1.0	1
 Adidas	Adidas	NOM_PROPRE	1.0	1
@@ -182,6 +182,7 @@ Dollar General	Dollar General	NOM_PROPRE	1.0	1
 Dom	Dominic Arpin	NOM_PROPRE	3.0	0
 Dominic	Dominic Arpin	NOM_PROPRE	10.0	0
 Dominic Arpin	Dominic Arpin	NOM_PROPRE	1.0	1
+dystopique	dystopique	INCONNU	1.0	1
 Earl	Earl V. Shaffer	NOM_PROPRE	2.0	0
 Earl  Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	0
 Earl V. Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	1
