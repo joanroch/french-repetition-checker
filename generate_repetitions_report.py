@@ -342,6 +342,9 @@ def export_custom_lexicon(unknown_data, filepath: str):
     IMPORTANT: Préserve les entrées existantes et n'ajoute que les nouvelles.
     Les entrées sont triées par ortho (sans distinction de casse ni diacritiques).
     
+    NOUVEAU: Supprime automatiquement les entrées INCONNU qui sont maintenant correctement
+    reconnues par le lexique principal grâce à la normalisation d'apostrophes.
+    
     Args:
         unknown_data: dict {key: {'lemma': str, 'category': str, 'forms': list, 'count': int}}
         filepath: Chemin vers le fichier TSV de sortie
@@ -379,6 +382,27 @@ def export_custom_lexicon(unknown_data, filepath: str):
         except Exception as e:
             print(f"Avertissement: impossible de lire le lexique existant: {e}")
     
+    # Filtrer les entrées INCONNU qui sont maintenant correctement reconnaissables
+    # grâce à la normalisation d'apostrophes dans le main lexicon
+    removed_entries = []
+    from word_classifier import WordClassifier
+    classifier = WordClassifier(Lexicon("data/OpenLexicon.tsv"))
+    
+    filtered_entries = {}
+    for word_lower, entry in existing_entries.items():
+        # Si c'est une entrée INCONNU, vérifier si elle est maintenant correctement reconnue
+        if entry['cgram'] == 'INCONNU':
+            result = classifier.classify_word(entry['ortho'], case_sensitive=False)
+            if result.status == "Classifié" and result.cgram not in ["INCONNU", "Inconnu"]:
+                # Elle est maintenant correctement reconnue, la supprimer
+                removed_entries.append(entry['ortho'])
+                continue
+        
+        # Sinon, la préserver
+        filtered_entries[word_lower] = entry
+    
+    existing_entries = filtered_entries
+    
     # Collecter les nouvelles entrées (qui n'existent pas déjà)
     new_entries = []
     
@@ -407,6 +431,11 @@ def export_custom_lexicon(unknown_data, filepath: str):
     all_entries = list(existing_entries.values()) + new_entries
     all_entries.sort(key=lambda x: normalize_for_sort(x['ortho']))
     
+    # Normaliser les apostrophes dans toutes les entrées avant écriture
+    for entry in all_entries:
+        entry['ortho'] = normalize_apostrophes(entry['ortho'])
+        entry['lemme'] = normalize_apostrophes(entry['lemme'])
+    
     # Écrire le fichier TSV
     try:
         with open(filepath, 'w', encoding='utf-8', newline='') as f:
@@ -417,6 +446,28 @@ def export_custom_lexicon(unknown_data, filepath: str):
         
         num_preserved = len(existing_entries)
         num_new = len(new_entries)
+        
+        if removed_entries:
+            print(f"⚠️  Entrées INCONNU supprimées (maintenant reconnues par le main lexicon):")
+            for word in removed_entries:
+                print(f"   - {word}")
+        
+        if num_new > 0 or removed_entries:
+            print(f"✓ Lexique personnalisé mis à jour: {filepath}")
+            print(f"  - {num_preserved} entrées préservées")
+            print(f"  - {num_new} nouvelles entrées ajoutées")
+            if removed_entries:
+                print(f"  - {len(removed_entries)} entrées supprimées")
+            print(f"  - Total: {len(all_entries)} entrées")
+        else:
+            print(f"✓ Lexique personnalisé inchangé: {filepath}")
+            print(f"  - {num_preserved} entrées (aucune nouvelle entrée)")
+            
+        if num_new > 0:
+            print(f"  Format: ortho, lemme, cgram, freq, is_lem")
+            print(f"  Ajoutez des variantes (masc/fém, sing/plur) avec le même lemme")
+    except Exception as e:
+        print(f"Erreur lors de l'export du lexique personnalisé: {e}")
         
         if num_new > 0:
             print(f"✓ Lexique personnalisé mis à jour: {filepath}")

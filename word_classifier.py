@@ -11,11 +11,11 @@ def normalize_apostrophes(word: str) -> str:
     Normalise les différentes variantes d'apostrophes en apostrophe ASCII droite (0x27).
     
     Transformations:
-    - ' (U+2019, curly right quote, 0xE2 0x80 0x99 en UTF-8) → '
-    - ` (backtick, grave accent) → '
-    - ´ (acute accent) → '
-    - ' (left single quotation mark, U+2018) → '
-    - ‐ (hyphen) → '
+    - U+2019 (curly right quote) → ASCII '
+    - U+2018 (curly left quote) → ASCII '
+    - ` (backtick) → ASCII '
+    - ´ (acute accent) → ASCII '
+    - ′ (prime) → ASCII '
     
     Args:
         word: Le mot à normaliser
@@ -23,12 +23,12 @@ def normalize_apostrophes(word: str) -> str:
     Returns:
         Le mot avec les apostrophes normalisées
     """
-    # Normaliser tous les types d'apostrophes/guillemets à l'apostrophe ASCII droite
-    word = word.replace(''', "'")  # Curly right quote (U+2019)
-    word = word.replace(''', "'")  # Curly left quote (U+2018)
-    word = word.replace('`', "'")  # Backtick
-    word = word.replace('´', "'")  # Acute accent
-    word = word.replace('′', "'")  # Prime
+    # Use Unicode code points to ensure correct characters
+    word = word.replace('\u2019', "'")  # RIGHT SINGLE QUOTATION MARK (U+2019)
+    word = word.replace('\u2018', "'")  # LEFT SINGLE QUOTATION MARK (U+2018)
+    word = word.replace('`', "'")       # GRAVE ACCENT
+    word = word.replace('\u00b4', "'")  # ACUTE ACCENT (U+00B4)
+    word = word.replace('\u2032', "'")  # PRIME (U+2032)
     return word
 
 

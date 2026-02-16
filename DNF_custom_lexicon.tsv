@@ -1,5 +1,4 @@
 ortho	lemme	cgram	freq	is_lem
-à l’instar	à l'instar	PRE	1.0	1
 acétazolamide	acétazolamide	NOM	2.0	1
 Achille	Achille	NOM_PROPRE	1.0	1
 Adidas	Adidas	NOM_PROPRE	1.0	1
@@ -207,7 +206,6 @@ fastpacker	fastpacker	ETRANGER	1.0	1
 fastpackers	fastpacker	ETRANGER	1.0	0
 fastpacking	fastpacking	ETRANGER	7.0	1
 Fat Belly's	Fat Belly's	NOM_PROPRE	5.0	1
-Fat Belly’s	Fat Belly’s	NOM_PROPRE	5.0	1
 faunique	faunique	ADJ	1.0	1
 Fernando	Fernando	NOM_PROPRE	1.0	1
 festifs	festif	ADJ	1.0	1
@@ -336,7 +334,6 @@ Jupiter	Jupiter	NOM_PROPRE	5.0	1
 Jurek	Scott Jurek	NOM_PROPRE	4.0	0
 Katahdin	Katahdin	NOM_PROPRE	2.0	1
 Kelly's Crossroads	Kelly's Crossroads	NOM_PROPRE	3.0	1
-Kelly’s Crossroads	Kelly’s Crossroads	NOM_PROPRE	3.0	1
 Kenyans	Kenyans	NOM_PROPRE	1.0	1
 Kevin Spacey	Kevin Spacey	NOM_PROPRE	1.0	1
 Key Largo	Key Largo	NOM_PROPRE	2.0	1
@@ -361,7 +358,6 @@ Lequient	Lequient	NOM_PROPRE	1.0	1
 Lieberman	Daniel E. LiebermanLieberman	NOM_PROPRE	1.0	0
 Lil	Lil' Buddha	NOM_PROPRE	1.0	0
 Lil' Buddha	Lil' Buddha	NOM_PROPRE	1.0	1
-Lil’ Buddha	Lil’ Buddha	NOM_PROPRE	1.0	1
 Limp Bizkit	Limp Bizkit	NOM_PROPRE	1.0	1
 ll	will	ETRANGER	2.0	0
 Longueuil	Longueuil	NOM_PROPRE	4.0	1
