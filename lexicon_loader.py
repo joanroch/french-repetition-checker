@@ -7,6 +7,32 @@ from pathlib import Path
 from typing import List, Dict, Optional
 
 
+def normalize_apostrophes(word: str) -> str:
+    """
+    Normalise les différentes variantes d'apostrophes en apostrophe ASCII droite (0x27).
+    
+    Transformations:
+    - ' (U+2019, curly right quote) → '
+    - ' (U+2018, curly left quote) → '
+    - ` (backtick) → '
+    - ´ (acute accent) → '
+    - ′ (prime) → '
+    
+    Args:
+        word: Le mot à normaliser
+        
+    Returns:
+        Le mot avec les apostrophes normalisées
+    """
+    # Normaliser tous les types d'apostrophes/guillemets à l'apostrophe ASCII droite
+    word = word.replace(''', "'")  # Curly right quote (U+2019)
+    word = word.replace(''', "'")  # Curly left quote (U+2018)
+    word = word.replace('`', "'")  # Backtick
+    word = word.replace('´', "'")  # Acute accent
+    word = word.replace('′', "'")  # Prime
+    return word
+
+
 class LexiconEntry:
     """Représente une entrée du lexique."""
     
@@ -42,6 +68,9 @@ class Lexicon:
             
             for row in reader:
                 ortho = row['ortho']
+                # Normaliser les apostrophes dans les formes orthographiques
+                ortho = normalize_apostrophes(ortho)
+                
                 lemme = row['Lexique3__lemme']
                 cgram = row['Lexique3__cgram']
                 

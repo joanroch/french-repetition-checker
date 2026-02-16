@@ -6,6 +6,32 @@ from typing import Optional, Tuple, Dict, Set
 from lexicon_loader import Lexicon, LexiconEntry
 
 
+def normalize_apostrophes(word: str) -> str:
+    """
+    Normalise les différentes variantes d'apostrophes en apostrophe ASCII droite (0x27).
+    
+    Transformations:
+    - ' (U+2019, curly right quote, 0xE2 0x80 0x99 en UTF-8) → '
+    - ` (backtick, grave accent) → '
+    - ´ (acute accent) → '
+    - ' (left single quotation mark, U+2018) → '
+    - ‐ (hyphen) → '
+    
+    Args:
+        word: Le mot à normaliser
+        
+    Returns:
+        Le mot avec les apostrophes normalisées
+    """
+    # Normaliser tous les types d'apostrophes/guillemets à l'apostrophe ASCII droite
+    word = word.replace(''', "'")  # Curly right quote (U+2019)
+    word = word.replace(''', "'")  # Curly left quote (U+2018)
+    word = word.replace('`', "'")  # Backtick
+    word = word.replace('´', "'")  # Acute accent
+    word = word.replace('′', "'")  # Prime
+    return word
+
+
 def normalize_ligatures(word: str) -> str:
     """
     Normalise les ligatures pour la recherche dans le lexique.
@@ -229,9 +255,10 @@ class WordClassifier:
         if is_number(word):
             return WordClassification(word, WordClassification.CLASSIFIED, cgram="NUM", entry_count=0)
         
-        # Normaliser les ligatures pour la recherche dans le lexique
+        # Normaliser les ligatures et apostrophes pour la recherche dans le lexique
         # (mais conserver le mot original pour l'affichage)
         word_normalized = normalize_ligatures(word)
+        word_normalized = normalize_apostrophes(word_normalized)
         
         # Étape 0.5: Vérifier le lexique personnalisé d'abord
         if hasattr(self.lexicon, '_custom_entries') and word_normalized.lower() in self.lexicon._custom_entries:

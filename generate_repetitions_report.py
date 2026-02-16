@@ -5,7 +5,7 @@ Script pour générer un rapport HTML des répétitions.
 from pathlib import Path
 from collections import Counter
 from word_extractor import extract_words, extract_words_simple
-from lexicon_loader import Lexicon
+from lexicon_loader import Lexicon, normalize_apostrophes
 from word_classifier import WordClassifier, WordClassification
 import csv
 import unicodedata
@@ -277,6 +277,9 @@ def load_custom_lexicon(filepath: str):
                 ortho = row.get('ortho', '').strip()
                 if not ortho:
                     continue
+                
+                # Normaliser les apostrophes pour la cohérence
+                ortho = normalize_apostrophes(ortho)
                 
                 # Vérifier que toutes les colonnes requises sont présentes et valides
                 lemme = row.get('lemme')
