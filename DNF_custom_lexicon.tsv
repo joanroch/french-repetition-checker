@@ -8,7 +8,8 @@ ago	ago	ETRANGER	1.0	1
 aguet	aguet	NOM	1.0	1
 aguets	aguet	NOM	1.0	0
 ahem	ahem	ONO	1.0	1
-Alabama	Alabama	NOM_PROPRE	18.0	1
+Akira Kurosawa	Akira Kurosawa	NOM_PROPRE	1.0	1
+Alabama	Alabama	NOM_PROPRE	19.0	1
 Alabama Roadwalk	Alabama Roadwalk	NOM_PROPRE	3.0	1
 all	all	ETRANGER	9.0	1
 almost	almost	ETRANGER	1.0	1
@@ -34,7 +35,7 @@ angels	angel	ETRANGER	3.0	0
 anglo	anglophone	ADJ	1.0	0
 Ann	Ann	NOM_PROPRE	1.0	1
 Ann Trason	Ann Trason	NOM_PROPRE	1.0	1
-Anne	Anne	NOM_PROPRE	101.0	1
+Anne	Anne	NOM_PROPRE	103.0	1
 another	another	ETRANGER	1.0	1
 Antoine	Antoine	NOM_PROPRE	4.0	1
 anxiogène	anxiogène	ADJ	2.0	1
@@ -161,7 +162,6 @@ deeply	deeply	ETRANGER	1.0	1
 del	del	ETRANGER	3.0	1
 Denis	Denis	NOM_PROPRE	2.0	1
 désintégrées	désintégrer	VER	1.0	0
-Detroit	Detroit	NOM_PROPRE	1.0	1
 détroussage	détrousser	VER	1.0	0
 Diag	Diagonale des Fous	NOM_PROPRE	1.0	0
 Diagonale	Diagnonale des Fous	NOM_PROPRE	1.0	0
@@ -181,11 +181,11 @@ Dollar General	Dollar General	NOM_PROPRE	1.0	1
 Dom	Dominic Arpin	NOM_PROPRE	3.0	0
 Dominic	Dominic Arpin	NOM_PROPRE	10.0	0
 Dominic Arpin	Dominic Arpin	NOM_PROPRE	1.0	1
-dystopique	dystopique	INCONNU	1.0	1
+dystopique	dystopique	ADJ	1.0	1
 Earl	Earl V. Shaffer	NOM_PROPRE	2.0	0
 Earl  Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	0
 Earl V. Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	1
-Eastern Continental Trail	Eastern Continental Trail	NOM_PROPRE	6.0	1
+Eastern Continental Trail	Eastern Continental Trail	NOM_PROPRE	7.0	1
 ECT	Eastern Continental Trail	NOM_PROPRE	7.0	0
 Eden	Eden	NOM_PROPRE	1.0	1
 Edmonton	Edmonton	NOM_PROPRE	1.0	1
@@ -219,7 +219,7 @@ FiveFingers	FiveFingers	NOM_PROPRE	1.0	1
 Flagg	Flagg Mountain	NOM_PROPRE	2.0	0
 Flagg Mountain	Flagg Mountain	NOM_PROPRE	2.0	1
 flopping	flopping	ETRANGER	1.0	1
-Florida	Florida	NOM_PROPRE	1.0	1
+Florida	Floride	NOM_PROPRE	1.0	0
 Florida Trail	Florida Trail	NOM_PROPRE	15.0	1
 Floride	Floride	NOM_PROPRE	30.0	1
 Floridiens	Floridiens	NOM_PROPRE	3.0	1
@@ -234,7 +234,7 @@ frontales	frontal	ADJ	4.0	0
 FT	Florida Trail	NOM_PROPRE	3.0	1
 fueling	fueling	ETRANGER	1.0	1
 GA	Géorgie	NOM_PROPRE	1.0	0
-Gaëtane	Gaëtane	NOM_PROPRE	2.0	1
+Gaëtane	Gaëtane	NOM_PROPRE	3.0	1
 Gaspésie	Gaspésie	NOM_PROPRE	4.0	1
 gaspésien	gaspésien	NOM	2.0	1
 gaspésienne	gaspésien	NOM	2.0	0
@@ -268,7 +268,8 @@ haaaa	ha	ONO	1.0	0
 Haïti	Haïti	NOM_PROPRE	1.0	1
 Harley	Harley	NOM_PROPRE	1.0	1
 Harricana	Harricana	NOM_PROPRE	1.0	1
-Haruki	Haruki	NOM_PROPRE	1.0	1
+Haruki	Haruki	NOM_PROPRE	2.0	1
+Haruki Murakami	Haruki Murakami	NOM_PROPRE	1.0	1
 Harvard	Harvard	NOM_PROPRE	1.0	1
 has	has	ETRANGER	1.0	1
 Hawk	Hawk	NOM_PROPRE	1.0	1
@@ -332,6 +333,7 @@ Julien	Julien Chorier	NOM_PROPRE	7.0	0
 Julien Chorier	Julien Chorier	NOM_PROPRE	3.0	1
 Jupiter	Jupiter	NOM_PROPRE	5.0	1
 Jurek	Scott Jurek	NOM_PROPRE	4.0	0
+Kagemusha	Kagemusha	NOM_PROPRE	1.0	1
 Katahdin	Katahdin	NOM_PROPRE	2.0	1
 Kelly's Crossroads	Kelly's Crossroads	NOM_PROPRE	3.0	1
 Kenyans	Kenyans	NOM_PROPRE	1.0	1
@@ -345,6 +347,7 @@ kg	kilogramme	NOM	1.0	0
 Kiev	Kiev	NOM_PROPRE	1.0	1
 km	kilomètre	NOM	82.0	0
 know	know	ETRANGER	1.0	1
+Kurosawa	Akira Kurosawa	NOM_PROPRE	1.0	0
 Landshark	Landshark	NOM_PROPRE	1.0	1
 Laure	Laure	NOM_PROPRE	1.0	1
 laurentien	laurentien	ADJ	1.0	1
@@ -355,7 +358,7 @@ Lefief	Lefief	NOM_PROPRE	1.0	1
 left	left	ETRANGER	1.0	1
 légitimisée	l/gitimer	VER	1.0	0
 Lequient	Lequient	NOM_PROPRE	1.0	1
-Lieberman	Daniel E. LiebermanLieberman	NOM_PROPRE	1.0	0
+Lieberman	Daniel E. Lieberman	NOM_PROPRE	1.0	0
 Lil	Lil' Buddha	NOM_PROPRE	1.0	0
 Lil' Buddha	Lil' Buddha	NOM_PROPRE	1.0	1
 Limp Bizkit	Limp Bizkit	NOM_PROPRE	1.0	1
@@ -403,6 +406,7 @@ month	month	ETRANGER	1.0	1
 months	month	ETRANGER	1.0	0
 Montréal	Montréal	NOM_PROPRE	22.0	1
 Mountain	Mountain	NOM_PROPRE	1.0	1
+Murakami	Haruki Murakami	NOM_PROPRE	2.0	0
 murder	murder	ETRANGER	3.0	1
 my	my	ETRANGER	1.0	1
 Nacho	Nacho	NOM_PROPRE	1.0	1
@@ -431,6 +435,7 @@ Okeechobee	Okeechobee	NOM_PROPRE	5.0	1
 OMS	OMS	ACRONYME	1.0	1
 one	one	ETRANGER	1.0	1
 Ontario	Ontario	NOM_PROPRE	2.0	1
+Orbital	Orbital	NOM_PROPRE	2.0	1
 Orlando	Orlando	NOM_PROPRE	2.0	1
 other	other	ETRANGER	1.0	1
 Ottawa	Ottawa	NOM_PROPRE	1.0	1
@@ -466,7 +471,7 @@ protect	protect	ETRANGER	2.0	1
 protègera	protéger	VER	1.0	0
 Québec	Québec	NOM_PROPRE	26.0	1
 Quebec	Québec	NOM_PROPRE	1.0	0
-Quid	Quid	NOM_PROPRE	1.0	1
+quid	quid	ADV	1.0	1
 Quimare	Quimare	NOM_PROPRE	1.0	1
 Quinsana	Quinsana	NOM_PROPRE	1.0	1
 r	r	NOM	1.0	1
@@ -478,6 +483,7 @@ rapido	rapidement	ADV	1.0	0
 RARAMURI	Rarámuri	NOM_PROPRE	1.0	0
 Rarámuri	Rarámuri	NOM_PROPRE	4.0	1
 Rarámuris	Rarámuri	NOM_PROPRE	32.0	0
+Rashōmon	Rashōmon	NOM_PROPRE	1.0	1
 ravito	ravitaillement	NOM	8.0	0
 reached	reached	ETRANGER	1.0	1
 real	real	ETRANGER	1.0	1
@@ -547,6 +553,7 @@ started	started	ETRANGER	1.0	1
 stay	stay	ETRANGER	1.0	1
 step	step	ETRANGER	1.0	1
 steps	step	ETRANGER	1.0	0
+Sterling	Sterling	NOM_PROPRE	2.0	1
 Subway	Subway	NOM_PROPRE	1.0	1
 Sunoco	Sunoco	NOM_PROPRE	1.0	1
 superathletes	superathletes	ETRANGER	1.0	1
@@ -576,7 +583,7 @@ things	thing	ETRANGER	1.0	0
 think	think	ETRANGER	1.0	1
 this	this	ETRANGER	1.0	1
 thru	thru	ETRANGER	1.0	1
-thru-hike	thru-hike	ETRANGER	4.0	1
+thru-hike	thru-hike	ETRANGER	5.0	1
 thru-hiker	thru-hiker	ETRANGER	1.0	1
 thru-hikers	thru-hiker	ETRANGER	2.0	0
 thru-hikes	thru-hike	ETRANGER	4.0	0
