@@ -225,10 +225,11 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                         if not (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit()):
                             break
                         
-                        # Extraire le mot (lettres, traits d'union, apostrophes, chiffres)
+                        # Extraire le mot (lettres, traits d'union, apostrophes, chiffres, points)
                         # Inclure l'apostrophe droite ' et l'apostrophe typographique ' (U+2019)
+                        # Inclure le point (.) pour les abréviations comme E. dans "Daniel E. Lieberman"
                         word_start = temp_pos
-                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit() or text[temp_pos] in "-''\u2019"):
+                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit() or text[temp_pos] in "-''\u2019."):
                             temp_pos += 1
                         
                         word = text[word_start:temp_pos]
