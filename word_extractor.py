@@ -227,9 +227,14 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                         
                         # Extraire le mot (lettres, traits d'union, apostrophes, chiffres, points)
                         # Inclure l'apostrophe droite ' et l'apostrophe typographique ' (U+2019)
-                        # Inclure le point (.) pour les abréviations comme E. dans "Daniel E. Lieberman"
+                        # Inclure les points pour les abréviations comme E. dans "Daniel E. Lieberman"
+                        # Nous traiterons les points terminaux lors de la vérification du composé
                         word_start = temp_pos
-                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit() or text[temp_pos] in "-''\u2019."):
+                        while temp_pos < len(text) and (is_latin_letter(text[temp_pos]) or text[temp_pos].isdigit() or text[temp_pos] in "-''\u2019"):
+                            temp_pos += 1
+                        
+                        # Inclure les points qui suivent immédiatement le mot
+                        while temp_pos < len(text) and text[temp_pos] == '.':
                             temp_pos += 1
                         
                         word = text[word_start:temp_pos]
@@ -241,8 +246,12 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                             potential_compound = ' '.join(temp_words)
                             # Normaliser les apostrophes avant de chercher
                             normalized_compound = normalize_apostrophes(potential_compound)
-                            if normalized_compound.lower() in compounds_with_spaces:
-                                best_match = potential_compound
+                            # Nettoyer les points terminaux du dernier mot (ponctuation)
+                            # Exemple: "Hong Kong." -> "Hong Kong"
+                            # Mais garder les points intérieurs: "Daniel E. Lieberman" reste intact
+                            normalized_compound_cleaned = normalized_compound.rstrip('.')
+                            if normalized_compound_cleaned.lower() in compounds_with_spaces:
+                                best_match = potential_compound.rstrip('.')  # Sauvegarder sans points terminaux
                                 best_match_end = temp_pos
                                 compound_found = True
                                 break
