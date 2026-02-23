@@ -255,6 +255,10 @@ def extract_words(text: str, lexicon_words: Optional[Set[str]] = None,
                                 best_match_end = temp_pos
                                 compound_found = True
                                 break
+                    
+                    # Si un composé a été trouvé, ne pas tester les n_words plus courts
+                    if compound_found:
+                        break
                 
                 if compound_found and best_match:
                     # On a trouvé un mot composé avec espaces

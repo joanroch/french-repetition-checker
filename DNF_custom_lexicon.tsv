@@ -75,8 +75,8 @@ Bianca	Bianca	NOM_PROPRE	1.0	1
 Big Cypress	Big Cypress	NOM_PROPRE	2.0	1
 bigorexie	bigorexie	NOM	1.0	1
 bipédie	bipédie	NOM	1.0	1
-Black Hawk	Black Hawk	NOM_PROPRE	5.0	1
-Black Hawk Down	Black Hawk Down	NOM_PROPRE	2.0	1
+Black Hawk	Black Hawk	NOM_PROPRE	4.0	1
+Black Hawk Down	Black Hawk Down	NOM_PROPRE	1.0	1
 Blade Runner	Blade Runner	NOM_PROPRE	1.0	1
 blazing	blazing	ETRANGER	2.0	1
 blog	blog	NOM	2.0	1
@@ -92,7 +92,7 @@ boomer	boomer	NOM	1.0	1
 boomers	boomer	NOM	1.0	0
 Born to Run	Born to Run	NOM_PROPRE	17.0	1
 Bradwell Bay	Bradwell Bay Wilderness	NOM_PROPRE	2.0	0
-Bradwell Bay Wilderness	Bradwell Bay Wilderness	NOM_PROPRE	1.0	1
+Bradwell Bay Wilderness	Bradwell Bay Wilderness	NOM_PROPRE	2.0	1
 Bridgestone	Bridgestone	NOM_PROPRE	1.0	1
 Britton	Britton	NOM_PROPRE	1.0	1
 Bromont	Bromont	NOM_PROPRE	4.0	1
@@ -406,7 +406,7 @@ month	month	ETRANGER	1.0	1
 months	month	ETRANGER	1.0	0
 Montréal	Montréal	NOM_PROPRE	22.0	1
 Mountain	Mountain	NOM_PROPRE	1.0	1
-Murakami	Haruki Murakami	NOM_PROPRE	2.0	0
+Murakami	Haruki Murakami	NOM_PROPRE	4.0	0
 murder	murder	ETRANGER	3.0	1
 my	my	ETRANGER	1.0	1
 Nacho	Nacho	NOM_PROPRE	1.0	1
@@ -619,8 +619,8 @@ ui	oui	ADV	1.0	0
 Ultimate XC	Ultimate XC	NOM_PROPRE	2.0	1
 Ultra Run Rarámuri	Ultra Run Rarámuri	NOM_PROPRE	3.0	1
 Ultra-Trail du mont Blanc	Ultra-Trail du mont Blanc	NOM_PROPRE	2.0	1
-Ultra-Trail Harricana	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	0
-Ultra-Trail Harricana du Canada	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	1
+Ultra-Trail Harricana	Ultra-Trail Harricana du Canada	NOM_PROPRE	1.0	0
+Ultra-Trail Harricana du Canada	Ultra-Trail Harricana du Canada	NOM_PROPRE	1.0	1
 ultramarathon	ultramarathon	NOM	2.0	1
 ultramarathonien	ultramarathonien	NOM	3.0	1
 ultramarathonienne	ultramarathonien	NOM	1.0	0
@@ -661,7 +661,7 @@ what	What	ETRANGER	2.0	1
 White Springs	White Springs	NOM_PROPRE	4.0	1
 why	why	ETRANGER	1.0	1
 wifi	wifi	NOM	1.0	1
-wilderness	wilderness	ETRANGER	3.0	1
+wilderness	wilderness	ETRANGER	1.0	1
 will	will	ETRANGER	1.0	1
 With	with	ETRANGER	1.0	0
 world	world	ETRANGER	2.0	0
