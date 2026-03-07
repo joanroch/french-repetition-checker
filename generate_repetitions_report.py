@@ -824,8 +824,8 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     
     print(f"Génération du rapport HTML pour: {filepath}")
     
-    # Charger le lexique personnalisé si disponible
-    custom_lexicon_path = filepath.replace('.txt', '_custom_lexicon.tsv')
+    # Charger le lexique personnalisé si disponible (situé à côté du script)
+    custom_lexicon_path = str(Path(__file__).parent / 'custom_lexicon.tsv')
     custom_lexicon = load_custom_lexicon(custom_lexicon_path)
     
     # Si le chargement du lexique a échoué (retourne None), arrêter l'analyse
@@ -2338,8 +2338,8 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     else:
         print(html)
     
-    # Exporter le lexique personnalisé pour édition future
-    custom_lexicon_export_path = filepath.replace('.txt', '_custom_lexicon.tsv')
+    # Exporter le lexique personnalisé pour édition future (situé à côté du script)
+    custom_lexicon_export_path = str(Path(__file__).parent / 'custom_lexicon.tsv')
     
     # Préparer les données pour l'export
     unknown_export_data = {}
@@ -2360,7 +2360,7 @@ def generate_html_report(filepath: str, output_file: str = None, min_occurrences
     export_custom_lexicon(unknown_export_data, custom_lexicon_export_path)
     
     # Mettre à jour les fréquences du lexique personnalisé basé sur les occurrences réelles trouvées
-    custom_lexicon_path = filepath.replace('.txt', '_custom_lexicon.tsv')
+    custom_lexicon_path = str(Path(__file__).parent / 'custom_lexicon.tsv')
     update_custom_lexicon_frequencies(custom_lexicon_path, words_with_positions, custom_lexicon)
 
 
