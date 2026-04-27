@@ -11,12 +11,15 @@ ahem	ahem	ONO	1.0	1
 airport	airport	ETRANGER	1.0	1
 AirTrain	AirTrain	NOM_PROPRE	1.0	1
 Akira Kurosawa	Akira Kurosawa	NOM_PROPRE	1.0	1
-Alabama	Alabama	NOM_PROPRE	21.0	1
+AL	Alabama	NOM_PROPRE	3.0	0
+Alabama	Alabama	NOM_PROPRE	22.0	1
 Alabama Roadwalk	Alabama Roadwalk	NOM_PROPRE	3.0	1
-all	all	ETRANGER	9.0	1
+all	all	ETRANGER	8.0	1
+Allemannsretten	Allemannsretten	ETRANGER	1.0	1
 almost	almost	ETRANGER	1.0	1
 alright	alright	ETRANGER	1.0	1
-am	am	ETRANGER	1.0	1
+also	also	ETRANGER	1.0	1
+am	am	ETRANGER	3.0	1
 Amazonie	Amazonie	NOM_PROPRE	1.0	1
 américanisée	américaniser	VER	1.0	0
 américanisées	américaniser	VER	0.14	0
@@ -29,7 +32,7 @@ Amicalola	Amicalola	NOM_PROPRE	1.0	1
 amortissante	amortir	VER	4.93	0
 amortissantes	amortir	VER	1.0	0
 amortissants	amortir	VER	4.93	0
-and	and	ETRANGER	6.0	1
+and	and	ETRANGER	7.0	1
 Andalusia	Andalusia	NOM_PROPRE	3.0	1
 Andréanne	Andréanne	NOM_PROPRE	1.0	1
 angel	angel	ETRANGER	2.0	1
@@ -37,60 +40,75 @@ angels	angel	ETRANGER	3.0	0
 anglo	anglophone	ADJ	1.0	0
 Ann	Ann	NOM_PROPRE	1.0	1
 Ann Trason	Ann Trason	NOM_PROPRE	1.0	1
-Anne	Anne	NOM_PROPRE	112.0	1
+Anne	Anne	NOM_PROPRE	124.0	1
 another	another	ETRANGER	1.0	1
-Antoine	Antoine	NOM_PROPRE	4.0	1
+Antoine	Antoine	NOM_PROPRE	3.0	1
 anxiogène	anxiogène	ADJ	2.0	1
 any	any	ETRANGER	1.0	1
-Apalachicola	Apalachicola	NOM_PROPRE	6.0	1
-Appalaches	Appalaches	NOM_PROPRE	30.0	1
-Appalachian Trail	Appalachian Trail	NOM_PROPRE	4.0	1
+Apalachicola	Apalachicola	NOM_PROPRE	7.0	1
+Appalaches	Appalaches	NOM_PROPRE	40.0	1
+Appalachian Trail	Appalachian Trail	NOM_PROPRE	5.0	1
 Appalachians	Appalaches	NOM_PROPRE	1.0	0
 appalachien	appalachien	ADJ	1.0	1
 appalachienne	appalachien	ADJ	2.0	0
 appalachiennes	appalachien	ADJ	1.0	0
 appalachiens	appalachien	ADJ	1.0	0
 arctic	arctic	ETRANGER	1.0	1
+Arizona	Arizona	NOM_PROPRE	1.0	1
 armadillos	armadillos	ETRANGER	1.0	1
 Arnulfo	Arnulfo	NOM_PROPRE	1.0	1
+Around the Bend	Around the Bend	NOM_PROPRE	3.0	1
 Arpin	Dominic Arpin	NOM_PROPRE	1.0	0
+Asheville	Asheville	NOM_PROPRE	2.0	1
 Asia	Asia	NOM_PROPRE	1.0	1
-at	at	ETRANGER	12.0	1
-Atlanta	Atlanta	NOM_PROPRE	4.0	1
-Aurélie	Aurélie	NOM_PROPRE	1.0	1
+ask	ask	ETRANGER	1.0	1
+ass	ass	ETRANGER	2.0	1
+Atlanta	Atlanta	NOM_PROPRE	5.0	1
+Aurélie	Aurélie	NOM_PROPRE	2.0	1
 Australie	Australie	NOM_PROPRE	1.0	1
-Av	avenue	ETRANGER	1.0	1
+Av	avenue	ETRANGER	3.0	1
 awesome	awesome	ETRANGER	2.0	1
 bad	bad	ETRANGER	1.0	1
 bag	bag	ETRANGER	1.0	1
 bankable	bankable	ETRANGER	1.0	1
+baptiserons	baptiser	VER	1.0	0
 Barefoot Ted	Ted McDonald	NOM_PROPRE	1.0	0
 barista	barista	NOM	1.0	1
 Barrancas	Barrancas del Cobre	NOM_PROPRE	2.0	0
 Barrancas del Cobre	Barrancas del Cobre	NOM_PROPRE	5.0	1
 Batman	Batman	NOM_PROPRE	1.0	1
 Baxter	Baxter	NOM_PROPRE	1.0	1
-be	be	ETRANGER	9.0	1
+be	be	ETRANGER	11.0	1
+bear	bear	ETRANGER	6.0	1
+beast	beast	ETRANGER	1.0	1
+beastie	beastie	ETRANGER	1.0	1
+Beastie Boy	Beastie Boy	NOM_PROPRE	2.0	1
+Beastie Runs	Beastie Runs	NOM_PROPRE	1.0	1
 bed	bed	ETRANGER	1.0	1
+beds	bed	ETRANGER	1.0	0
+before	before	ETRANGER	1.0	1
 beginning	beginning	ETRANGER	1.0	1
 bein	bein	ONO	1.0	1
-Benton MacKaye	Benton MacKaye	NOM_PROPRE	5.0	1
+Bend	Bend	NOM_PROPRE	3.0	1
+Benton MacKaye	Benton MacKaye	NOM_PROPRE	6.0	1
 Bianca	Bianca	NOM_PROPRE	1.0	1
-Big Cypress	Big Cypress	NOM_PROPRE	2.0	1
+Big Cypress	Big Cypress	NOM_PROPRE	3.0	1
 bigorexie	bigorexie	NOM	1.0	1
-Bill Bryson	Bill Bryson	NOM_PROPRE	2.0	1
+Bill Bryson	Bill Bryson	NOM_PROPRE	4.0	1
 bipédie	bipédie	NOM	1.0	1
+Bismarck	Bismarck	NOM_PROPRE	4.0	1
 Black Hawk	Black Hawk	NOM_PROPRE	4.0	1
 Black Hawk Down	Black Hawk Down	NOM_PROPRE	1.0	1
 Blade Runner	Blade Runner	NOM_PROPRE	1.0	1
-blazing	blazing	ETRANGER	2.0	1
-blog	blog	NOM	2.0	1
-blogs	blog	NOM	1.0	0
+Blanchet	Bruno Blanchet	NOM_PROPRE	2.0	0
+blazing	blazing	ETRANGER	3.0	1
+blogue	blogue	NOM	2.0	1
+blogues	blogue	NOM	1.0	0
 blogueur	blogueur	NOM	1.0	1
 blogueurs	blogueur	NOM	1.0	0
 blogueuse	blogueur	NOM	1.0	0
 blogueuses	blogueur	NOM	1.0	0
-Blood	Blood	NOM_PROPRE	3.0	1
+Blood Mountain	Blood Mountain	NOM_PROPRE	4.0	1
 blue	blue	ETRANGER	1.0	1
 BMT	BMT	ACRONYME	1.0	1
 bobcat	bobcat	ETRANGER	2.0	1
@@ -100,20 +118,24 @@ Born to Run	Born to Run	NOM_PROPRE	19.0	1
 Bradwell Bay	Bradwell Bay Wilderness	NOM_PROPRE	2.0	0
 Bradwell Bay Wilderness	Bradwell Bay Wilderness	NOM_PROPRE	2.0	1
 Bridgestone	Bridgestone	NOM_PROPRE	1.0	1
+Brion	Brion	NOM_PROPRE	1.0	1
 Britton	Britton	NOM_PROPRE	1.0	1
 Bromont	Bromont	NOM_PROPRE	4.0	1
 brûlerie	brûlerie	NOM	1.0	1
 brûleries	brûlerie	NOM	1.0	0
-Bruno	Bruno	NOM_PROPRE	6.0	1
-Bryson	Bill Bryson	NOM_PROPRE	3.0	0
+Bruno	Bruno Blanchet	NOM_PROPRE	10.0	0
+Bruno Blanchet	Bruno Blanchet	NOM_PROPRE	9.0	1
+Bryson	Bill Bryson	NOM_PROPRE	4.0	0
+bubble	bubble	ETRANGER	2.0	1
 Buddha	Lil' Buddha	NOM_PROPRE	1.0	0
 Bullitt	Bullitt	NOM_PROPRE	1.0	1
+bunk	bunk	ETRANGER	1.0	1
 ç	ça	PRO:dem	1.0	0
 Caballo Blanco	Caballo Blanco	NOM_PROPRE	4.0	1
+cable	cable	ETRANGER	2.0	1
 cabrón	cabrón	ETRANGER	1.0	1
 cadenassés	cadenasser	VER	1.0	0
 caloriques	calorique	ADJ	1.0	0
-Camino	Camino	NOM_PROPRE	1.0	1
 can	can	ETRANGER	6.0	1
 Candice Burt	Candice Burt	NOM_PROPRE	1.0	1
 canopée	canopée	NOM	2.0	1
@@ -121,14 +143,17 @@ Cap-Gaspé	Cap-Gaspé	NOM_PROPRE	3.0	1
 Caperton	Caperton	NOM_PROPRE	1.0	1
 carénée	caréner	VER	1.0	0
 Carlos	Carlos	NOM_PROPRE	3.0	1
+Carolina Mountain Club	Carolina Mountain Club	NOM_PROPRE	1.0	1
 Castafiore	Castafiore	NOM_PROPRE	1.0	1
 cat	cat	ETRANGER	1.0	1
 catfish	catfish	ETRANGER	1.0	1
+CDT	Continental Divide Trail	NOM_PROPRE	1.0	0
 Cédric	Cédric	NOM_PROPRE	1.0	1
 Celestino	Celestino	NOM_PROPRE	18.0	1
 ch	c	PRO:dem	1.0	0
 Chamonix	Chamonix	NOM_PROPRE	1.0	1
-Charlevoix	Charlevoix	NOM_PROPRE	1.0	1
+Charlevoix	Charlevoix	NOM_PROPRE	2.0	1
+Chattanooga	Chattanooga	NOM_PROPRE	1.0	1
 cheese	cheese	ETRANGER	1.0	1
 Chris McDougall	Christopher McDougall	NOM_PROPRE	3.0	0
 Christopher McDougall	Christopher McDougall	NOM_PROPRE	3.0	1
@@ -136,20 +161,30 @@ Chuck	Chuck Norris	NOM_PROPRE	1.0	0
 Chuck Norris	Chuck Norris	NOM_PROPRE	1.0	1
 Cilaos	Cilaos	NOM_PROPRE	2.0	1
 cise	cise	ADJ	1.0	1
+Clingman's Dome	Clingman's Dome	NOM_PROPRE	2.0	1
 closed	closed	ETRANGER	1.0	1
+cloth	cloth	ETRANGER	1.0	1
+clothes	cloth	ETRANGER	1.0	0
+Cocodona	Cocodona	NOM_PROPRE	1.0	1
+Collins	Mount Collins	NOM_PROPRE	1.0	0
 compenserons	compenser	VER	1.0	0
+complotiste	complotiste	NOM	1.0	1
 Compostelle	Compostelle	NOM_PROPRE	2.0	1
 concocte	concocter	VER	1.0	0
 concocter	concocter	VER	1.0	1
 Conecuh	Conecuh	NOM_PROPRE	1.0	1
+confinements	confinement	NOM	1.0	0
 congrats	congrats	ETRANGER	1.0	1
+Continental Divide Trail	Continental Divide Trail	NOM_PROPRE	1.0	1
 Coosa	Coosa	NOM_PROPRE	2.0	1
 Cormac McCarthy	Cormac McCarthy	NOM_PROPRE	1.0	1
-COVID	COVID-19	ACRONYME	2.0	0
+Cosby Knob	Cosby Knob	NOM_PROPRE	1.0	1
+COVID	COVID-19	ACRONYME	3.0	0
 COVID-19	COVID-19	ACRONYME	1.0	1
 CP2	CP2	ACRONYME	2.0	1
 CP3	CP3	ACRONYME	3.0	1
 CR12	CR12	ACRONYME	2.0	1
+Cracovie	Cracovie	NOM_PROPRE	1.0	1
 crazy	crazy	ETRANGER	1.0	1
 Crestview	Crestview	NOM_PROPRE	2.0	1
 Crinqués	Crinqués	NOM_PROPRE	1.0	1
@@ -157,54 +192,66 @@ Crocodile Dundee	Crocodile Dundee	NOM_PROPRE	2.0	1
 crocodiliens	crocodiliens	ADJ	1.0	1
 Cuba	Cuba	NOM_PROPRE	1.0	1
 cubicule	cubicule	NOM	1.0	1
+cucurbitacé	cucurbitacé	NOM	1.0	1
 cumulent	cumuler	VER	1.0	0
 cup	cup	ETRANGER	2.0	1
-damn	damn	ETRANGER	2.0	1
+damn	damn	ETRANGER	3.0	1
 Daniel	Daniel	NOM_PROPRE	2.0	1
 Daniel E. Lieberman	Daniel E. Lieberman	NOM_PROPRE	1.0	1
 dare	dare	ETRANGER	1.0	1
-David	David	NOM_PROPRE	1.0	1
-Day	Day	NOM_PROPRE	2.0	1
+Davenport	Davenport	NOM_PROPRE	1.0	1
+David	David	NOM_PROPRE	2.0	1
+Day	Day	NOM_PROPRE	1.0	1
 de Kat	Joan de Kat	NOM_PROPRE	1.0	0
 débusquées	disqualifier	VER	1.0	0
 déconstruire	déconstruire	VER	1.0	1
 déconstruites	déconstruire	VER	1.0	0
+Deep Gap	Deep Gap	NOM_PROPRE	1.0	1
 deeply	deeply	ETRANGER	1.0	1
 del	del	ETRANGER	3.0	1
 Denis	Denis	NOM_PROPRE	2.0	1
 désintégrées	désintégrer	VER	1.0	0
 Detroit	Detroit	NOM_PROPRE	1.0	1
 détroussage	détrousser	VER	1.0	0
-Diag	Diagonale des Fous	NOM_PROPRE	1.0	0
-Diagonale	Diagnonale des Fous	NOM_PROPRE	1.0	0
-Diagonale des Fous	Diagonale des Fous	NOM_PROPRE	6.0	1
+Diag'	Diagonale des fous	NOM_PROPRE	1.0	0
+Diagonale	Diagonale des fous	NOM_PROPRE	1.0	0
+Diagonale des fous	Diagonale des fous	NOM_PROPRE	6.0	1
 did	did	ETRANGER	3.0	1
 Did Not Finish	DNF	ACRONYME	1.0	0
 Did Not Start	DNS	ACRONYME	1.0	0
+didn't	did	ETRANGER	1.0	0
 diner	diner	ETRANGER	1.0	1
+dirtbag	dirtbag	ETRANGER	2.0	1
 discard	discard	ETRANGER	1.0	1
 disqualifiais	disqualifier	VER	1.0	0
 Divisadero	Divisadero	NOM_PROPRE	4.0	1
-DNF	DNF	ACRONYME	17.0	1
+DNF	DNF	ACRONYME	21.0	1
 DNFs	DNF	ACRONYME	1.0	0
 DNS	DNS	ACRONYME	1.0	1
 Dodge Caravan	Dodge Caravan	NOM_PROPRE	1.0	1
-dog	dog	ETRANGER	1.0	1
+does	does	ETRANGER	1.0	1
+doesn't	does	ETRANGER	1.0	0
+Dog Day Afternoon	Dog Day Afternoon	NOM_PROPRE	1.0	1
 Dollar General	Dollar General	NOM_PROPRE	1.0	1
-Dom	Dominic Arpin	NOM_PROPRE	3.0	0
+Dom	Dominic Arpin	NOM_PROPRE	4.0	0
+Dome	Dome	NOM_PROPRE	1.0	1
 Dominic	Dominic Arpin	NOM_PROPRE	10.0	0
 Dominic Arpin	Dominic Arpin	NOM_PROPRE	1.0	1
 dystopique	dystopique	ADJ	1.0	1
-Earl Shaffer	Earl V. Shaffer	NOM_PROPRE	1.0	0
+Earl	Earl V. Shaffer	NOM_PROPRE	1.0	0
+Earl Shaffer	Earl V. Shaffer	NOM_PROPRE	2.0	0
 Earl V. Shaffer	Earl V. Shaffer	NOM_PROPRE	2.0	1
-Eastern Continental Trail	Eastern Continental Trail	NOM_PROPRE	7.0	1
-ECT	Eastern Continental Trail	NOM_PROPRE	7.0	0
+Eastern Continental Trail	Eastern Continental Trail	NOM_PROPRE	8.0	1
+eat	eat	ETRANGER	1.0	1
+Eberhart	Meredith Eberhart	NOM_PROPRE	1.0	0
+ECT	Eastern Continental Trail	NOM_PROPRE	9.0	0
 Eden	Eden	NOM_PROPRE	1.0	1
 Edmonton	Edmonton	NOM_PROPRE	1.0	1
 either	either	ETRANGER	2.0	1
-El	El	NOM_PROPRE	1.0	1
+El Camino	El Camino	NOM_PROPRE	1.0	1
 Elite	élite	NOM	2.0	0
 Ellijay	Ellijay	NOM_PROPRE	1.0	1
+encâblure	encâblure	NOM	1.0	1
 endurcissent	endurcir	VER	1.0	0
 Enjoy	Enjoy	ETRANGER	1.0	1
 ennuyantes	ennuyant	ADJ	1.0	0
@@ -212,17 +259,22 @@ Enrique	Enrique	NOM_PROPRE	1.0	1
 éperonnées	éperonner	VER	1.0	0
 époumonent	époumoner	VER	1.0	1
 Erol Flynn	Erol Flynn	NOM_PROPRE	1.0	1
-Everglades	Everglades	NOM_PROPRE	11.0	1
+Errol	Errol	NOM_PROPRE	1.0	1
+error	error	ETRANGER	1.0	1
+Europe	Europe	NOM_PROPRE	2.0	1
+Everglades	Everglades	NOM_PROPRE	13.0	1
 évitements	évitement	NOM	1.0	0
 faith	faith	ETRANGER	1.0	1
 family	family	ETRANGER	2.0	1
+FarOut	FarOut	NOM_PROPRE	1.0	1
 fast	fast	ETRANGER	1.0	1
 fastpacker	fastpacker	ETRANGER	1.0	1
 fastpackers	fastpacker	ETRANGER	1.0	0
-fastpacking	fastpacking	ETRANGER	8.0	1
+fastpacking	fastpacking	ETRANGER	10.0	1
 Fat Belly's	Fat Belly's	NOM_PROPRE	5.0	1
-fault	fault	ETRANGER	1.0	1
+fault	fault	ETRANGER	2.0	1
 faunique	faunique	ADJ	1.0	1
+FBI	FBI	ACRONYME	4.0	1
 fees	fees	ETRANGER	1.0	1
 fellowship	fellowship	ETRANGER	1.0	1
 Fernando	Fernando	NOM_PROPRE	1.0	1
@@ -234,58 +286,68 @@ firearms	firearms	ETRANGER	1.0	1
 first	first	ETRANGER	1.0	1
 fish	fish	ETRANGER	1.0	1
 FiveFingers	FiveFingers	NOM_PROPRE	1.0	1
+FKT	FKT	ACRONYME	1.0	1
+FL	Floride	NOM_PROPRE	1.0	0
 Flagg	Flagg Mountain	NOM_PROPRE	2.0	0
 Flagg Mountain	Flagg Mountain	NOM_PROPRE	2.0	1
 flopping	flopping	ETRANGER	1.0	1
-Florida	Florida	NOM_PROPRE	1.0	1
-Florida Trail	Florida Trail	NOM_PROPRE	15.0	1
-Floride	Floride	NOM_PROPRE	34.0	1
+Florida	Floride	NOM_PROPRE	1.0	0
+Florida Trail	Florida Trail	NOM_PROPRE	19.0	1
+Floride	Floride	NOM_PROPRE	38.0	1
 Floridiens	Floridiens	NOM_PROPRE	3.0	1
-food	food	ETRANGER	2.0	1
+Flynn	Flynn	NOM_PROPRE	1.0	1
+Fontana	Fontana	NOM_PROPRE	2.0	1
+food	food	ETRANGER	3.0	1
 foods	food	ETRANGER	1.0	0
 footpath	footpath	ETRANGER	1.0	1
 forceraient	forcer	VER	1.0	0
-Forillon	Forillon	NOM_PROPRE	9.0	1
-France	France	NOM_PROPRE	3.0	1
+Forillon	Forillon	NOM_PROPRE	11.0	1
+France	France	NOM_PROPRE	8.0	1
 free	free	ETRANGER	1.0	1
 fries	fries	ETRANGER	1.0	1
 from	from	ETRANGER	2.0	1
 frontales	frontal	ADJ	4.0	0
-FT	Florida Trail	NOM_PROPRE	3.0	1
+frrrt	frrrt	ONO	6.0	1
+FT	Florida Trail	NOM_PROPRE	2.0	1
+fuele	fuele	INCONNU	1.0	1
 fueling	fueling	ETRANGER	1.0	1
+Full Metal Jacket	Full Metal Jacket	NOM_PROPRE	1.0	1
 GA	Géorgie	NOM_PROPRE	2.0	0
 Gaëtane	Gaëtane	NOM_PROPRE	4.0	1
 Gaspésie	Gaspésie	NOM_PROPRE	5.0	1
 gaspésien	gaspésien	NOM	2.0	1
-gaspésienne	gaspésien	NOM	2.0	0
+gaspésienne	gaspésien	NOM	3.0	0
 gaspésiennes	gaspésien	NOM	2.0	0
 gaspésiens	gaspésien	NOM	2.0	0
 general	general	ETRANGER	1.0	1
 génèrent	générer	VER	1.0	0
 George	George W. Sears	NOM_PROPRE	1.0	0
 George W. Sears	George W. Sears	NOM_PROPRE	1.0	1
-Géorgie	Géorgie	NOM_PROPRE	8.0	1
+Géorgie	Géorgie	NOM_PROPRE	13.0	1
 get	get	ETRANGER	5.0	1
 giant	giant	ETRANGER	1.0	1
+Gibraltar	Gibraltar	NOM_PROPRE	1.0	1
 Ginger Ale	Ginger Ale	NOM_PROPRE	1.0	1
 give	give	ETRANGER	2.0	1
-Gollum	Gollum	NOM_PROPRE	6.0	1
+Gollum	Gollum	NOM_PROPRE	4.0	1
+good	good	ETRANGER	1.0	1
 gougoune	gougoune	NOM	1.0	1
 gougounes	gougoune	NOM	1.0	0
-GPS	GPS	ACRONYME	10.0	1
-GR	GR	ACRONYME	1.0	1
-GRA1	GRA1	ACRONYME	2.0	1
+GPS	GPS	ACRONYME	12.0	1
+GR	GR	ACRONYME	6.0	1
+GRA1	GRA1	ACRONYME	4.0	1
 graduels	graduel	ADJ	1.0	0
 grapiller	grapiller	VER	1.0	1
-great	great	ETRANGER	3.0	1
+great	great	ETRANGER	5.0	1
 greatest	greatest	ETRANGER	1.0	1
 Green Hippies	Green Hippies	NOM_PROPRE	3.0	1
 grevant	grever	VER	1.0	0
 grilled	grilled	ETRANGER	1.0	1
 grugent	gruger	VER	1.0	0
 Guardia	Guardia	NOM_PROPRE	4.0	1
-h	heure	NOM	5.0	0
+h	heure	NOM	12.0	0
 haaaa	ha	ONO	1.0	0
+Hahaha	Hahaha	NOM_PROPRE	3.0	1
 Haïti	Haïti	NOM_PROPRE	1.0	1
 Harley	Harley	NOM_PROPRE	1.0	1
 Harricana	Harricana	NOM_PROPRE	1.0	1
@@ -294,6 +356,7 @@ Haruki Murakami	Haruki Murakami	NOM_PROPRE	1.0	1
 Haruki-San	Haruki	NOM_PROPRE	1.0	0
 Harvard	Harvard	NOM_PROPRE	1.0	1
 has	has	ETRANGER	1.0	1
+hauling	haul	ETRANGER	1.0	0
 Hawk	Hawk	NOM_PROPRE	1.0	1
 heads	heads	ETRANGER	1.0	1
 heaven	heaven	ETRANGER	1.0	1
@@ -303,20 +366,22 @@ help	help	ETRANGER	1.0	1
 Hemingway	Hemingway	NOM_PROPRE	1.0	1
 here	here	ETRANGER	1.0	1
 hétérodoxe	hétérodoxe	NOM	1.0	1
-hey	hey	ONO	2.0	1
+hey	hey	ONO	3.0	1
 hidden	hidden	ETRANGER	1.0	1
-hike	hike	ETRANGER	1.0	1
+Hihihi	Hihihi	NOM_PROPRE	1.0	1
+hike	hike	ETRANGER	2.0	1
 hiked	hike	ETRANGER	1.0	0
-hiker	hiker	ETRANGER	2.0	1
-hikers	hiker	ETRANGER	1.0	0
-hiking	hike	ETRANGER	1.0	0
+hiker	hiker	ETRANGER	6.0	1
+hikers	hiker	ETRANGER	3.0	0
+hiking	hike	ETRANGER	2.0	0
 Hippies	Green Hippies	NOM_PROPRE	2.0	0
+his	his	ETRANGER	1.0	1
 hispanophone	hispanophone	ADJ	1.0	1
 hispanophones	hispanophone	ADJ	1.0	0
-hmmm	hmmm	ONO	4.0	1
-Hobbit	Hobbit	NOM_PROPRE	2.0	1
+hmmm	hmmm	ONO	6.0	1
+Hobbit	Hobbit	NOM_PROPRE	1.0	1
 Hobbits	Hobbit	NOM_PROPRE	2.0	0
-hostel	hostel	ETRANGER	2.0	1
+hostel	hostel	ETRANGER	6.0	1
 How	How	NOM_PROPRE	2.0	1
 huaraches	huaraches	ETRANGER	11.0	1
 Hummer	Hummer	NOM_PROPRE	1.0	1
@@ -332,15 +397,19 @@ inquièterait	inquiéter	VER	1.0	0
 Interstate	Interstate	ETRANGER	1.0	1
 intiment	intimer	VER	1.0	0
 intimidantes	intimidant	ADJ	1.0	0
+Ippei	Ippei	NOM_PROPRE	3.0	1
 is	is	ETRANGER	1.0	1
 Israël	Israël	NOM_PROPRE	1.0	1
-it	it	ETRANGER	7.0	1
+it	it	ETRANGER	12.0	1
+Italie	Italie	NOM_PROPRE	1.0	1
+ITRA	ITRA	ACRONYME	1.0	1
 Iwo Jima	Iwo Jima	NOM_PROPRE	1.0	1
-Jacques-Cartier	Jacques-Cartier	NOM_PROPRE	4.0	1
+Jacques-Cartier	Jacques-Cartier	NOM_PROPRE	5.0	1
 Jake	Jake	NOM_PROPRE	11.0	1
+James T. Hammes	James T. Hammes	NOM_PROPRE	1.0	1
 Jean-François	Jean-François Tantin	NOM_PROPRE	17.0	0
 Jean-François Tantin	Jean-François Tantin	NOM_PROPRE	5.0	1
-Jean-Philippe	Jean-Philippe Lefief	NOM_PROPRE	3.0	0
+Jean-Philippe	Jean-Philippe Lefief	NOM_PROPRE	2.0	0
 Jean-Philippe Lefief	Jean-Philippe Lefief	NOM_PROPRE	1.0	1
 jefe	jefe	ETRANGER	1.0	1
 Jenn Shelton	Jenn Shelton	NOM_PROPRE	1.0	1
@@ -354,25 +423,32 @@ John Brinda	John Brinda	NOM_PROPRE	2.0	1
 John Ram	John Rambo	NOM_PROPRE	1.0	0
 John Rambo	John Rambo	NOM_PROPRE	1.0	1
 John Wick	John Wick	NOM_PROPRE	1.0	1
-Joshua	Joshua	NOM_PROPRE	1.0	1
+Josh	Josh Perry	NOM_PROPRE	10.0	0
+Josh Perry	Josh Perry	NOM_PROPRE	1.0	1
+Joshua	Joshua	NOM_PROPRE	2.0	1
 Julien	Julien Chorier	NOM_PROPRE	7.0	0
 Julien Chorier	Julien Chorier	NOM_PROPRE	3.0	1
+Jumanji	Jumanji	NOM_PROPRE	1.0	1
 Jupiter	Jupiter	NOM_PROPRE	5.0	1
 Jurek	Scott Jurek	NOM_PROPRE	2.0	0
+just	just	ETRANGER	1.0	1
 Kagemusha	Kagemusha	NOM_PROPRE	1.0	1
-Katahdin	Katahdin	NOM_PROPRE	2.0	1
+Katahdin	Katahdin	NOM_PROPRE	4.0	1
+Katz	Katz	NOM_PROPRE	3.0	1
 Kelly's Crossroads	Kelly's Crossroads	NOM_PROPRE	3.0	1
 Kenyans	Kenyans	NOM_PROPRE	1.0	1
 Kevin Spacey	Kevin Spacey	NOM_PROPRE	1.0	1
 Key Largo	Key Largo	NOM_PROPRE	2.0	1
-Key West	Key West	NOM_PROPRE	20.0	1
+Key West	Key West	NOM_PROPRE	24.0	1
 Keys	Keys	NOM_PROPRE	7.0	1
 Keyser	Keyser Söze	NOM_PROPRE	1.0	0
 Keyser Söze	Keyser Söze	NOM_PROPRE	2.0	1
 kg	kilogramme	NOM	1.0	0
 Kiev	Kiev	NOM_PROPRE	1.0	1
-km	kilomètre	NOM	87.0	0
+kitchen	kitchen	ETRANGER	1.0	1
+km	kilomètre	NOM	111.0	0
 know	know	ETRANGER	1.0	1
+Knoxville	Knoxville	NOM_PROPRE	1.0	1
 Kurosawa	Akira Kurosawa	NOM_PROPRE	1.0	0
 Landshark	Landshark	NOM_PROPRE	1.0	1
 Laure	Laure	NOM_PROPRE	1.0	1
@@ -385,36 +461,46 @@ leave	leave	ETRANGER	1.0	1
 Lefief	Lefief	NOM_PROPRE	1.0	1
 left	left	ETRANGER	1.0	1
 légitimisée	l/gitimer	VER	1.0	0
+Leloup	Leloup	NOM_PROPRE	2.0	1
 Lequient	Lequient	NOM_PROPRE	1.0	1
+Lévis	Lévis	NOM_PROPRE	1.0	1
 Lieberman	Daniel E. LiebermanLieberman	NOM_PROPRE	1.0	0
+like	like	ETRANGER	1.0	1
 Lil	Lil' Buddha	NOM_PROPRE	1.0	0
 Lil' Buddha	Lil' Buddha	NOM_PROPRE	1.0	1
 Limp Bizkit	Limp Bizkit	NOM_PROPRE	1.0	1
+literally	literally	ETRANGER	1.0	1
 ll	will	ETRANGER	2.0	0
+loaner	loaner	ETRANGER	2.0	1
 LOL	LOL	ACRONYME	1.0	1
-Longueuil	Longueuil	NOM_PROPRE	5.0	1
+Longueuil	Longueuil	NOM_PROPRE	6.0	1
 lost	lost	ETRANGER	1.0	1
 LTE	LTE	ACRONYME	1.0	1
 luchador	luchador	ETRANGER	1.0	1
 Luna	Luna	NOM_PROPRE	6.0	1
 Luverne	Luverne	NOM_PROPRE	1.0	1
 Lyme	Lyme	NOM_PROPRE	1.0	1
+Lyon	Lyon	NOM_PROPRE	2.0	1
 MacKaye	Benton MacKaye	NOM_PROPRE	1.0	0
 macrophotographique	macrophotographique	ADJ	1.0	1
 Maël	Maël	NOM_PROPRE	1.0	1
 Mafate	Mafate	NOM_PROPRE	2.0	1
+magic	magic	ETRANGER	2.0	1
 Maïdo	Maïdo	NOM_PROPRE	3.0	1
-Maine	Maine	NOM_PROPRE	3.0	1
+Maine	Maine	NOM_PROPRE	5.0	1
 make	make	ETRANGER	1.0	1
 many	many	ETRANGER	1.0	1
 Marley	Marley	NOM_PROPRE	1.0	1
 Martinique	Martinique	NOM_PROPRE	2.0	1
 Massanutten	Massanutten	NOM_PROPRE	1.0	1
 Massanutten Mountain Trails 100 Mile Run	Massanutten Mountain Trails 100 Mile Run	NOM_PROPRE	1.0	1
+Matapédia	Matapédia	NOM_PROPRE	1.0	1
 McDougall	Christopher McDougall	NOM_PROPRE	9.0	0
 meal	meal	ETRANGER	1.0	1
+Mélancolite	Mélancolite	NOM_PROPRE	1.0	1
 Melinda	Melinda	NOM_PROPRE	4.0	1
-Metal	Metal	NOM_PROPRE	1.0	1
+Meredith	Meredith Eberhart	NOM_PROPRE	1.0	0
+Meredith Eberhart	Meredith Eberhart	NOM_PROPRE	1.0	1
 meth	meth	ETRANGER	1.0	1
 México	México	NOM_PROPRE	1.0	1
 Mexique	Mexique	NOM_PROPRE	7.0	1
@@ -432,42 +518,61 @@ mind	mind	ETRANGER	2.0	1
 minimalistes	minimaliste	NOM	5.0	0
 minivan	minivan	NOM	4.0	1
 MMT100	Massanutten Mountain Trails 100 Mile Run	NOM_PROPRE	2.0	0
+Mollies Ridge	Mollies Ridge	NOM_PROPRE	4.0	1
 Monadnock	Monadnock	NOM_PROPRE	1.0	1
 Monique	Monique	NOM_PROPRE	1.0	1
 Montaigne	Montaigne	NOM_PROPRE	1.0	1
+montérégien	montérégien	ADJ	1.0	1
+montérégienne	montérégien	ADJ	1.0	0
+montérégiennes	montérégien	ADJ	1.0	0
+montérégiens	montérégien	ADJ	1.0	0
 Montgomery	Montgomery	NOM_PROPRE	3.0	1
 month	month	ETRANGER	1.0	1
 months	month	ETRANGER	1.0	0
-Montréal	Montréal	NOM_PROPRE	23.0	1
-Mountain	Mountain	NOM_PROPRE	3.0	1
+Montréal	Montréal	NOM_PROPRE	26.0	1
+morning	morning	ETRANGER	1.0	1
+Mount Collins	Mount Collins	NOM_PROPRE	1.0	1
+Mountain	Mountain	NOM_PROPRE	1.0	1
+Mr	mister	ETRANGER	4.0	1
 Mulberry Gap	Mulberry Gap Adventure Basecamp	NOM_PROPRE	1.0	0
 Mulberry Gap Adventure Basecamp	Mulberry Gap Adventure Basecamp	NOM_PROPRE	1.0	1
 Murakami	Haruki Murakami	NOM_PROPRE	4.0	0
 murder	murder	ETRANGER	3.0	1
-my	my	ETRANGER	2.0	1
+my	my	ETRANGER	4.0	1
 Nacho	Nacho	NOM_PROPRE	1.0	1
 Nacional	Nacional	NOM_PROPRE	2.0	1
-name	name	ETRANGER	3.0	1
+name	name	ETRANGER	4.0	1
+names	name	ETRANGER	1.0	0
+Nantahala Outdoor Center	Nantahala Outdoor Center	NOM_PROPRE	1.0	1
 narcos	narcotrafiquant	NOM	5.0	0
 narcotrafiquant	narcotrafiquant	NOM	1.0	1
+narrativement	narrativement	ADV	1.0	1
 Nate	Nate	NOM_PROPRE	1.0	1
+Nazgûl	Nazgûl	NOM_PROPRE	1.0	1
+NC	North Carolina	NOM_PROPRE	1.0	0
+near	near	ETRANGER	1.0	1
+Nearo	Nearo	NOM_PROPRE	3.0	1
 need	need	ETRANGER	1.0	1
-Neel	Neel	NOM_PROPRE	2.0	1
+Neel Gap	Neel Gap	NOM_PROPRE	5.0	1
 Némésis	némésis	NOM	1.0	1
 Nessmuk	Nessmuk	NOM_PROPRE	1.0	1
 never	never	ETRANGER	1.0	1
 new	new	ETRANGER	2.0	1
+New Hampshire	New Hampshire	NOM_PROPRE	1.0	1
 New York	New York	NOM_PROPRE	3.0	1
 Newark	Newark	NOM_PROPRE	2.0	1
 news	new	ETRANGER	1.0	0
 NGCC Mamilossa	NGCC Mamilossa	NOM_PROPRE	1.0	1
 Nike	Nike	NOM_PROPRE	2.0	1
-Nimblewill	Nimblewill Nomad	NOM_PROPRE	2.0	0
-Nimblewill Nomad	Nimblewill Nomad	NOM_PROPRE	3.0	1
-no	no	ETRANGER	5.0	1
+Nimblewill	Meredith Eberhart	NOM_PROPRE	2.0	0
+Nimblewill Nomad	Meredith Eberhart	NOM_PROPRE	4.0	0
+no	no	ETRANGER	7.0	1
 NoBo	northbound	ETRANGER	2.0	0
+NOC	Nantahala outdoor Center	NOM_PROPRE	1.0	0
 Nomad	Nimblewill Nomad	NOM_PROPRE	2.0	0
+North Carolina	North Carolina	NOM_PROPRE	1.0	1
 northbound	northbound	ETRANGER	1.0	1
+Norvège	Norvège	NOM_PROPRE	1.0	1
 Nouveau-Brunswick	Nouveau-Brunswick	NOM_PROPRE	1.0	1
 NYC	New York	NOM_PROPRE	1.0	0
 obtempérons	obtempérer	VER	1.0	0
@@ -481,58 +586,77 @@ Orlando	Orlando	NOM_PROPRE	2.0	1
 other	other	ETRANGER	1.0	1
 Ottawa	Ottawa	NOM_PROPRE	1.0	1
 oua	moi	PRO:per	1.0	0
-own	own	ETRANGER	1.0	1
+Ouarzazate	Ouarzazate	NOM_PROPRE	1.0	1
+own	own	ETRANGER	2.0	1
+Pacific Crest Trail	Pacific Crest Trail	NOM_PROPRE	1.0	1
 paléoanthropologue	paléoanthropologue	NOM	1.0	1
 papemobile	papemobile	NOM	1.0	1
 parasitique	parasitique	ADJ	1.0	1
 parfumant	parfumer	VER	1.0	0
+PCT	Pacific Crest Trail	NOM_PROPRE	2.0	0
 peace	peace	ETRANGER	1.0	1
 Pedro	Pedro	NOM_PROPRE	1.0	1
 Penn	Penn	NOM_PROPRE	1.0	1
 Pensacola	Pensacola	NOM_PROPRE	5.0	1
-personne	personne	NOM	35.0	1
-personnes	personne	NOM	9.0	0
+péremption	péremption	NOM	1.0	1
+Perry	Perry	NOM_PROPRE	1.0	1
+personne	personne	NOM	40.0	1
+personnes	personne	NOM	14.0	0
+Philadelphie	Philadelphie	NOM_PROPRE	1.0	1
 pick	pick	ETRANGER	1.0	1
 pick-ups	pick-up	NOM	1.0	0
 pickup	pickup	ETRANGER	1.0	1
 piétonner	piétonner	VER	1.0	1
-Pinhoti	Pinhoti	NOM_PROPRE	9.0	1
+Pinhoti	Pinhoti	NOM_PROPRE	11.0	1
 Pinhoti Outdoor Center	Pinhoti Outdoor Center	NOM_PROPRE	2.0	1
 pinole	pinole	ETRANGER	1.0	1
 planifiais	planifier	VER	1.0	0
-platinum	platinum	ETRANGER	1.0	1
+platinum	platinum	ETRANGER	2.0	1
 POC	Pinhoti Outdoor Center	NOM_PROPRE	5.0	0
 podcast	podcast	NOM	1.0	1
 podcasts	podcast	NOM	1.0	0
-Poitiers	Poitiers	NOM_PROPRE	1.0	1
+Poitiers	Poitiers	NOM_PROPRE	2.0	1
+Pologne	Pologne	NOM_PROPRE	1.0	1
 polydactyles	polydactyle	ADJ	1.0	0
 pours	pour	NOM	1.0	0
+Predator	Predator	NOM_PROPRE	1.0	1
 prevail	prevail	ETRANGER	2.0	1
 primales	primal	ADJ	1.0	0
+privy	privy	ETRANGER	3.0	1
+professionnalisent	professionnaliser	VER	1.0	0
+professionnaliser	professionnaliser	VER	1.0	1
 programmant	programmer	VER	1.0	0
 pronounce	pronounce	ETRANGER	1.0	1
 protect	protect	ETRANGER	2.0	1
 protègera	protéger	VER	1.0	0
 Purdue	Purdue	NOM_PROPRE	1.0	1
-Québec	Québec	NOM_PROPRE	27.0	1
+Puy de Sancy	Puy de Sancy	NOM_PROPRE	1.0	1
+Pyrénées	Pyrénées	NOM_PROPRE	3.0	1
+QC	Québec	NOM_PROPRE	1.0	0
+quantifient	quantifier	VER	1.0	1
+Québec	Québec	NOM_PROPRE	34.0	1
 Quebec	Québec	NOM_PROPRE	1.0	0
 quid	quid	ADV	1.0	1
 Quimare	Quimare	NOM_PROPRE	1.0	1
 Quinsana	Quinsana	NOM_PROPRE	1.0	1
-r	r	NOM	1.0	1
+r	r	NOM	3.0	1
 racer	racer	ETRANGER	1.0	1
 racers	racer	ETRANGER	4.0	0
 Rambo	John Rambo	NOM_PROPRE	1.0	0
-rando	randonnée	NOM	12.0	0
+rando	randonnée	NOM	17.0	0
+randos	randonnée	NOM	1.0	0
 rapido	rapidement	ADV	1.0	0
 RARAMURI	Rarámuri	NOM_PROPRE	1.0	0
-Rarámuri	Rarámuri	NOM_PROPRE	4.0	1
-Rarámuris	Rarámuri	NOM_PROPRE	32.0	0
+Rarámuri	Rarámuri	NOM_PROPRE	37.0	1
+Rarámuris	Rarámuri	NOM_PROPRE	1.0	0
 Rashōmon	Rashōmon	NOM_PROPRE	1.0	1
-ravito	ravitaillement	NOM	8.0	0
+ravito	ravitaillement	NOM	7.0	0
+ravitos	ravito	NOM	1.0	0
 reached	reached	ETRANGER	1.0	1
 real	real	ETRANGER	1.0	1
 reconverties	reconvertir	VER	1.0	0
+redécouvres	redécouvrir	VER	1.0	0
+redécouvrir	redécouvrir	VER	1.0	1
 refill	refill	ETRANGER	1.0	1
 refondé	refonder	VER	1.0	0
 règlera	régler	VER	1.0	0
@@ -540,6 +664,7 @@ regroupons	regrouper	VER	1.0	0
 regulations	regulations	ETRANGER	1.0	1
 réhydratés	réhydrater	VER	1.0	0
 remballée	remballer	VER	1.0	0
+resupply	resupply	ETRANGER	1.0	1
 reuse	reuse	ETRANGER	1.0	1
 réutilisable	réutilisable	ADJ	1.0	1
 révèlera	révéler	VER	1.0	0
@@ -560,41 +685,51 @@ Rules	Rules	NOM_PROPRE	1.0	1
 run	run	ETRANGER	4.0	1
 run commute	run commute	ETRANGER	2.0	1
 runner	runner	ETRANGER	1.0	1
+runs	run	ETRANGER	1.0	0
 Ruts	Ruts	NOM_PROPRE	2.0	1
 safe	safe	ETRANGER	4.0	1
-Sahara	Sahara	NOM_PROPRE	1.0	1
+Sahara	Sahara	NOM_PROPRE	2.0	1
 Saïgon	Saïgon	NOM_PROPRE	1.0	1
 Saint-Denis	Saint-Denis	NOM_PROPRE	2.0	1
 Saint-Donat	Saint-Donat	NOM_PROPRE	1.0	1
-Saint-Laurent	Saint-Laurent	NOM_PROPRE	9.0	1
+Saint-Laurent	Saint-Laurent	NOM_PROPRE	11.0	1
 salvatrices	salvateur	ADJ	1.0	0
+same	same	ETRANGER	2.0	1
 SBS	SBS	ACRONYME	2.0	1
+Schwarzenegger	Schwarzenegger	NOM_PROPRE	1.0	1
 Scott	Scott Jurek	NOM_PROPRE	2.0	0
 Scott Jurek	Scott Jurek	NOM_PROPRE	4.0	1
 Sears	George W. Sears	NOM_PROPRE	1.0	0
 section-hiker	section-hiker	ETRANGER	2.0	1
-section-hikers	section-hiker	ETRANGER	1.0	0
+section-hikers	section-hiker	ETRANGER	2.0	0
 see	see	ETRANGER	1.0	1
 seek	seek	ETRANGER	1.0	1
 seen	seen	ETRANGER	1.0	1
-Shaffer	Earl V. Shaffer	NOM_PROPRE	11.0	0
+Shaffer	Earl V. Shaffer	NOM_PROPRE	13.0	0
+shelter	shelter	ETRANGER	5.0	1
+shelters	shelter	ETRANGER	2.0	0
+Shikoku	Shikoku	NOM_PROPRE	1.0	1
 should	should	ETRANGER	1.0	1
 Shrimp Basket	Shrimp Basket	NOM_PROPRE	1.0	1
-shuttle	shuttle	ETRANGER	2.0	1
+Shroom	Shroom	NOM_PROPRE	2.0	1
+shuttle	shuttle	ETRANGER	4.0	1
 sí	sí	ETRANGER	1.0	1
-SIA	SIA	ACRONYME	1.0	1
+SIA	SIA	ACRONYME	2.0	1
 Sicario	Sicario	NOM_PROPRE	1.0	1
+Sicario: Day of the Soldado	Sicario: Day of the Soldado	NOM_PROPRE	1.0	1
 sillonnerai	silloner	VER	1.0	0
 Simon	Simon	NOM_PROPRE	3.0	1
-slackpacking	slackpacking	ETRANGER	9.0	1
+slackpacking	slackpacking	ETRANGER	10.0	1
+small	small	ETRANGER	1.0	1
 Sméagol	Sméagol	NOM_PROPRE	2.0	1
-Smokies	Smoky Mountains	NOM_PROPRE	1.0	0
-Smoky Mountains	Smoky Mountains	NOM_PROPRE	1.0	1
+Smokies	Smoky Mountains	NOM_PROPRE	11.0	0
+Smoky Mountains	Smoky Mountains	NOM_PROPRE	5.0	1
 snake	snake	ETRANGER	1.0	1
 snakes	snake	ETRANGER	1.0	0
 Snowbirds	Snowbirds	NOM_PROPRE	1.0	1
 so	so	ETRANGER	3.0	1
-Soldado	soldado	ETRANGER	1.0	1
+sociofinancement	sociofinancement	NOM	1.0	1
+Soldado	Soldado	NOM_PROPRE	1.0	1
 some	some	ETRANGER	3.0	1
 southernmost	southernmost	ETRANGER	1.0	1
 special	special	ETRANGER	1.0	1
@@ -602,17 +737,24 @@ Springfever	Springfever	NOM_PROPRE	1.0	1
 Sssííí	Sí	ETRANGER	4.0	0
 St	street	ETRANGER	2.0	1
 stairway	stairway	ETRANGER	1.0	1
+Standing Bear Farm	Standing Bear Farm	NOM_PROPRE	3.0	1
 start	start	ETRANGER	1.0	1
-started	started	ETRANGER	1.0	1
+started	start	ETRANGER	1.0	0
 stay	stay	ETRANGER	1.0	1
+Stecoah Gap	Stecoah Gap	NOM_PROPRE	3.0	1
 step	step	ETRANGER	1.0	1
 steps	step	ETRANGER	1.0	0
+Strava	Strava	NOM_PROPRE	5.0	1
+stream	stream	ETRANGER	1.0	1
 Subway	Subway	NOM_PROPRE	1.0	1
 Sunoco	Sunoco	NOM_PROPRE	1.0	1
 superathletes	superathletes	ETRANGER	1.0	1
 Supercuts	Supercuts	NOM_PROPRE	1.0	1
 surdimensionnées	surdimensionné	ADJ	2.0	0
+suremballage	suremballage	NOM	1.0	1
+surqualifiés	surqualifié	ADJ	1.0	1
 sussurant	sussurer	VER	1.0	0
+syntax	syntax	ETRANGER	1.0	1
 tabarnak	tabarnak	NOM	1.0	1
 take	take	ETRANGER	1.0	1
 tandis	tandis que	CON	4.0	0
@@ -625,47 +767,56 @@ Teasle	Teasle	NOM_PROPRE	1.0	1
 Ted	Ted McDonald	NOM_PROPRE	2.0	0
 Ted McDonald	Ted McDonald	NOM_PROPRE	1.0	1
 terminerais	terminer	VER	1.0	0
+Terps	Terps	NOM_PROPRE	10.0	1
 than	than	ETRANGER	1.0	1
 thanks	thanks	ETRANGER	1.0	0
-that	that	ETRANGER	8.0	1
-the	the	ETRANGER	16.0	1
+that	that	ETRANGER	12.0	1
+the	the	ETRANGER	19.0	1
+The Crazy One	Earl V. Shaffer	NOM_PROPRE	1.0	0
 The Hearn Inn	The Hearn Inn	NOM_PROPRE	1.0	1
-there	there	ETRANGER	7.0	0
+there	there	ETRANGER	8.0	0
 Thierry	Thierry	NOM_PROPRE	2.0	1
 things	thing	ETRANGER	1.0	0
 think	think	ETRANGER	1.0	1
-this	this	ETRANGER	1.0	1
+this	this	ETRANGER	4.0	1
+Thoreau	Thoreau	NOM_PROPRE	1.0	1
 those	those	ETRANGER	1.0	1
 thru	thru	ETRANGER	1.0	1
 thru-hike	thru-hike	ETRANGER	6.0	1
-thru-hiker	thru-hiker	ETRANGER	2.0	1
-thru-hikers	thru-hiker	ETRANGER	2.0	0
-thru-hikes	thru-hike	ETRANGER	4.0	0
+thru-hiker	thru-hiker	ETRANGER	5.0	1
+thru-hikers	thru-hiker	ETRANGER	6.0	0
+thru-hikes	thru-hike	ETRANGER	1.0	0
 tick	tick	ETRANGER	1.0	1
 ticks	tick	ETRANGER	1.0	0
 Tigger	Tigger	NOM_PROPRE	2.0	1
 time	time	ETRANGER	2.0	1
+TN	Tennessee	NOM_PROPRE	1.0	1
 TOC	TOC	ACRONYME	17.0	1
 together	together	ETRANGER	2.0	1
+toilet	toilet	ETRANGER	1.0	1
 Tolkien	Tolkien	NOM_PROPRE	1.0	1
 Tom Hanks	Tom Hanks	NOM_PROPRE	1.0	1
 tonight	tonight	ETRANGER	2.0	1
+Total Recall	Total Recall	NOM_PROPRE	1.0	1
 tractées	tracter	VER	1.0	0
-trail	trail	NOM	22.0	1
+trail	trail	NOM	27.0	1
 trailer	traileur	NOM	1.0	0
 trailers	traileur	NOM	1.0	0
 traileur	traileur	NOM	1.0	1
-traileurs	traileur	NOM	2.0	0
+traileurs	traileur	NOM	3.0	0
 traileuse	traileur	NOM	2.0	0
 traileuses	traileur	NOM	2.0	0
-trailhead	trailhead	ETRANGER	1.0	1
+trailhead	trailhead	ETRANGER	3.0	1
 trails	trail	NOM	12.0	0
 trainers	trainers	ETRANGER	2.0	1
+Trainspotting	Trainspotting	NOM_PROPRE	1.0	1
 Transcanadien	Transcanadien	NOM_PROPRE	1.0	1
 triathlètes	triathlète	NOM	1.0	0
 tribe	tribe	ETRANGER	1.0	1
+trumpiste	trumpiste	ADJ	1.0	1
 try	try	ETRANGER	1.0	1
 trying	try	ETRANGER	1.0	0
+Turquie	Turquie	NOM_PROPRE	1.0	1
 turtle	turtle	ETRANGER	1.0	1
 turtles	turtle	ETRANGER	1.0	0
 two	two	ETRANGER	1.0	1
@@ -681,17 +832,17 @@ ultramarathon	ultramarathon	NOM	2.0	1
 ultramarathonien	ultramarathonien	NOM	3.0	1
 ultramarathonienne	ultramarathonien	NOM	1.0	0
 ultramarathoniennes	ultramarathonien	NOM	1.0	0
-ultramarathoniens	ultramarathonien	NOM	3.0	0
-ultramarathons	ultramarathon	NOM	3.0	0
+ultramarathoniens	ultramarathonien	NOM	1.0	0
+ultramarathons	ultramarathon	NOM	4.0	0
 ultratrail	ultratrail	NOM	1.0	1
 ultratrails	ultratrail	NOM	1.0	0
 universitairement	universitairement	ADV	1.0	1
 unless	unless	ETRANGER	1.0	1
 up	up	ETRANGER	1.0	1
-USB	USB	ACRONYME	1.0	1
+USB	USB	ACRONYME	2.0	1
 usual	usual	ETRANGER	1.0	0
 UTHC	Ultra-Trail Harricana du Canada	NOM_PROPRE	2.0	0
-UTMB	Ultra-Trail du mont Blanc	NOM_PROPRE	7.0	0
+UTMB	Ultra-Trail du mont Blanc	NOM_PROPRE	9.0	0
 uto	uto	ADJ	1.0	1
 UV	UV	ACRONYME	1.0	1
 Vancouver	Vancouver	NOM_PROPRE	2.0	1
@@ -703,21 +854,23 @@ vermontoise	vermontois	ADJ	1.0	0
 victim	victim	ETRANGER	1.0	1
 victory	victory	ETRANGER	1.0	1
 Vietnam	Vietnam	NOM_PROPRE	2.0	1
-Vincent	Vincent	NOM_PROPRE	15.0	1
+Vincent	Vincent	NOM_PROPRE	14.0	1
+visit	visit	ETRANGER	1.0	1
 waffle	waffle	ETRANGER	1.0	0
 walk	walk	ETRANGER	1.0	1
 Walking	Walking	NOM_PROPRE	2.0	1
+wall	wall	ETRANGER	1.0	1
 wanted	wanted	ETRANGER	1.0	1
 Warner Bros	Warner Bros	NOM_PROPRE	1.0	1
-was	was	ETRANGER	1.0	1
+was	was	ETRANGER	2.0	1
 way	way	ETRANGER	1.0	1
 we	we	ETRANGER	6.0	1
-Webwalker	Webwalker	NOM_PROPRE	3.0	1
+Webwalker	Scott Jurek	NOM_PROPRE	3.0	0
 weird	weird	ETRANGER	3.0	1
 welcome	welcome	ETRANGER	1.0	1
 well	well	ETRANGER	1.0	1
 Wendy	Wendy	NOM_PROPRE	1.0	1
-what	What	ETRANGER	2.0	1
+what	What	ETRANGER	3.0	1
 White Springs	White Springs	NOM_PROPRE	4.0	1
 who	who	ETRANGER	1.0	1
 why	why	ETRANGER	1.0	1
@@ -726,22 +879,29 @@ wilderness	wilderness	ETRANGER	2.0	1
 will	will	ETRANGER	1.0	1
 win	win	ETRANGER	1.0	1
 with	with	ETRANGER	3.0	0
+work-for-stay	work-for-stay	ETRANGER	1.0	1
 world	world	ETRANGER	2.0	0
 wouhou	wouhou	ONO	1.0	1
 would	would	ETRANGER	3.0	1
 wouldn	would	ETRANGER	1.0	0
 woush	woush	ONO	3.0	1
-wow	wow	ONO	1.0	1
+wow	wow	ONO	3.0	1
+wrap	wrap	NOM	1.0	1
+written	write	ETRANGER	1.0	0
+WS100	WS100	ACRONYME	1.0	1
 XIXe	XIXe	NOM_PROPRE	1.0	1
 XVe	XVe	NOM_PROPRE	1.0	1
 XVIe	XVIe	NOM_PROPRE	1.0	1
 XXe	XXe	NOM_PROPRE	1.0	1
 XXL	XXL	ACRONYME	1.0	1
-yes	yes	ETRANGER	3.0	1
+Year	Year	NOM_PROPRE	1.0	1
+yes	yes	ETRANGER	4.0	1
 yesterday	yesterday	ETRANGER	2.0	1
 Yo	Yo	NOM_PROPRE	1.0	1
-you	you	ETRANGER	19.0	1
+you	you	ETRANGER	20.0	1
 your	your	ETRANGER	7.0	1
 yourself	yourself	ETRANGER	1.0	1
 Yukon	Yukon	NOM_PROPRE	2.0	1
-YUL	YUL	ACRONYME	1.0	1
+YUL	YUL	ACRONYME	2.0	1
+zero	zero	ETRANGER	2.0	1
+Ziploc	Ziploc	NOM_PROPRE	1.0	1
